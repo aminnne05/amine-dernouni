@@ -20,3 +20,8 @@ yarn-error.log*
 # Env
 .env
 .env.local
+
+# Fichiers vidéo trop volumineux pour GitHub (limite 100MB par fichier).
+# À remplacer par une version compressée ou un hébergement externe.
+src/assets/images/bikin in algiers/5.mp4
+src/assets/images/syc-maudit/02.mp4

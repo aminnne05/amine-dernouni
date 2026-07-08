@@ -29,7 +29,7 @@ export default function Contact() {
         </p>
         <p className="max-w-[600px] text-2xl font-light leading-snug tracking-[-0.02em] text-ivoire md:text-4xl">
           <span className="font-thin">Un projet auquel vous tenez ?</span>{" "}
-          <span className="font-bold tracking-[-0.04em]">Construisons le ensemble.</span>
+          <span className="font-medium tracking-[-0.04em]">Construisons le ensemble.</span>
         </p>
       </section>
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 245.49 106.57">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        isolation: isolate;
+      }
+
+      .cls-3 {
+        stroke: url(#linear-gradient-2);
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3, .cls-4 {
+        fill: none;
+        stroke-width: 6.53px;
+      }
+
+      .cls-4 {
+        stroke: url(#linear-gradient);
+        stroke-linejoin: round;
+      }
+
+      .cls-2 {
+        fill: #1f2934;
+        font-family: Outfit-SemiBold, Outfit;
+        font-size: 38.42px;
+        font-variation-settings: 'wght' 600;
+        font-weight: 600;
+      }
+
+      .cls-5 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="1523.82" y1="1014.87" x2="1441" y2="1014.87" gradientTransform="translate(-1441 1068.16) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ab9af1"/>
+      <stop offset=".39" stop-color="#9d90ee"/>
+      <stop offset="1" stop-color="#6669e7"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1440.99" y1="989.44" x2="1498.39" y2="989.44" gradientTransform="translate(-1441 1068.16) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eac8fa"/>
+      <stop offset="1" stop-color="#6669e7"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="uuid-4b78ed58-3378-4bc4-8fb2-bbcdf567af86" data-name="Layer 1-2">
+      <g>
+        <g class="cls-1">
+          <text class="cls-2" transform="translate(110.4 49.71)"><tspan x="0" y="0">Bez</tspan><tspan class="cls-6" x="62.93" y="0">z</tspan><tspan x="80.49" y="0">ala</tspan></text>
+          <text class="cls-2" transform="translate(110.4 95.81)"><tspan class="cls-5" x="0" y="0">&amp;</tspan><tspan x="24.67" y="0" xml:space="preserve"> Fils</tspan></text>
+        </g>
+        <g>
+          <path class="cls-4" d="M72.36,60.22l-18.24-3.25V17.95c0-4.22-3.03-7.84-7.19-8.58L13.52,3.4c-5.35-.95-10.25,3.16-10.25,8.58v82.58c0,4.82,3.91,8.72,8.72,8.72h25.43s7.99,0,7.99,0h25.43c4.82,0,8.72-3.91,8.72-8.73v-25.77c0-4.22-3.03-7.84-7.19-8.58h0Z"/>
+          <path class="cls-3" d="M54.12,94.58v-37.61l-15.18-2.7c-5.34-.95-10.25,3.16-10.25,8.58v31.72c0,4.82,3.91,8.72,8.72,8.72h7.99c4.82,0,8.72-3.91,8.72-8.72h0Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

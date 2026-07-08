@@ -8,7 +8,7 @@ export default function NextStepCTA() {
       </p>
       <p className="max-w-[480px] text-center text-2xl md:text-[32px] font-light leading-snug tracking-[-0.02em] text-ivoire">
         <span className="font-thin">Un projet auquel vous tenez ?</span>{" "}
-        <span className="font-bold tracking-[-0.04em] whitespace-nowrap">Parlons-en.</span>
+        <span className="font-medium tracking-[-0.04em] whitespace-nowrap">Parlons-en.</span>
       </p>
       <CTAButton variant="white" href="/contact">
         EN SAVOIR PLUS

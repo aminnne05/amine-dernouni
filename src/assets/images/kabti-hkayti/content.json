@@ -1,0 +1,16 @@
+{
+  "order": 5,
+  "title": "Kabti Hkayti",
+  "year": "2024",
+  "tall": false,
+  "categories": ["Branding"],
+  "sector": "Agence de voyage",
+  "services": "Identité visuelle, réseaux sociaux",
+  "agence": "Geometric El Djazair",
+  "intro": "Texte d'introduction à venir.",
+  "chapters": {
+    "contexte": "Contenu à venir.",
+    "demarche": "Contenu à venir.",
+    "reponse": "Contenu à venir."
+  }
+}

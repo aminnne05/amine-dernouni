@@ -1,0 +1,15 @@
+{
+  "order": 7,
+  "title": "Sabir",
+  "year": "2023",
+  "tall": true,
+  "categories": ["Direction artistique"],
+  "sector": "Marque de vêtement",
+  "services": "Branding, Logo Design",
+  "intro": "Un fanzine éditorial sur l'œuvre de Hervé Koubi, vue par des enfants de 10-11 ans, racontée par des corps. Six chapitres-gestes, un double regard, un seul objet.",
+  "chapters": {
+    "contexte": "Comment traduire la vision naïve et spontanée d'enfants face à une œuvre chorégraphique profonde, sans trahir ni l'un ni l'autre ?",
+    "demarche": "Contenu à venir.",
+    "reponse": "Photos de scène et interventions graphiques enfantines superposées. Palette duotone par chapitre sur fond kraft. Typo condensée brute pour les gestes, serif sobre pour l'analyse. Un système qui parle à l'enfant et à l'adulte en même temps."
+  }
+}

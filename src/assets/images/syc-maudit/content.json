@@ -1,0 +1,15 @@
+{
+  "order": 6,
+  "title": "SYC | Maudit",
+  "year": "2026",
+  "tall": true,
+  "categories": ["Direction artistique", "Motion"],
+  "sector": "Musique",
+  "services": "Direction artistique, motion",
+  "intro": "Texte d'introduction à venir.",
+  "chapters": {
+    "contexte": "Contenu à venir.",
+    "demarche": "Contenu à venir.",
+    "reponse": "Contenu à venir."
+  }
+}

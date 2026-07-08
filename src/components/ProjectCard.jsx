@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useReveal from "../hooks/useReveal";
+import { isVideoSrc } from "../utils/media";
 
 export default function ProjectCard({
   project,
@@ -21,11 +22,22 @@ export default function ProjectCard({
     >
       <div className="relative min-h-0 flex-1 overflow-hidden bg-[#a6a6a6]">
         {image ? (
-          <img
-            src={image}
-            alt={title}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          isVideoSrc(image) ? (
+            <video
+              src={image}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <img
+              src={image}
+              alt={title}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          )
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-xs font-light text-white/60">
             visuel à venir

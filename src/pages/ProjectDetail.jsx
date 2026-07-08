@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import NextStepCTA from "../components/NextStepCTA";
 import { projects } from "../data/projects";
+import { isVideoSrc } from "../utils/media";
 
 const chapterLabels = [
   { key: "contexte", label: "Contexte" },
@@ -56,7 +57,7 @@ export default function ProjectDetail() {
               </Link>
 
               <div className="flex flex-col gap-3">
-                <h1 className="text-4xl font-bold tracking-[-0.04em] text-encre md:text-5xl">
+                <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">
                   {project.title}
                 </h1>
                 <p className="text-sm font-light leading-relaxed text-gris-texte">
@@ -65,7 +66,7 @@ export default function ProjectDetail() {
               </div>
 
               {/* Détails */}
-              <dl className="flex flex-col gap-2 border-t border-encre/15 pt-4 text-xs font-light">
+              <dl className="flex flex-col gap-2 border-t border-encre/15 pt-8 text-xs font-light">
                 <div className="flex justify-between gap-4">
                   <dt className="text-taupe">Année</dt>
                   <dd className="font-medium text-encre">{project.year}</dd>
@@ -78,6 +79,12 @@ export default function ProjectDetail() {
                   <dt className="text-taupe">Services</dt>
                   <dd className="text-right font-medium text-encre">{project.services}</dd>
                 </div>
+                {project.agence && (
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-taupe">Collaboration</dt>
+                    <dd className="text-right font-medium text-encre">{project.agence}</dd>
+                  </div>
+                )}
                 {project.award && (
                   <div className="flex justify-between gap-4">
                     <dt className="text-taupe">Prix</dt>
@@ -114,16 +121,36 @@ export default function ProjectDetail() {
           {/* GALERIE DROITE — défile */}
           <div className="flex flex-1 flex-col gap-4">
             {project.gallery.length > 0 ? (
-              project.gallery.map((img, i) => (
-                <div
-                  key={i}
-                  className="w-full overflow-hidden bg-[#a6a6a6]"
-                >
-                  <img
-                    src={img}
-                    alt={`${project.title} — visuel ${i + 1}`}
-                    className="h-auto w-full object-cover"
-                  />
+              project.gallery.map((row, i) => (
+                <div key={i} className="flex gap-4">
+                  {row.map((media, j) =>
+                    isVideoSrc(media) ? (
+                      <div
+                        key={j}
+                        className="w-full flex-1 overflow-hidden bg-[#a6a6a6]"
+                      >
+                        <video
+                          src={media}
+                          controls
+                          loop
+                          muted
+                          playsInline
+                          className="h-auto w-full"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        key={j}
+                        className="w-full flex-1 overflow-hidden bg-[#a6a6a6]"
+                      >
+                        <img
+                          src={media}
+                          alt={`${project.title} — visuel ${i + 1}.${j + 1}`}
+                          className="h-auto w-full object-cover"
+                        />
+                      </div>
+                    )
+                  )}
                 </div>
               ))
             ) : (

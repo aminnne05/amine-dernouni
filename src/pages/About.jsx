@@ -89,7 +89,7 @@ export default function About() {
 
         {/* EXPÉRIENCE */}
         <Reveal as="section" className="flex flex-col gap-6 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-bold tracking-[-0.03em] text-encre">
+          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
             Expérience
           </h2>
           <div className="flex flex-col gap-5">
@@ -111,7 +111,7 @@ export default function About() {
 
         {/* AVEC QUI JE COLLABORE */}
         <Reveal as="section" className="flex flex-col gap-6 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-bold leading-snug tracking-[-0.03em] text-encre">
+          <h2 className="shrink-0 text-xl font-medium leading-snug tracking-[-0.03em] text-encre">
             Avec qui
             <br />
             je collabore
@@ -136,7 +136,7 @@ export default function About() {
 
         {/* PRATIQUES (identique à la homepage) */}
         <Reveal as="section" className="flex flex-col gap-8 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-bold tracking-[-0.03em] text-encre">
+          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
             Pratiques
           </h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-[21px] md:gap-y-[33px]">
@@ -152,7 +152,7 @@ export default function About() {
                   </span>
                   <div className="h-px flex-1 bg-encre/20" />
                 </div>
-                <h3 className="text-base font-bold tracking-[-0.03em] text-encre">
+                <h3 className="text-base font-medium tracking-[-0.03em] text-encre">
                   {practice.title}
                 </h3>
                 <p className="text-base font-light leading-relaxed text-gris-texte text-justify">
@@ -168,7 +168,7 @@ export default function About() {
         {/* MÉTHODOLOGIE */}
         <Reveal as="section" className="flex flex-col gap-8 px-6 md:px-[27px]">
           <div className="flex flex-col gap-3 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
-            <h2 className="shrink-0 text-xl font-bold tracking-[-0.03em] text-encre">
+            <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
               Méthodologie
             </h2>
             <p className="text-sm font-light leading-relaxed text-encre">

@@ -1,0 +1,15 @@
+{
+  "order": 8,
+  "title": "Abra Kebab",
+  "year": "2025",
+  "tall": false,
+  "categories": ["Branding", "Packaging"],
+  "sector": "Fast-food",
+  "services": "Identité visuelle, packaging",
+  "intro": "Texte d'introduction à venir.",
+  "chapters": {
+    "contexte": "Contenu à venir.",
+    "demarche": "Contenu à venir.",
+    "reponse": "Contenu à venir."
+  }
+}

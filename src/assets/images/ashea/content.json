@@ -1,0 +1,15 @@
+{
+  "order": 1,
+  "title": "Ashéa",
+  "year": "2025",
+  "tall": false,
+  "categories": ["Branding", "Direction artistique", "Packaging"],
+  "sector": "Prêt-à-porter",
+  "services": "Identité visuelle, direction artistique, packaging",
+  "intro": "Texte d'introduction à venir.",
+  "chapters": {
+    "contexte": "Contenu à venir.",
+    "demarche": "Contenu à venir.",
+    "reponse": "Contenu à venir."
+  }
+}
