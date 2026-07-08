@@ -49,13 +49,8 @@ export default function Header() {
         </nav>
       </div>
 
-      <div className="hidden items-center gap-[10px] cursor-pointer md:flex">
-        <button type="button" className="text-xs text-encre">
-          FR
-        </button>
-        <button type="button" className="text-xs font-light text-encre">
-          EN
-        </button>
+      <div className="hidden items-center md:flex">
+        <span className="text-xs text-encre">FR</span>
       </div>
 
       <button
@@ -93,13 +88,8 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <div className="flex items-center gap-[10px] cursor-pointer">
-          <button type="button" className="text-xs text-encre">
-            FR
-          </button>
-          <button type="button" className="text-xs font-light text-encre">
-            EN
-          </button>
+        <div className="flex items-center">
+          <span className="text-xs text-encre">FR</span>
         </div>
       </div>
     )}

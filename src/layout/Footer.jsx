@@ -49,7 +49,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-col gap-1 text-sm font-light">
                 <a
-                  href="https://www.instagram.com/amine_dernoui"
+                  href="https://www.instagram.com/amine_dernouni/"
                   target="_blank"
                   rel="noreferrer"
                   className="transition-opacity hover:opacity-60"
@@ -57,7 +57,7 @@ export default function Footer() {
                   Instagram
                 </a>
                 <a
-                  href="https://www.linkedin.com/"
+                  href="https://www.linkedin.com/in/mohamed-el-amine-dernouni-b270a4211/"
                   target="_blank"
                   rel="noreferrer"
                   className="transition-opacity hover:opacity-60"
@@ -65,12 +65,12 @@ export default function Footer() {
                   LinkedIn
                 </a>
                 <a
-                  href="https://www.behance.net/"
+                  href="https://www.wearepulpp.com/"
                   target="_blank"
                   rel="noreferrer"
                   className="transition-opacity hover:opacity-60"
                 >
-                  Behance
+                  Pulpp
                 </a>
               </div>
             </div>

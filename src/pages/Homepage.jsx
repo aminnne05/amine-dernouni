@@ -68,13 +68,19 @@ export default function Homepage() {
             Ils m'ont fait confiance
           </h2>
           {clientLogos.length > 0 ? (
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+            <div className="flex w-full items-center justify-between gap-4">
               {clientLogos.map((logo) => (
                 <img
                   key={logo.filename}
                   src={logo.src}
                   alt={logo.name}
-                  className="h-9 w-[72px] object-contain grayscale transition-all duration-300 hover:grayscale-0"
+                  className={`object-contain grayscale transition-all duration-300 hover:grayscale-0 ${
+                    logo.filename === "066.svg"
+                      ? "h-14 w-[72px]"
+                      : logo.filename === "04.svg"
+                        ? "h-9 w-[104px]"
+                        : "h-9 w-[72px]"
+                  }`}
                 />
               ))}
             </div>

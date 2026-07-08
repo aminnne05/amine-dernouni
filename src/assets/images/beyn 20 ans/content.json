@@ -4,12 +4,13 @@
   "year": "2025",
   "tall": true,
   "categories": ["Branding", "Direction Artistiques", "Motion"],
-  "sector": "Compléments alimentaires",
+  "sector": "Fintech",
   "services": "Identité visuelle, Motion",
-  "intro": "Vitaya est une marque de compléments alimentaires centrée sur le bien-être au quotidien. Un accompagnement complet sur l'identité de marque et la direction artistique, du positionnement jusqu'aux visuels et au ton de voix pour les réseaux sociaux.",
+  "agence": "Geometric El Djazair",
+  "intro": "Baynana wa Baynakom, l'événement des 20 ans de Beyn, entre célébration d'un héritage et vision d'un futur financier plus prometteur pour l'Algérie.",
   "chapters": {
-    "contexte": "Contenu à venir.",
-    "demarche": "Contenu à venir.",
-    "reponse": "Contenu à venir."
+    "contexte": "Beyn célébrait à la fois ses vingt ans et une nouvelle ambition, portée par de nouvelles solutions et services. Le défi était de mettre en avant à la fois la marque Beyn, représentée par son losange, et sa nouvelle solution de paiement Wimpay, représentée par le symbole infini, tout en portant un message d'espoir pour une Algérie financière plus moderne.",
+    "demarche": "L'identité de l'événement s'appuie sur un dégradé bleu et violet qui installe une vision futuriste, et sur un effet de verre qui évoque directement l'application et les solutions mobiles de Wimpay. Les deux symboles, losange et infini, cohabitent sur l'ensemble des supports pour affirmer le lien entre l'histoire de Beyn et l'avenir qu'elle construit avec Wimpay.",
+    "reponse": "Le résultat est une identité d'événement qui célèbre vingt ans d'existence tout en projetant Beyn vers l'avenir, avec une image à la fois technologique et porteuse d'espoir pour le secteur financier algérien."
   }
 }
