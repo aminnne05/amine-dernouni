@@ -4,9 +4,11 @@ import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
 import HoverTab from "../components/HoverTab";
 import { projects, categories } from "../data/projects";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Projects() {
   const [active, setActive] = useState("Tous");
+  const { t } = useLanguage();
 
   const filtered =
     active === "Tous"
@@ -19,12 +21,10 @@ export default function Projects() {
         {/* En-tête : titre + description à droite (référence Moonstone) */}
         <Reveal as="section" className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">
-            Sélection de projets
+            {t("projectsPage.title")}
           </h1>
           <p className="max-w-[420px] text-sm font-light leading-relaxed text-encre/60">
-            Une sélection de projets où l'image et l'idée ne font qu'une :
-            identités, campagnes, packagings et directions artistiques,
-            pensés du concept à la déclinaison.
+            {t("projectsPage.description")}
           </p>
         </Reveal>
 
@@ -36,7 +36,7 @@ export default function Projects() {
               active={active === cat}
               onClick={() => setActive(cat)}
             >
-              {cat}
+              {t(`categories.${cat}`)}
             </HoverTab>
           ))}
         </div>
@@ -55,7 +55,7 @@ export default function Projects() {
 
         {filtered.length === 0 && (
           <p className="py-16 text-center text-sm font-light text-encre/50">
-            Aucun projet dans cette catégorie pour le moment.
+            {t("projectsPage.empty")}
           </p>
         )}
       </div>

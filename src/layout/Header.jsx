@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import LogoMark from "../assets/logo/logo-mark.svg?react";
-
-const navLinks = [
-  { to: "/", label: "Accueil" },
-  { to: "/projets", label: "Projets" },
-  { to: "/a-propos", label: "À propos" },
-  { to: "/contact", label: "Contact" },
-];
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { lang, t, path } = useLanguage();
+  const { pathname } = useLocation();
+
+  const navLinks = [
+    { to: path("/"), label: t("nav.accueil") },
+    { to: path("/projets"), label: t("nav.projets") },
+    { to: path("/a-propos"), label: t("nav.aPropos") },
+    { to: path("/contact"), label: t("nav.contact") },
+  ];
+
+  const isEn = pathname === "/en" || pathname.startsWith("/en/");
+  const frPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
+  const enPath = isEn ? pathname : pathname === "/" ? "/en" : `/en${pathname}`;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -24,7 +31,7 @@ export default function Header() {
       <header className="fixed top-0 left-1/2 z-50 flex h-16 w-full max-w-[1440px] -translate-x-1/2 items-center justify-between border-b border-encre/10 bg-ivoire/70 px-6 py-4 backdrop-blur-xl md:px-[27px]">
         <div className="flex items-center gap-16">
           <Link
-            to="/"
+            to={path("/")}
             onClick={() => setOpen(false)}
             className="block w-[40px] shrink-0 text-encre"
             aria-label="Amine Dernouni"
@@ -37,6 +44,7 @@ export default function Header() {
               <NavLink
                 key={link.to}
                 to={link.to}
+                end
                 className="group relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-[-0.01em]"
               >
                 {({ isActive }) => (
@@ -62,14 +70,26 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="hidden items-center md:flex">
-          <span className="text-xs text-encre">FR</span>
+        <div className="hidden items-center gap-1 text-xs md:flex">
+          <Link
+            to={frPath}
+            className={`transition-colors ${lang === "fr" ? "font-medium text-encre" : "text-taupe hover:text-encre"}`}
+          >
+            FR
+          </Link>
+          <span className="text-taupe">/</span>
+          <Link
+            to={enPath}
+            className={`transition-colors ${lang === "en" ? "font-medium text-encre" : "text-taupe hover:text-encre"}`}
+          >
+            EN
+          </Link>
         </div>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
           aria-expanded={open}
           className="relative z-50 flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden"
         >
@@ -86,13 +106,14 @@ export default function Header() {
         <div className="fixed inset-0 z-40 flex flex-col justify-between bg-ivoire px-6 pt-28 pb-8 md:hidden">
           <div className="flex flex-col gap-3">
             <p className="text-xs font-light uppercase tracking-widest text-taupe">
-              (Menu)
+              {t("nav.menuLabel")}
             </p>
             <nav className="flex flex-col">
               {navLinks.map((link, i) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
+                  end
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center justify-between gap-4 border-t border-encre/15 py-5 text-2xl font-medium tracking-[-0.02em] transition-colors ${
@@ -123,7 +144,7 @@ export default function Header() {
           <div className="flex items-end justify-between gap-4 border-t border-encre/15 pt-4">
             <div className="flex flex-col gap-4">
               <p className="text-xs font-light uppercase tracking-widest text-taupe">
-                (Réseaux)
+                {t("nav.socialLabel")}
               </p>
               <div className="flex flex-col gap-1 text-sm font-light text-encre">
                 <a
@@ -145,7 +166,26 @@ export default function Header() {
                 </a>
               </div>
             </div>
-            <p className="text-xs font-light text-taupe">©2026</p>
+            <div className="flex flex-col items-end gap-3">
+              <div className="flex items-center gap-1 text-xs">
+                <Link
+                  to={frPath}
+                  onClick={() => setOpen(false)}
+                  className={lang === "fr" ? "font-medium text-encre" : "text-taupe"}
+                >
+                  FR
+                </Link>
+                <span className="text-taupe">/</span>
+                <Link
+                  to={enPath}
+                  onClick={() => setOpen(false)}
+                  className={lang === "en" ? "font-medium text-encre" : "text-taupe"}
+                >
+                  EN
+                </Link>
+              </div>
+              <p className="text-xs font-light text-taupe">©2026</p>
+            </div>
           </div>
         </div>
       )}

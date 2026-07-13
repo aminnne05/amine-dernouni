@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import LoadingScreen from "./components/LoadingScreen";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import Homepage from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -37,20 +38,28 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
-      <ScrollToTop />
-      <Header />
-      {/* main au-dessus du footer fixé : effet reveal */}
-      <main className="relative z-10 bg-ivoire shadow-[0_20px_60px_rgba(0,0,0,0.15)]">
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/projets" element={<Projects />} />
-          <Route path="/projets/:slug" element={<ProjectDetail />} />
-          <Route path="/a-propos" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
-      <Footer />
+      <LanguageProvider>
+        {loading && <LoadingScreen onDone={() => setLoading(false)} />}
+        <ScrollToTop />
+        <Header />
+        {/* main au-dessus du footer fixé : effet reveal */}
+        <main className="relative z-10 bg-ivoire shadow-[0_20px_60px_rgba(0,0,0,0.15)]">
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/projets" element={<Projects />} />
+            <Route path="/projets/:slug" element={<ProjectDetail />} />
+            <Route path="/a-propos" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+
+            <Route path="/en" element={<Homepage />} />
+            <Route path="/en/projets" element={<Projects />} />
+            <Route path="/en/projets/:slug" element={<ProjectDetail />} />
+            <Route path="/en/a-propos" element={<About />} />
+            <Route path="/en/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <Footer />
+      </LanguageProvider>
     </BrowserRouter>
   );
 }

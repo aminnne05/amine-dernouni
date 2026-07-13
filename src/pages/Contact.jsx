@@ -1,22 +1,27 @@
 import { useState } from "react";
 import Reveal from "../components/Reveal";
 import HoverTab from "../components/HoverTab";
-
-const projectTypes = ["Branding", "Motion", "Direction artistique", "UX/UI", "Autre"];
-const timelines = ["Aucune urgence", "1 à 3 mois", "Dans le mois", "Urgent"];
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
+  const projectTypes = t("contact.projectTypes");
+  const timelines = t("contact.timelines");
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [type, setType] = useState("Branding");
-  const [timeline, setTimeline] = useState("Aucune urgence");
+  const [type, setType] = useState(() => projectTypes[0]);
+  const [timeline, setTimeline] = useState(() => timelines[0]);
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Brief projet — ${name || "sans nom"}`);
+    const fields = t("contact.mailFields");
+    const subject = encodeURIComponent(
+      `${t("contact.mailSubject")} — ${name || t("contact.mailNoName")}`
+    );
     const body = encodeURIComponent(
-      `Nom : ${name}\nEmail : ${email}\nType de projet : ${type}\nTimeline souhaitée : ${timeline}\n\n${message}`
+      `${fields.name} : ${name}\n${fields.email} : ${email}\n${fields.type} : ${type}\n${fields.timeline} : ${timeline}\n\n${message}`
     );
     window.location.href = `mailto:dernouniamine02@gmail.com?subject=${subject}&body=${body}`;
   };
@@ -26,11 +31,11 @@ export default function Contact() {
       {/* HERO */}
       <section className="flex flex-col items-center gap-4 bg-encre px-6 py-24 text-center">
         <p className="text-sm font-medium tracking-widest text-ivoire/60">
-          CONTACT
+          {t("contact.eyebrow")}
         </p>
         <p className="max-w-[600px] text-2xl font-light leading-snug tracking-[-0.02em] text-ivoire md:text-4xl">
-          <span className="font-thin">Un projet auquel vous tenez ?</span>{" "}
-          <span className="font-medium tracking-[-0.04em]">Construisons le ensemble.</span>
+          <span className="font-thin">{t("contact.titlePlain")}</span>{" "}
+          <span className="font-medium tracking-[-0.04em]">{t("contact.titleBold")}</span>
         </p>
       </section>
 
@@ -38,18 +43,18 @@ export default function Contact() {
         {/* 01 — BRIEF */}
         <Reveal as="section" className="flex flex-col gap-8 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
           <p className="shrink-0 text-sm font-medium tracking-wide text-encre/70">
-            01 — Brief
+            {t("contact.briefLabel")}
           </p>
           <form onSubmit={handleSubmit} className="flex w-full max-w-[500px] flex-col gap-8">
             <label className="flex flex-col gap-2">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Ton nom
+                {t("contact.yourName")}
               </span>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Écrire ici"
+                placeholder={t("contact.namePlaceholder")}
                 className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
                 required
               />
@@ -57,13 +62,13 @@ export default function Contact() {
 
             <label className="flex flex-col gap-2">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Email
+                {t("contact.email")}
               </span>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="contact@tamarque.com"
+                placeholder={t("contact.emailPlaceholderForm")}
                 className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
                 required
               />
@@ -71,12 +76,12 @@ export default function Contact() {
 
             <div className="flex flex-col gap-3">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Type de projet
+                {t("contact.projectType")}
               </span>
               <div className="flex flex-wrap gap-1">
-                {projectTypes.map((t) => (
-                  <HoverTab key={t} active={type === t} onClick={() => setType(t)}>
-                    {t}
+                {projectTypes.map((pt) => (
+                  <HoverTab key={pt} active={type === pt} onClick={() => setType(pt)}>
+                    {pt}
                   </HoverTab>
                 ))}
               </div>
@@ -84,16 +89,16 @@ export default function Contact() {
 
             <label className="flex flex-col gap-2">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Timeline souhaitée
+                {t("contact.timeline")}
               </span>
               <select
                 value={timeline}
                 onChange={(e) => setTimeline(e.target.value)}
                 className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre focus:border-encre focus:outline-none"
               >
-                {timelines.map((t) => (
-                  <option key={t} value={t}>
-                    {t}
+                {timelines.map((tl) => (
+                  <option key={tl} value={tl}>
+                    {tl}
                   </option>
                 ))}
               </select>
@@ -101,12 +106,12 @@ export default function Contact() {
 
             <label className="flex flex-col gap-2">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Le projet en quelques lignes
+                {t("contact.projectDescription")}
               </span>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Contexte, audience, ce qui te bloque, ce dont tu rêves..."
+                placeholder={t("contact.descPlaceholder")}
                 rows={1}
                 className="resize-none border-b border-encre/20 bg-transparent pb-2 text-base font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
               />
@@ -117,7 +122,7 @@ export default function Contact() {
               className="group mt-2 flex w-fit flex-col items-start gap-1"
             >
               <span className="flex items-center gap-2 text-sm font-medium tracking-wide text-encre">
-                ENVOYER LE BRIEF
+                {t("contact.submit")}
                 <svg
                   className="h-[8px] w-[10px] transition-transform group-hover:translate-x-1"
                   viewBox="0 0 11 9"
@@ -136,12 +141,12 @@ export default function Contact() {
         {/* 02 — DIRECT */}
         <Reveal as="section" className="flex flex-col gap-8 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
           <p className="shrink-0 text-sm font-medium tracking-wide text-encre/70">
-            02 — Direct
+            {t("contact.directLabel")}
           </p>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Email
+                {t("contact.email")}
               </span>
               <a
                 href="mailto:dernouniamine02@gmail.com"
@@ -152,7 +157,7 @@ export default function Contact() {
             </div>
             <div className="flex flex-col gap-1">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Numéro
+                {t("contact.numberLabel")}
               </span>
               <a
                 href="tel:+33625020042"
@@ -163,7 +168,7 @@ export default function Contact() {
             </div>
             <div className="flex flex-col gap-1">
               <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                Instagram
+                {t("contact.instagramLabel")}
               </span>
               <a
                 href="https://www.instagram.com/amine_dernoui"

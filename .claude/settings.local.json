@@ -44,7 +44,15 @@
       "Bash(grep -rn \"overflow-x\\\\|overflow:\" src/ index.html)",
       "Bash(grep -rn \"min-w\\\\|w-screen\\\\|100vw\" src/)",
       "Bash(find '/Users/test/Library/Application Support' -maxdepth 4 -iname *paste*)",
-      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/abracadabra-doner/content.json'\\)\\)\")"
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/abracadabra-doner/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/abra-kebab/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/ashea/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/beyn 20 ans/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/beyn-rebranding/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/kabti-hkayti/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/sabir/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/syc-maudit/content.json'\\)\\)\")",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/vitaya/content.json'\\)\\)\")"
     ]
   }
 }

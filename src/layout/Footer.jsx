@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
+import { useLanguage } from "../i18n/LanguageContext";
 
 /*
   Footer style JKR :
@@ -10,6 +11,7 @@ import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
 export default function Footer() {
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const measure = () => setHeight(ref.current?.offsetHeight ?? 0);
@@ -30,7 +32,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             <div className="flex flex-col gap-4">
               <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">
-                Trouver
+                {t("footer.find")}
               </p>
               <div className="text-sm font-light leading-relaxed">
                 <p>Nice, France.</p>
@@ -45,7 +47,7 @@ export default function Footer() {
 
             <div className="flex flex-col gap-4">
               <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">
-                Suivre
+                {t("footer.follow")}
               </p>
               <div className="flex flex-col gap-1 text-sm font-light">
                 <a
@@ -77,7 +79,7 @@ export default function Footer() {
 
             <div className="flex flex-col gap-4">
               <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">
-                Écrire
+                {t("footer.write")}
               </p>
               <a
                 href="mailto:dernouniamine02@gmail.com"
@@ -90,7 +92,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-start justify-between gap-2 border-t border-ivoire/15 pt-4 pb-4 text-xs font-light text-ivoire/50 md:flex-row md:items-center">
             <p>©2026 Amine Dernouni</p>
-            <p>Directeur artistique, Nice.</p>
+            <p>{t("footer.tagline")}</p>
           </div>
         </div>
 

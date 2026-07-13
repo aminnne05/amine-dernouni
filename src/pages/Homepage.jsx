@@ -6,10 +6,13 @@ import RevealRow from "../components/RevealRow";
 import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
 import shotAmine from "../assets/images/hero-portrait.jpg";
 import useScrollProgress from "../hooks/useScrollProgress";
-import { projects, practices } from "../data/projects";
+import { projects } from "../data/projects";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Homepage() {
   const scroll = useScrollProgress(450);
+  const { t, path } = useLanguage();
+  const practices = t("practices");
 
   return (
     <div className="bg-ivoire">
@@ -18,9 +21,9 @@ export default function Homepage() {
         <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-14 px-6 pt-[129px] pb-20 md:flex-row md:items-center md:justify-between md:gap-8 md:px-[27px] md:pb-28">
           <div className="hidden shrink-0 flex-col gap-1 md:flex md:w-[220px]">
             <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
-              Directeur artistique
+              {t("homepage.role")}
             </p>
-            <p className="text-sm font-light text-ivoire/60">Nice, France.</p>
+            <p className="text-sm font-light text-ivoire/60">{t("homepage.location")}</p>
           </div>
 
           <div className="relative mx-auto w-full max-w-[260px] shrink-0 md:mx-0 md:max-w-[340px]">
@@ -42,8 +45,8 @@ export default function Homepage() {
           </div>
 
           <div className="hidden shrink-0 md:flex md:w-[220px] md:justify-end">
-            <CTAButton variant="white" href="/contact">
-              CONTACT
+            <CTAButton variant="white" href={path("/contact")}>
+              {t("homepage.contact")}
             </CTAButton>
           </div>
 
@@ -51,12 +54,12 @@ export default function Homepage() {
           <div className="flex flex-col items-center gap-5 text-center md:hidden">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
-                Directeur artistique
+                {t("homepage.role")}
               </p>
-              <p className="text-sm font-light text-ivoire/60">Nice, France.</p>
+              <p className="text-sm font-light text-ivoire/60">{t("homepage.location")}</p>
             </div>
-            <CTAButton variant="white" href="/contact">
-              CONTACT
+            <CTAButton variant="white" href={path("/contact")}>
+              {t("homepage.contact")}
             </CTAButton>
           </div>
         </div>
@@ -66,10 +69,7 @@ export default function Homepage() {
         {/* INTRO STATEMENT */}
         <Reveal as="section" className="flex justify-end px-6 md:px-[27px]">
           <p className="max-w-[820px] text-[30px] font-medium leading-snug tracking-[-0.04em] text-encre">
-            Je travaille à l'endroit où l'esthétique rejoint l'intention.
-            Chaque projet a une matière propre : je la lis, je la cadre, je
-            lui donne une forme qui a du sens autant que de l'allure. Pour
-            qu'au premier regard, l'image et l'idée ne fassent plus qu'une.
+            {t("homepage.manifesto")}
           </p>
         </Reveal>
 
@@ -78,7 +78,7 @@ export default function Homepage() {
         {/* PROJETS SÉLECTIONNÉS */}
         <Reveal as="section" className="flex flex-col gap-6 px-6 md:px-[27px]">
           <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
-            Projets séléctionnés
+            {t("homepage.projectsTitle")}
           </h2>
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:auto-rows-[300px]">
             {projects.map((project, i) => (
@@ -91,10 +91,10 @@ export default function Homepage() {
             ))}
           </div>
           <a
-            href="/projets"
+            href={path("/projets")}
             className="flex items-center justify-center self-end p-[10px] text-xs font-light uppercase tracking-widest text-encre hover:opacity-70"
           >
-            Voir tous les projets
+            {t("homepage.viewAll")}
           </a>
         </Reveal>
 
@@ -103,7 +103,7 @@ export default function Homepage() {
         {/* SERVICES */}
         <Reveal as="section" className="flex flex-col gap-8 px-6 md:px-[27px]">
           <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
-            Services
+            {t("homepage.servicesTitle")}
           </h2>
           <div className="flex flex-col">
             {practices.map((practice, i) => (

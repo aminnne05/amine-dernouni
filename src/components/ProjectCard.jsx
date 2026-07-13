@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import useReveal from "../hooks/useReveal";
 import { isVideoSrc } from "../utils/media";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ProjectCard({ project, className = "", index = 0 }) {
   const { title, year, image, slug } = project;
   const [ref, visible] = useReveal();
+  const { t, path } = useLanguage();
 
   return (
     <Link
       ref={ref}
-      to={`/projets/${slug}`}
+      to={path(`/projets/${slug}`)}
       className={`group flex h-[340px] w-full flex-col gap-1.5 transition-all duration-700 ease-out sm:h-full ${
         visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       } ${className}`}
@@ -35,7 +37,7 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
           )
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-xs font-light text-white/60">
-            visuel à venir
+            {t("projectDetail.comingSoon")}
           </div>
         )}
       </div>
