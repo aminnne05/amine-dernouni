@@ -3,7 +3,7 @@
   <defs>
     <style>
       .logo-horizontal-fill {
-        fill: #f0f0f0;
+        fill: currentColor;
       }
     </style>
   </defs>

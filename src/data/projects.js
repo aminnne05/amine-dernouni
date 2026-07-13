@@ -39,14 +39,3 @@ export const practices = [
       "Des interfaces nettes et lisibles, où la forme travaille pour l'usage et jamais contre lui.",
   },
 ];
-
-export const collaborators = [
-  "Pulpp",
-  "Ashéa",
-  "Vitaya",
-  "Beyn",
-  "Abracadabra Döner",
-  "Kabti Hkayti",
-  "SYC",
-  "Abra Kebab",
-];

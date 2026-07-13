@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import NextStepCTA from "../components/NextStepCTA";
+import HoverTab from "../components/HoverTab";
 import { projects } from "../data/projects";
 import { isVideoSrc } from "../utils/media";
 
@@ -60,7 +61,7 @@ export default function ProjectDetail() {
                 <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">
                   {project.title}
                 </h1>
-                <p className="text-sm font-light leading-relaxed text-gris-texte">
+                <p className="text-sm font-light leading-relaxed text-encre/60">
                   {project.intro}
                 </p>
               </div>
@@ -95,20 +96,16 @@ export default function ProjectDetail() {
 
               {/* Chapitres : Contexte / Démarche / Réponse */}
               <div className="flex flex-col gap-4 border-t border-encre/15 pt-4">
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-1">
                   {chapterLabels.map(({ key, label }, i) => (
-                    <button
+                    <HoverTab
                       key={key}
-                      type="button"
+                      active={chapter === key}
                       onClick={() => setChapter(key)}
-                      className={`rounded-full border px-3 py-1 text-[11px] font-light tracking-wide transition-colors ${
-                        chapter === key
-                          ? "border-encre bg-encre text-ivoire"
-                          : "border-encre/25 text-encre hover:border-encre"
-                      }`}
+                      className="text-xs"
                     >
                       {`0${i + 1} ${label}`}
-                    </button>
+                    </HoverTab>
                   ))}
                 </div>
                 <p className="min-h-[80px] text-sm font-light leading-relaxed text-encre">

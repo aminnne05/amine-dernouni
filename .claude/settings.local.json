@@ -24,7 +24,27 @@
       "Bash(git push *)",
       "Bash(security find-internet-password *)",
       "Bash(ssh-keygen -t ed25519 -C \"dernouniamine02@gmail.com\" -f ~/.ssh/id_ed25519 -N \"\")",
-      "Bash(ssh -T git@github.com -o StrictHostKeyChecking=accept-new)"
+      "Bash(ssh -T git@github.com -o StrictHostKeyChecking=accept-new)",
+      "Read(//private/tmp/**)",
+      "Bash(unzip -o ffmpeg.zip -d ffmpeg-bin)",
+      "Bash(chmod +x ffmpeg-bin/ffmpeg)",
+      "Bash(xattr -d com.apple.quarantine ffmpeg-bin/ffmpeg)",
+      "Bash(./ffmpeg-bin/ffmpeg -version)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/bikin in algiers/content.json'\\)\\)\")",
+      "Bash(npm run *)",
+      "Bash(npx vite *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4173/projets/ashea)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4173/contact)",
+      "Bash(kill %1)",
+      "Bash(grep -rn \"overflow-x\\\\|overflow:\" src/ index.html)",
+      "Bash(grep -rn \"min-w\\\\|w-screen\\\\|100vw\" src/)",
+      "Bash(find '/Users/test/Library/Application Support' -maxdepth 4 -iname *paste*)",
+      "Bash(python3 -c \"import json; json.load\\(open\\('src/assets/images/abracadabra-doner/content.json'\\)\\)\")"
     ]
   }
 }

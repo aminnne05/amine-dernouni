@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import LoadingScreen from "./components/LoadingScreen";
 import Homepage from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -25,8 +26,18 @@ function Placeholder({ name }) {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.body.style.overflow = loading ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
+
   return (
     <BrowserRouter>
+      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       <ScrollToTop />
       <Header />
       {/* main au-dessus du footer fixé : effet reveal */}

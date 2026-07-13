@@ -2,100 +2,75 @@ import CTAButton from "../components/CTAButton";
 import ProjectCard from "../components/ProjectCard";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
-import LogoWordmark from "../assets/logo/logo-wordmark.svg?react";
-import shotAmine from "../assets/images/SHOT_AMINE.jpg";
+import RevealRow from "../components/RevealRow";
+import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
+import shotAmine from "../assets/images/hero-portrait.jpg";
 import useScrollProgress from "../hooks/useScrollProgress";
-import { projects, practices, collaborators } from "../data/projects";
-import { getClientLogos } from "../data/mediaLoader";
-
-const clientLogos = getClientLogos();
+import { projects, practices } from "../data/projects";
 
 export default function Homepage() {
   const scroll = useScrollProgress(450);
 
   return (
     <div className="bg-ivoire">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 pt-[129px] pb-32">
-        {/* HERO */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:flex-row md:justify-end md:gap-16 md:px-[27px]">
-          <div className="h-[220px] w-[150px] shrink-0 md:h-[380px] md:w-[240px]">
-            <img
-              src={shotAmine}
-              alt="Amine Dernouni"
-              className="h-full w-full object-cover object-center will-change-[filter,transform]"
-              style={{
-                filter: `blur(${scroll * 14}px)`,
-                transform: `scale(${1 + scroll * 0.06})`,
-                opacity: 1 - scroll * 0.25,
-              }}
-            />
+      {/* HERO — bloc noir */}
+      <Reveal as="section" className="bg-encre">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-14 px-6 pt-[129px] pb-20 md:flex-row md:items-center md:justify-between md:gap-8 md:px-[27px] md:pb-28">
+          <div className="hidden shrink-0 flex-col gap-1 md:flex md:w-[220px]">
+            <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
+              Directeur artistique
+            </p>
+            <p className="text-sm font-light text-ivoire/60">Nice, France.</p>
           </div>
-          <div className="flex w-full max-w-[600px] flex-col gap-8">
-            <div className="flex flex-1 flex-col justify-center gap-3">
-              <div className="w-[220px] text-encre">
-                <LogoWordmark className="h-auto w-full" />
-              </div>
-              <p className="text-sm font-medium uppercase tracking-[-0.03em] text-encre">
+
+          <div className="relative mx-auto w-full max-w-[260px] shrink-0 md:mx-0 md:max-w-[340px]">
+            <div className="aspect-[3/4] w-full overflow-hidden">
+              <img
+                src={shotAmine}
+                alt="Amine Dernouni"
+                className="h-full w-full object-cover object-center will-change-[filter,transform]"
+                style={{
+                  filter: `blur(${scroll * 14}px)`,
+                  transform: `scale(${1 + scroll * 0.06})`,
+                  opacity: 1 - scroll * 0.25,
+                }}
+              />
+            </div>
+            <div className="pointer-events-none absolute bottom-6 left-1/2 w-[135%] -translate-x-1/2 md:bottom-10">
+              <LogoHorizontal className="h-auto w-full text-ivoire drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]" />
+            </div>
+          </div>
+
+          <div className="hidden shrink-0 md:flex md:w-[220px] md:justify-end">
+            <CTAButton variant="white" href="/contact">
+              CONTACT
+            </CTAButton>
+          </div>
+
+          {/* mobile only : infos empilées sous la photo */}
+          <div className="flex flex-col items-center gap-5 text-center md:hidden">
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
                 Directeur artistique
               </p>
+              <p className="text-sm font-light text-ivoire/60">Nice, France.</p>
             </div>
-            <div className="flex items-end justify-between">
-              <p className="text-sm font-light text-encre">Nice, France.</p>
-              <CTAButton variant="black" href="/contact">
-                CONTACT
-              </CTAButton>
-            </div>
+            <CTAButton variant="white" href="/contact">
+              CONTACT
+            </CTAButton>
           </div>
-        </Reveal>
+        </div>
+      </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
-
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 pt-32 pb-32">
         {/* INTRO STATEMENT */}
         <Reveal as="section" className="flex justify-end px-6 md:px-[27px]">
-          <p className="max-w-[820px] text-[26px] font-medium leading-snug tracking-[-0.04em] text-encre">
+          <p className="max-w-[820px] text-[30px] font-medium leading-snug tracking-[-0.04em] text-encre">
             Je travaille à l'endroit où l'esthétique rejoint l'intention.
             Chaque projet a une matière propre : je la lis, je la cadre, je
             lui donne une forme qui a du sens autant que de l'allure. Pour
             qu'au premier regard, l'image et l'idée ne fassent plus qu'une.
           </p>
-        </Reveal>
-
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* COLLABORATEURS */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
-            Ils m'ont fait confiance
-          </h2>
-          {clientLogos.length > 0 ? (
-            <div className="flex w-full items-center justify-between gap-4">
-              {clientLogos.map((logo) => (
-                <img
-                  key={logo.filename}
-                  src={logo.src}
-                  alt={logo.name}
-                  className={`object-contain grayscale transition-all duration-300 hover:grayscale-0 ${
-                    logo.filename === "066.svg"
-                      ? "h-14 w-[72px]"
-                      : logo.filename === "04.svg"
-                        ? "h-9 w-[104px]"
-                        : "h-9 w-[72px]"
-                  }`}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-wrap items-center gap-x-10 gap-y-5">
-              {collaborators.map((name) => (
-                <span
-                  key={name}
-                  className="text-sm font-medium uppercase tracking-[2px] text-taupe transition-colors hover:text-encre"
-                >
-                  {name}
-                </span>
-              ))}
-            </div>
-          )}
         </Reveal>
 
         <div className="h-px w-full bg-encre/15" />
@@ -125,49 +100,23 @@ export default function Homepage() {
 
         <div className="h-px w-full bg-encre/15" />
 
-        {/* PRATIQUES */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
-            Pratiques
+        {/* SERVICES */}
+        <Reveal as="section" className="flex flex-col gap-8 px-6 md:px-[27px]">
+          <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
+            Services
           </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-[21px] md:gap-y-[33px]">
+          <div className="flex flex-col">
             {practices.map((practice, i) => (
-              <Reveal
+              <RevealRow
                 key={practice.number}
-                className="flex flex-col gap-4"
-                delay={(i % 2) * 100}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-light text-encre">
-                    {practice.number}
-                  </span>
-                  <div className="h-px flex-1 bg-encre/20" />
-                </div>
-                <h3 className="text-base font-medium tracking-[-0.03em] text-encre">
-                  {practice.title}
-                </h3>
-                <p className="text-base font-light leading-relaxed text-gris-texte text-justify">
-                  {practice.description}
-                </p>
-              </Reveal>
+                title={practice.title}
+                number={practice.number}
+                paragraph={practice.description}
+                theme="light"
+                delay={i * 60}
+              />
             ))}
           </div>
-        </Reveal>
-
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* COLLABORATIONS */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
-            Collaborations
-          </h2>
-          <p className="text-base md:text-lg font-light leading-relaxed text-encre">
-            Je travaille avec des marques qui se lancent, des marques
-            installées qui veulent se repositionner, des artistes qui
-            cherchent à donner forme à leur direction, et des agences en
-            quête du bon équilibre entre intention stratégique et exigence
-            visuelle.
-          </p>
         </Reveal>
       </div>
 

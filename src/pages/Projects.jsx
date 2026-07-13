@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
+import HoverTab from "../components/HoverTab";
 import { projects, categories } from "../data/projects";
 
 export default function Projects() {
@@ -18,9 +19,9 @@ export default function Projects() {
         {/* En-tête : titre + description à droite (référence Moonstone) */}
         <Reveal as="section" className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">
-            Réalisations
+            Sélection de projets
           </h1>
-          <p className="max-w-[420px] text-sm font-light leading-relaxed text-gris-texte">
+          <p className="max-w-[420px] text-sm font-light leading-relaxed text-encre/60">
             Une sélection de projets où l'image et l'idée ne font qu'une :
             identités, campagnes, packagings et directions artistiques,
             pensés du concept à la déclinaison.
@@ -28,20 +29,15 @@ export default function Projects() {
         </Reveal>
 
         {/* Filtres */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap justify-end gap-1">
           {categories.map((cat) => (
-            <button
+            <HoverTab
               key={cat}
-              type="button"
+              active={active === cat}
               onClick={() => setActive(cat)}
-              className={`rounded-full border px-4 py-1.5 text-xs font-light tracking-wide transition-colors ${
-                active === cat
-                  ? "border-encre bg-encre text-ivoire"
-                  : "border-encre/25 text-encre hover:border-encre"
-              }`}
             >
               {cat}
-            </button>
+            </HoverTab>
           ))}
         </div>
 
@@ -58,7 +54,7 @@ export default function Projects() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="py-16 text-center text-sm font-light text-gris-texte">
+          <p className="py-16 text-center text-sm font-light text-encre/50">
             Aucun projet dans cette catégorie pour le moment.
           </p>
         )}

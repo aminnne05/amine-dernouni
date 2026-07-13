@@ -135,6 +135,13 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  max-width: 100%;
+}
+
 /* Curseur rétro pixelisé : flèche par défaut, main au survol des éléments cliquables */
 body {
   cursor: url("./assets/cursor/arrow.svg") 0 0, auto;

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Reveal from "../components/Reveal";
+import HoverTab from "../components/HoverTab";
 
 const projectTypes = ["Branding", "Motion", "Direction artistique", "UX/UI", "Autre"];
 const timelines = ["Aucune urgence", "1 à 3 mois", "Dans le mois", "Urgent"];
@@ -24,7 +25,7 @@ export default function Contact() {
     <div className="relative z-10 bg-ivoire">
       {/* HERO */}
       <section className="flex flex-col items-center gap-4 bg-encre px-6 py-24 text-center">
-        <p className="text-xs font-light tracking-widest text-[#a5a5a5]">
+        <p className="text-sm font-medium tracking-widest text-ivoire/60">
           CONTACT
         </p>
         <p className="max-w-[600px] text-2xl font-light leading-snug tracking-[-0.02em] text-ivoire md:text-4xl">
@@ -36,12 +37,12 @@ export default function Contact() {
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 px-6 py-32 md:px-[27px]">
         {/* 01 — BRIEF */}
         <Reveal as="section" className="flex flex-col gap-8 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
-          <p className="shrink-0 text-sm font-light tracking-wide text-taupe">
+          <p className="shrink-0 text-sm font-medium tracking-wide text-encre/70">
             01 — Brief
           </p>
           <form onSubmit={handleSubmit} className="flex w-full max-w-[500px] flex-col gap-8">
             <label className="flex flex-col gap-2">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Ton nom
               </span>
               <input
@@ -55,7 +56,7 @@ export default function Contact() {
             </label>
 
             <label className="flex flex-col gap-2">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Email
               </span>
               <input
@@ -69,29 +70,20 @@ export default function Contact() {
             </label>
 
             <div className="flex flex-col gap-3">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Type de projet
               </span>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1">
                 {projectTypes.map((t) => (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => setType(t)}
-                    className={`rounded-full border px-4 py-1.5 text-xs font-light tracking-wide transition-colors ${
-                      type === t
-                        ? "border-encre bg-encre text-ivoire"
-                        : "border-encre/25 text-encre hover:border-encre"
-                    }`}
-                  >
-                    {t.toUpperCase()}
-                  </button>
+                  <HoverTab key={t} active={type === t} onClick={() => setType(t)}>
+                    {t}
+                  </HoverTab>
                 ))}
               </div>
             </div>
 
             <label className="flex flex-col gap-2">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Timeline souhaitée
               </span>
               <select
@@ -108,14 +100,14 @@ export default function Contact() {
             </label>
 
             <label className="flex flex-col gap-2">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Le projet en quelques lignes
               </span>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Contexte, audience, ce qui te bloque, ce dont tu rêves..."
-                rows={3}
+                rows={1}
                 className="resize-none border-b border-encre/20 bg-transparent pb-2 text-base font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
               />
             </label>
@@ -143,12 +135,12 @@ export default function Contact() {
 
         {/* 02 — DIRECT */}
         <Reveal as="section" className="flex flex-col gap-8 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
-          <p className="shrink-0 text-sm font-light tracking-wide text-taupe">
+          <p className="shrink-0 text-sm font-medium tracking-wide text-encre/70">
             02 — Direct
           </p>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Email
               </span>
               <a
@@ -159,7 +151,7 @@ export default function Contact() {
               </a>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Numéro
               </span>
               <a
@@ -170,7 +162,7 @@ export default function Contact() {
               </a>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-xs font-light uppercase tracking-widest text-taupe/70">
+              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
                 Instagram
               </span>
               <a

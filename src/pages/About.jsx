@@ -1,8 +1,8 @@
 import CTAButton from "../components/CTAButton";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
-import LogoWordmark from "../assets/logo/logo-wordmark.svg?react";
-import shotAmine from "../assets/images/SHOT_AMINE.jpg";
+import RevealRow from "../components/RevealRow";
+import aboutPortrait from "../assets/images/about-portrait.jpg";
 import { practices } from "../data/projects";
 
 const experience = [
@@ -52,43 +52,48 @@ const methodology = [
 export default function About() {
   return (
     <div className="relative z-10 bg-ivoire">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 pt-[129px] pb-32">
-        {/* HERO */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:flex-row md:justify-end md:gap-16 md:px-[27px]">
-          <div className="h-[220px] w-[150px] shrink-0 overflow-hidden md:h-[380px] md:w-[240px]">
-            <img
-              src={shotAmine}
-              alt="Amine Dernouni"
-              className="h-full w-full object-cover object-center"
-            />
+      {/* HERO */}
+      <Reveal
+        as="section"
+        className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-6 pt-[129px] pb-32 md:flex-row md:items-end md:gap-16 md:px-[27px]"
+      >
+        <div className="mx-auto aspect-[3/4] w-full max-w-[200px] shrink-0 overflow-hidden md:mx-0 md:max-w-[220px]">
+          <img
+            src={aboutPortrait}
+            alt="Amine Dernouni"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+        <div className="flex flex-1 flex-col gap-8">
+          <p className="max-w-[820px] text-[30px] font-medium leading-snug tracking-[-0.04em] text-encre/50">
+            <span className="text-encre">Directeur artistique</span> formé
+            entre deux cultures, je travaille{" "}
+            <span className="text-encre">
+              le branding, la direction artistique, le motion et l'UX/UI
+            </span>
+            . Mon œil s'est aiguisé{" "}
+            <span className="text-encre">
+              en agence, puis en freelance et au sein du studio que j'ai
+              co-fondé
+            </span>
+            . Curieux jusqu'à l'obsession, je m'attarde sur le détail qui fait
+            qu'une idée sonne juste.{" "}
+            <span className="text-encre">
+              Rigoureux dans la méthode, libre dans la forme.
+            </span>
+          </p>
+          <div className="flex items-end justify-between">
+            <p className="text-sm font-light text-encre">Nice, France.</p>
+            <CTAButton variant="black" href="/contact">
+              CONTACT
+            </CTAButton>
           </div>
-          <div className="flex w-full max-w-[600px] flex-col gap-8">
-            <div className="flex flex-1 flex-col justify-center gap-4">
-              <div className="w-[180px] text-encre">
-                <LogoWordmark className="h-auto w-full" />
-              </div>
-              <p className="max-w-[500px] text-sm font-light leading-relaxed text-encre">
-                Directeur artistique formé entre deux cultures, je travaille
-                le branding, la direction artistique, le motion et l'UX/UI.
-                Mon œil s'est aiguisé en agence, puis en freelance et au sein
-                du studio que j'ai co-fondé. Curieux jusqu'à l'obsession, je
-                m'attarde sur le détail qui fait qu'une idée sonne juste.
-                Rigoureux dans la méthode, libre dans la forme.
-              </p>
-            </div>
-            <div className="flex items-end justify-between">
-              <p className="text-sm font-light text-encre">Nice, France.</p>
-              <CTAButton variant="black" href="/contact">
-                CONTACT
-              </CTAButton>
-            </div>
-          </div>
-        </Reveal>
+        </div>
+      </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* EXPÉRIENCE */}
-        <Reveal as="section" className="flex flex-col gap-6 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
+      {/* EXPÉRIENCE */}
+      <Reveal as="section" className="bg-ivoire">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 border-t border-encre/15 px-6 py-20 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
           <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
             Expérience
           </h2>
@@ -105,97 +110,91 @@ export default function About() {
               </div>
             ))}
           </div>
-        </Reveal>
+        </div>
+      </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* AVEC QUI JE COLLABORE */}
-        <Reveal as="section" className="flex flex-col gap-6 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-medium leading-snug tracking-[-0.03em] text-encre">
-            Avec qui
-            <br />
-            je collabore
+      {/* AVEC QUI JE COLLABORE — bloc noir */}
+      <Reveal as="section" className="bg-encre">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-24 md:px-[27px]">
+          <h2 className="text-xl font-medium tracking-[-0.03em] text-ivoire">
+            Avec qui je collabore
           </h2>
-          <div className="flex flex-col gap-4">
-            {collaborations.map((c) => (
-              <div
+          <div className="flex flex-col">
+            {collaborations.map((c, i) => (
+              <RevealRow
                 key={c.number}
-                className="flex flex-col gap-1 border-t border-encre/15 pt-4 md:flex-row md:items-center md:gap-8"
-              >
-                <div className="flex items-center gap-4 md:w-[160px] md:shrink-0">
-                  <span className="text-xs font-light text-taupe">{c.number}</span>
-                  <span className="text-base font-medium text-encre">{c.who}</span>
-                </div>
-                <p className="text-sm font-light text-gris-texte">{c.text}</p>
-              </div>
+                title={c.who}
+                number={c.number}
+                paragraph={c.text}
+                theme="dark"
+                delay={i * 60}
+              />
             ))}
           </div>
-        </Reveal>
+        </div>
+      </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* PRATIQUES (identique à la homepage) */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
-            Pratiques
+      {/* SERVICES */}
+      <Reveal as="section" className="bg-ivoire">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-24 md:px-[27px]">
+          <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
+            Services
           </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-[21px] md:gap-y-[33px]">
+          <div className="flex flex-col">
             {practices.map((practice, i) => (
-              <Reveal
+              <RevealRow
                 key={practice.number}
-                className="flex flex-col gap-4"
-                delay={(i % 2) * 100}
+                title={practice.title}
+                number={practice.number}
+                paragraph={practice.description}
+                theme="light"
+                delay={i * 60}
+              />
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* MÉTHODOLOGIE — bloc noir, révélation en accordéon */}
+      <Reveal as="section" className="bg-encre">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-24 md:px-[27px]">
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
+            <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-ivoire">
+              Méthodologie
+            </h2>
+            <p className="text-sm font-light leading-relaxed text-ivoire/60">
+              Quatre étapes, jamais sautées. Survole chaque étape pour voir le
+              détail. Le but est qu'à chaque livraison, tu saches exactement
+              où on en est et pourquoi.
+            </p>
+          </div>
+          <div className="flex flex-col">
+            {methodology.map((step, i) => (
+              <Reveal
+                key={step.number}
+                delay={i * 60}
+                className="group/step border-t border-ivoire/15 py-6 last:border-b"
               >
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-light text-encre">
-                    {practice.number}
+                <div className="flex items-baseline gap-4">
+                  <span className="text-sm font-light text-ivoire/40">
+                    {step.number}
                   </span>
-                  <div className="h-px flex-1 bg-encre/20" />
+                  <span className="text-xl font-medium tracking-[-0.02em] text-ivoire transition-colors duration-300 md:text-2xl">
+                    {step.title}
+                  </span>
                 </div>
-                <h3 className="text-base font-medium tracking-[-0.03em] text-encre">
-                  {practice.title}
-                </h3>
-                <p className="text-base font-light leading-relaxed text-gris-texte text-justify">
-                  {practice.description}
-                </p>
+                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-hover/step:grid-rows-[1fr]">
+                  <div className="overflow-hidden">
+                    <p className="max-w-[600px] pt-3 text-base font-light leading-relaxed text-ivoire/60">
+                      {step.text}
+                    </p>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
-        </Reveal>
-
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* MÉTHODOLOGIE */}
-        <Reveal as="section" className="flex flex-col gap-8 px-6 md:px-[27px]">
-          <div className="flex flex-col gap-3 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
-            <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
-              Méthodologie
-            </h2>
-            <p className="text-sm font-light leading-relaxed text-encre">
-              Quatre étapes, jamais sautées. Le but est qu'à chaque livraison,
-              tu saches exactement où on en est et pourquoi.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4">
-            {methodology.map((step) => (
-              <div
-                key={step.number}
-                className="flex flex-col gap-2 border-t border-encre/15 pt-4 md:flex-row md:items-start md:gap-12"
-              >
-                <span className="shrink-0 text-sm font-light text-encre">
-                  {step.number}
-                </span>
-                <span className="shrink-0 text-sm font-medium text-encre md:w-[160px]">
-                  {step.title}
-                </span>
-                <p className="flex-1 text-base font-light leading-relaxed text-gris-texte text-justify">
-                  {step.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
 
       <NextStepCTA />
     </div>
