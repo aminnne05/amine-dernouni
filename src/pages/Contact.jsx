@@ -3,6 +3,8 @@ import Reveal from "../components/Reveal";
 import HoverTab from "../components/HoverTab";
 import { useLanguage } from "../i18n/LanguageContext";
 
+const FORM_ENDPOINT = "https://formspree.io/f/xpqvwlzo";
+
 export default function Contact() {
   const { t } = useLanguage();
   const projectTypes = t("contact.projectTypes");
@@ -13,17 +15,41 @@ export default function Contact() {
   const [type, setType] = useState(() => projectTypes[0]);
   const [timeline, setTimeline] = useState(() => timelines[0]);
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setType(projectTypes[0]);
+    setTimeline(timelines[0]);
+    setMessage("");
+    setStatus("idle");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("sending");
     const fields = t("contact.mailFields");
-    const subject = encodeURIComponent(
-      `${t("contact.mailSubject")} — ${name || t("contact.mailNoName")}`
-    );
-    const body = encodeURIComponent(
-      `${fields.name} : ${name}\n${fields.email} : ${email}\n${fields.type} : ${type}\n${fields.timeline} : ${timeline}\n\n${message}`
-    );
-    window.location.href = `mailto:dernouniamine02@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          [fields.name]: name,
+          [fields.email]: email,
+          [fields.type]: type,
+          [fields.timeline]: timeline,
+          message,
+          _subject: `${t("contact.mailSubject")} — ${name || t("contact.mailNoName")}`,
+        }),
+      });
+      setStatus(res.ok ? "success" : "error");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -46,93 +72,115 @@ export default function Contact() {
             {t("contact.briefLabel")}
           </p>
           <form onSubmit={handleSubmit} className="flex w-full max-w-[500px] flex-col gap-8">
-            <label className="flex flex-col gap-2">
-              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                {t("contact.yourName")}
-              </span>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder={t("contact.namePlaceholder")}
-                className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
-                required
-              />
-            </label>
-
-            <label className="flex flex-col gap-2">
-              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                {t("contact.email")}
-              </span>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t("contact.emailPlaceholderForm")}
-                className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
-                required
-              />
-            </label>
-
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                {t("contact.projectType")}
-              </span>
-              <div className="flex flex-wrap gap-1">
-                {projectTypes.map((pt) => (
-                  <HoverTab key={pt} active={type === pt} onClick={() => setType(pt)}>
-                    {pt}
-                  </HoverTab>
-                ))}
-              </div>
-            </div>
-
-            <label className="flex flex-col gap-2">
-              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                {t("contact.timeline")}
-              </span>
-              <select
-                value={timeline}
-                onChange={(e) => setTimeline(e.target.value)}
-                className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre focus:border-encre focus:outline-none"
-              >
-                {timelines.map((tl) => (
-                  <option key={tl} value={tl}>
-                    {tl}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className="flex flex-col gap-2">
-              <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
-                {t("contact.projectDescription")}
-              </span>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder={t("contact.descPlaceholder")}
-                rows={1}
-                className="resize-none border-b border-encre/20 bg-transparent pb-2 text-base font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
-              />
-            </label>
-
-            <button
-              type="submit"
-              className="group mt-2 flex w-fit flex-col items-start gap-1"
-            >
-              <span className="flex items-center gap-2 text-sm font-medium tracking-wide text-encre">
-                {t("contact.submit")}
-                <svg
-                  className="h-[8px] w-[10px] transition-transform group-hover:translate-x-1"
-                  viewBox="0 0 11 9"
-                  fill="none"
+            {status === "success" ? (
+              <div className="flex flex-col gap-3 py-4">
+                <p className="text-lg font-medium text-encre">{t("contact.successTitle")}</p>
+                <p className="text-sm font-light text-encre/60">{t("contact.successBody")}</p>
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="mt-2 w-fit text-xs font-light uppercase tracking-widest text-taupe hover:text-encre"
                 >
-                  <path d="M0 4.5H10M10 4.5L6.5 1M10 4.5L6.5 8" stroke="currentColor" />
-                </svg>
-              </span>
-              <span className="h-px w-full bg-encre" />
-            </button>
+                  {t("contact.sendAnother")}
+                </button>
+              </div>
+            ) : (
+              <>
+                <label className="flex flex-col gap-2">
+                  <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
+                    {t("contact.yourName")}
+                  </span>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={t("contact.namePlaceholder")}
+                    className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
+                    required
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
+                    {t("contact.email")}
+                  </span>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t("contact.emailPlaceholderForm")}
+                    className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
+                    required
+                  />
+                </label>
+
+                <div className="flex flex-col gap-3">
+                  <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
+                    {t("contact.projectType")}
+                  </span>
+                  <div className="flex flex-wrap gap-1">
+                    {projectTypes.map((pt) => (
+                      <HoverTab key={pt} active={type === pt} onClick={() => setType(pt)}>
+                        {pt}
+                      </HoverTab>
+                    ))}
+                  </div>
+                </div>
+
+                <label className="flex flex-col gap-2">
+                  <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
+                    {t("contact.timeline")}
+                  </span>
+                  <select
+                    value={timeline}
+                    onChange={(e) => setTimeline(e.target.value)}
+                    className="border-b border-encre/20 bg-transparent pb-2 text-lg font-light text-encre focus:border-encre focus:outline-none"
+                  >
+                    {timelines.map((tl) => (
+                      <option key={tl} value={tl}>
+                        {tl}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="text-sm font-medium uppercase tracking-wide text-encre/70">
+                    {t("contact.projectDescription")}
+                  </span>
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder={t("contact.descPlaceholder")}
+                    rows={1}
+                    className="resize-none border-b border-encre/20 bg-transparent pb-2 text-base font-light text-encre placeholder:text-taupe/50 focus:border-encre focus:outline-none"
+                  />
+                </label>
+
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="group mt-2 flex w-fit flex-col items-start gap-1 disabled:opacity-50"
+                >
+                  <span className="flex items-center gap-2 text-sm font-medium tracking-wide text-encre">
+                    {status === "sending" ? t("contact.sending") : t("contact.submit")}
+                    <svg
+                      className="h-[8px] w-[10px] transition-transform group-hover:translate-x-1"
+                      viewBox="0 0 11 9"
+                      fill="none"
+                    >
+                      <path d="M0 4.5H10M10 4.5L6.5 1M10 4.5L6.5 8" stroke="currentColor" />
+                    </svg>
+                  </span>
+                  <span className="h-px w-full bg-encre" />
+                </button>
+                {status === "error" && (
+                  <p className="text-xs font-light text-encre/70">
+                    {t("contact.errorTitle")} {t("contact.errorBody")}
+                  </p>
+                )}
+              </>
+            )}
           </form>
         </Reveal>
 
