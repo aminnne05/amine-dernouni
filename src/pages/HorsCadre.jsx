@@ -26,7 +26,7 @@ export default function HorsCadre() {
               ({String(pieces.length).padStart(2, "0")})
             </span>
           </h1>
-          <p className="col-span-16 font-serif text-[clamp(1.75rem,3.6vw,3.5rem)] leading-[1.05] text-encre md:col-span-11 md:col-start-6">
+          <p className="type-lede col-span-16 max-w-[38ch] text-encre/60 md:col-span-11 md:col-start-6">
             {t("horsCadre.lede")}
           </p>
         </Reveal>
@@ -59,7 +59,7 @@ export default function HorsCadre() {
                     />
                   )}
                 </div>
-                <p className="mt-2 font-serif text-[clamp(1rem,1.25vw,1.375rem)] leading-tight text-encre">
+                <p className="type-index mt-2 flex items-baseline gap-2 text-encre">
                   {piece.title}
                   {piece.media.length > 1 && (
                     <span className="type-micro ml-2 align-middle text-taupe">

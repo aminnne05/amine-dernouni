@@ -45,7 +45,7 @@ export default function Lightbox({ piece, onClose }) {
     >
       {/* barre : titre à gauche, compteur et fermeture à droite */}
       <div className="shell flex shrink-0 items-center justify-between gap-6 pt-6 pb-4">
-        <p className="font-serif text-[clamp(1.25rem,2vw,2rem)] leading-none text-ivoire">
+        <p className="type-index text-ivoire">
           {piece.title}
         </p>
         <div className="flex items-center gap-6">

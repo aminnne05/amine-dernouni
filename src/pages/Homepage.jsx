@@ -125,7 +125,7 @@ export default function Homepage() {
             </span>
           </h2>
           {awards.length > 0 ? (
-            <div className="colonnes gap-y-14">
+            <div className="flex flex-col border-b border-encre">
               {awards.map((award, i) => (
                 <AwardCard
                   key={`${award.slug}-${award.title}`}
@@ -133,9 +133,9 @@ export default function Homepage() {
                   title={award.title}
                   body={award.body}
                   project={award.project}
+                  cover={award.cover}
                   to={path(`/projets/${award.slug}`)}
                   delay={i * 90}
-                  className={i % 2 === 1 ? "md:col-start-10" : ""}
                 />
               ))}
             </div>

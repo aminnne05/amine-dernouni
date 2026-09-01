@@ -51,11 +51,12 @@ export default function Header() {
   const navLinks = [
     { to: path("/"), label: t("nav.accueil") },
     { to: path("/projets"), label: t("nav.projets") },
-    // Hors Cadre se signale par son dessin de lettre, pas par un badge.
-    { to: path("/hors-cadre"), label: t("horsCadre.nav"), serif: true },
     { to: path("/a-propos"), label: t("nav.aPropos") },
     { to: path("/contact"), label: t("nav.contact") },
   ];
+
+  // Hors Cadre ferme la barre, tenu à l'écart des pages client.
+  const horsCadre = { to: path("/hors-cadre"), label: t("horsCadre.nav") };
 
   const isEn = pathname === "/en" || pathname.startsWith("/en/");
   const frPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
@@ -113,11 +114,7 @@ export default function Header() {
                     key={link.to}
                     to={link.to}
                     end
-                    className={`group relative inline-flex items-center justify-center px-3 py-1 ${
-                      link.serif
-                        ? "font-serif text-[1.15em] leading-none"
-                        : "type-index"
-                    }`}
+                    className="type-index group relative inline-flex items-center justify-center px-3 py-1"
                   >
                     {({ isActive }) => (
                       <>
@@ -148,9 +145,41 @@ export default function Header() {
               </nav>
             </div>
 
-            <div
-              className={`type-micro hidden items-center gap-1 transition-colors duration-500 md:flex ${encreDoux}`}
-            >
+            <div className="hidden items-center gap-8 md:flex">
+              <NavLink
+                to={horsCadre.to}
+                end
+                className="type-index group relative inline-flex items-center justify-center px-3 py-1"
+              >
+                {({ isActive }) => (
+                  <>
+                    <span
+                      className={`absolute inset-0 rounded-full transition-all duration-500 ${
+                        surFondNoir ? "bg-ivoire" : "bg-encre"
+                      } ${
+                        isActive
+                          ? "scale-100 opacity-100"
+                          : "scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-10"
+                      }`}
+                    />
+                    <span
+                      className={`relative transition-colors duration-500 ${
+                        isActive
+                          ? surFondNoir
+                            ? "text-encre"
+                            : "text-ivoire"
+                          : encreTexte
+                      }`}
+                    >
+                      {horsCadre.label}
+                    </span>
+                  </>
+                )}
+              </NavLink>
+
+              <div
+                className={`type-micro flex items-center gap-1 transition-colors duration-500 ${encreDoux}`}
+              >
               <Link
                 to={frPath}
                 className={`transition-colors ${lang === "fr" ? encreTexte : ""}`}
@@ -164,6 +193,7 @@ export default function Header() {
               >
                 EN
               </Link>
+              </div>
             </div>
 
             <button
@@ -207,9 +237,7 @@ export default function Header() {
                 >
                   <span className="flex items-baseline gap-4">
                     <span className="type-micro text-taupe">{`0${i + 1}`}</span>
-                    <span className={link.serif ? "font-serif" : undefined}>
-                      {link.label}
-                    </span>
+                    {link.label}
                   </span>
                   <svg
                     className="h-[10px] w-[13px] shrink-0"
@@ -225,6 +253,29 @@ export default function Header() {
                 </NavLink>
               ))}
             </nav>
+
+            <NavLink
+              to={horsCadre.to}
+              end
+              onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `type-title mt-10 flex items-center justify-between gap-4 border-t border-encre/15 py-5 transition-colors ${
+                  isActive ? "text-encre" : "text-encre/60"
+                }`
+              }
+            >
+              <span className="flex items-baseline gap-4">
+                <span className="type-micro text-rouge">05</span>
+                {horsCadre.label}
+              </span>
+              <svg className="h-[10px] w-[13px] shrink-0" viewBox="0 0 14 10" fill="none">
+                <path
+                  d="M0 5H13M13 5L8.5 0.5M13 5L8.5 9.5"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+              </svg>
+            </NavLink>
           </div>
 
           <div className="flex items-end justify-between gap-4 border-t border-encre/15 pt-4">

@@ -24,6 +24,7 @@ export function getAwards(lang = "fr") {
         slug: p.slug,
         project: p.title,
         year: p.year,
+        cover: p.image,
         title,
         body,
       };
