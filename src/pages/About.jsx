@@ -1,7 +1,7 @@
 import CTAButton from "../components/CTAButton";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
-import RevealRow from "../components/RevealRow";
+import IndexRow from "../components/IndexRow";
 import aboutPortrait from "../assets/images/about-portrait.jpg";
 import { useLanguage } from "../i18n/LanguageContext";
 
@@ -17,7 +17,7 @@ export default function About() {
       {/* HERO */}
       <Reveal
         as="section"
-        className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-6 pt-[129px] pb-32 md:flex-row md:items-end md:gap-16 md:px-[27px]"
+        className="shell flex flex-col gap-10 pt-[120px] pb-32 md:flex-row md:items-end md:gap-16"
       >
         <div className="mx-auto aspect-[3/4] w-full max-w-[200px] shrink-0 overflow-hidden md:mx-0 md:max-w-[220px]">
           <img
@@ -45,8 +45,8 @@ export default function About() {
 
       {/* EXPÉRIENCE */}
       <Reveal as="section" className="bg-ivoire">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 border-t border-encre/15 px-6 py-20 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10 md:px-[27px]">
-          <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-encre">
+        <div className="shell flex flex-col gap-6 border-t border-encre/15 py-20 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
+          <h2 className="type-micro shrink-0 text-taupe">
             {t("about.experienceTitle")}
           </h2>
           <div className="flex flex-col gap-5">
@@ -67,17 +67,20 @@ export default function About() {
 
       {/* AVEC QUI JE COLLABORE — bloc noir */}
       <Reveal as="section" className="bg-encre">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-24 md:px-[27px]">
-          <h2 className="text-xl font-medium tracking-[-0.03em] text-ivoire">
-            {t("about.collaborateTitle")}
+        <div className="shell flex flex-col gap-8 py-24">
+          <h2 className="type-micro text-ivoire/45">
+            {t("about.collaborateTitle")}{" "}
+            <span className="text-ivoire/25">
+              ({String(collaborations.length).padStart(2, "0")})
+            </span>
           </h2>
-          <div className="flex flex-col">
+          <div className="flex flex-col border-b border-ivoire/15">
             {collaborations.map((c, i) => (
-              <RevealRow
+              <IndexRow
                 key={c.number}
-                title={c.who}
                 number={c.number}
-                paragraph={c.text}
+                title={c.who}
+                description={c.text}
                 theme="dark"
                 delay={i * 60}
               />
@@ -88,18 +91,20 @@ export default function About() {
 
       {/* SERVICES */}
       <Reveal as="section" className="bg-ivoire">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-24 md:px-[27px]">
-          <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
-            {t("about.servicesTitle")}
+        <div className="shell flex flex-col gap-8 py-24">
+          <h2 className="type-micro text-taupe">
+            {t("about.servicesTitle")}{" "}
+            <span className="text-encre/40">
+              ({String(practices.length).padStart(2, "0")})
+            </span>
           </h2>
-          <div className="flex flex-col">
+          <div className="flex flex-col border-b border-encre/15">
             {practices.map((practice, i) => (
-              <RevealRow
+              <IndexRow
                 key={practice.number}
-                title={practice.title}
                 number={practice.number}
-                paragraph={practice.description}
-                theme="light"
+                title={practice.title}
+                description={practice.description}
                 delay={i * 60}
               />
             ))}
@@ -109,9 +114,9 @@ export default function About() {
 
       {/* MÉTHODOLOGIE — bloc noir, révélation en accordéon */}
       <Reveal as="section" className="bg-encre">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-24 md:px-[27px]">
+        <div className="shell flex flex-col gap-8 py-24">
           <div className="flex flex-col gap-4 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
-            <h2 className="shrink-0 text-xl font-medium tracking-[-0.03em] text-ivoire">
+            <h2 className="type-micro shrink-0 text-ivoire/45">
               {t("about.methodologyTitle")}
             </h2>
             <p className="text-sm font-light leading-relaxed text-ivoire/60">

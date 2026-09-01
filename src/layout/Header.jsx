@@ -28,12 +28,12 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-1/2 z-50 flex h-16 w-full max-w-[1440px] -translate-x-1/2 items-center justify-between border-b border-encre/10 bg-ivoire/70 px-6 py-4 backdrop-blur-xl md:px-[27px]">
-        <div className="flex items-center gap-16">
+      <header className="shell fixed top-0 left-0 z-50 flex h-[52px] w-full items-center justify-between border-b border-encre/10 bg-ivoire/70 backdrop-blur-xl">
+        <div className="flex items-center gap-10">
           <Link
             to={path("/")}
             onClick={() => setOpen(false)}
-            className="block w-[40px] shrink-0 text-encre"
+            className="block w-[30px] shrink-0 text-encre"
             aria-label="Amine Dernouni"
           >
             <LogoMark className="h-auto w-full" />
@@ -45,7 +45,7 @@ export default function Header() {
                 key={link.to}
                 to={link.to}
                 end
-                className="group relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-[-0.01em]"
+                className="type-index group relative inline-flex items-center justify-center px-3 py-1.5"
               >
                 {({ isActive }) => (
                   <>
@@ -70,7 +70,7 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="hidden items-center gap-1 text-xs md:flex">
+        <div className="type-micro hidden items-center gap-1 md:flex">
           <Link
             to={frPath}
             className={`transition-colors ${lang === "fr" ? "font-medium text-encre" : "text-taupe hover:text-encre"}`}
@@ -91,7 +91,7 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
           aria-expanded={open}
-          className="relative z-50 flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden"
+          className="relative z-50 -mr-1 flex h-8 w-8 flex-col items-center justify-end gap-[5px] md:hidden"
         >
           <span
             className={`h-px w-5 bg-encre transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`}
@@ -103,9 +103,9 @@ export default function Header() {
       </header>
 
       {open && (
-        <div className="fixed inset-0 z-40 flex flex-col justify-between bg-ivoire px-6 pt-28 pb-8 md:hidden">
+        <div className="shell fixed inset-0 z-40 flex flex-col justify-between bg-ivoire pt-24 pb-8 md:hidden">
           <div className="flex flex-col gap-3">
-            <p className="text-xs font-light uppercase tracking-widest text-taupe">
+            <p className="type-micro text-taupe">
               {t("nav.menuLabel")}
             </p>
             <nav className="flex flex-col">
@@ -143,7 +143,7 @@ export default function Header() {
 
           <div className="flex items-end justify-between gap-4 border-t border-encre/15 pt-4">
             <div className="flex flex-col gap-4">
-              <p className="text-xs font-light uppercase tracking-widest text-taupe">
+              <p className="type-micro text-taupe">
                 {t("nav.socialLabel")}
               </p>
               <div className="flex flex-col gap-1 text-sm font-light text-encre">

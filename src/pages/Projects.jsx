@@ -17,7 +17,7 @@ export default function Projects() {
 
   return (
     <div className="relative z-10 bg-ivoire">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-20 px-6 pt-[129px] pb-32 md:px-[27px]">
+      <div className="shell flex flex-col gap-20 pt-[120px] pb-32">
         {/* En-tête : titre + description à droite (référence Moonstone) */}
         <Reveal as="section" className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">

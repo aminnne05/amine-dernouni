@@ -28,7 +28,7 @@ export default function Footer() {
         ref={ref}
         className="fixed bottom-0 left-0 z-0 w-full bg-encre text-ivoire"
       >
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-16 px-6 pb-8 pt-20 md:px-[27px]">
+        <div className="shell flex flex-col gap-16 pb-8 pt-20">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             <div className="flex flex-col gap-4">
               <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">

@@ -33,6 +33,8 @@ export const translations = {
       projectsTitle: "Projets séléctionnés",
       viewAll: "Voir tous les projets",
       servicesTitle: "Services",
+      awardsTitle: "Distinctions",
+      awardsEmpty: "Distinctions à venir.",
     },
     about: {
       heroSegments: [
@@ -241,6 +243,8 @@ export const translations = {
       projectsTitle: "Selected Projects",
       viewAll: "View all projects",
       servicesTitle: "Services",
+      awardsTitle: "Awards",
+      awardsEmpty: "Awards coming soon.",
     },
     about: {
       heroSegments: [

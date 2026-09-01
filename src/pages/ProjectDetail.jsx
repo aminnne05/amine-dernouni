@@ -38,7 +38,7 @@ export default function ProjectDetail() {
 
   return (
     <div className="relative z-10 bg-ivoire">
-      <div className="mx-auto w-full max-w-[1440px] px-6 pt-[100px] pb-24 md:px-[27px] md:pb-0">
+      <div className="shell pt-[92px] pb-24 md:pb-0">
         <div className="flex flex-col gap-12 md:h-[calc(100vh-100px)] md:flex-row md:gap-16 md:overflow-hidden">
           {/* PANNEAU GAUCHE — fixe, ne défile pas */}
           <aside className="md:h-full md:w-[380px] md:shrink-0 md:overflow-hidden">

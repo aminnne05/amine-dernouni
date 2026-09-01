@@ -65,7 +65,7 @@ export default function Contact() {
         </p>
       </section>
 
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 px-6 py-32 md:px-[27px]">
+      <div className="shell flex flex-col gap-32 py-32">
         {/* 01 — BRIEF */}
         <Reveal as="section" className="flex flex-col gap-8 md:grid md:grid-cols-[200px_1fr] md:items-start md:gap-10">
           <p className="shrink-0 text-sm font-medium tracking-wide text-encre/70">
