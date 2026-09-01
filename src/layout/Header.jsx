@@ -51,6 +51,8 @@ export default function Header() {
   const navLinks = [
     { to: path("/"), label: t("nav.accueil") },
     { to: path("/projets"), label: t("nav.projets") },
+    // Hors Cadre se signale par son dessin de lettre, pas par un badge.
+    { to: path("/hors-cadre"), label: t("horsCadre.nav"), serif: true },
     { to: path("/a-propos"), label: t("nav.aPropos") },
     { to: path("/contact"), label: t("nav.contact") },
   ];
@@ -111,7 +113,11 @@ export default function Header() {
                     key={link.to}
                     to={link.to}
                     end
-                    className="type-index group relative inline-flex items-center justify-center px-3 py-1"
+                    className={`group relative inline-flex items-center justify-center px-3 py-1 ${
+                      link.serif
+                        ? "font-serif text-[1.15em] leading-none"
+                        : "type-index"
+                    }`}
                   >
                     {({ isActive }) => (
                       <>
@@ -201,7 +207,9 @@ export default function Header() {
                 >
                   <span className="flex items-baseline gap-4">
                     <span className="type-micro text-taupe">{`0${i + 1}`}</span>
-                    {link.label}
+                    <span className={link.serif ? "font-serif" : undefined}>
+                      {link.label}
+                    </span>
                   </span>
                   <svg
                     className="h-[10px] w-[13px] shrink-0"

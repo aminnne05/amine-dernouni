@@ -65,6 +65,12 @@ export const translations = {
       methodologyIntro:
         "Quatre étapes, jamais sautées. Survole chaque étape pour voir le détail. Le but est qu'à chaque livraison, tu saches exactement où on en est et pourquoi.",
     },
+    horsCadre: {
+      nav: "Hors Cadre",
+      title: "Hors Cadre",
+      lede: "Covers, affiches et propositions restées sans client.",
+      empty: "Les pièces arrivent bientôt.",
+    },
     projectsPage: {
       title: "Sélection de projets",
       description:
@@ -272,6 +278,12 @@ export const translations = {
       methodologyTitle: "Methodology",
       methodologyIntro:
         "Four steps, never skipped. Hover each step to see the detail. The goal is that with every delivery, you know exactly where things stand and why.",
+    },
+    horsCadre: {
+      nav: "Hors Cadre",
+      title: "Hors Cadre",
+      lede: "Covers, posters and proposals that never found a client.",
+      empty: "Pieces coming soon.",
     },
     projectsPage: {
       title: "Selected Projects",

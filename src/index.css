@@ -121,6 +121,9 @@
    ============================================ */
 @theme {
   --font-display: "Neue Haas Display", "Helvetica Neue", Arial, sans-serif;
+  /* Serif réservée à Hors Cadre : la section artistique se signale par
+     son dessin de lettre, pas par une couleur ou un cadre. */
+  --font-serif: "Instrument Serif", Didot, "Bodoni 72", Georgia, serif;
 
   /* Grille — reprise des proportions de gianlucagradogna.com :
      pas de largeur maximale, des marges et des gouttières en vw,

@@ -10,6 +10,7 @@ import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import HorsCadre from "./pages/HorsCadre";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -42,12 +43,14 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/projets" element={<Projects />} />
             <Route path="/projets/:slug" element={<ProjectDetail />} />
+            <Route path="/hors-cadre" element={<HorsCadre />} />
             <Route path="/a-propos" element={<About />} />
             <Route path="/contact" element={<Contact />} />
 
             <Route path="/en" element={<Homepage />} />
             <Route path="/en/projets" element={<Projects />} />
             <Route path="/en/projets/:slug" element={<ProjectDetail />} />
+            <Route path="/en/hors-cadre" element={<HorsCadre />} />
             <Route path="/en/a-propos" element={<About />} />
             <Route path="/en/contact" element={<Contact />} />
           </Routes>
