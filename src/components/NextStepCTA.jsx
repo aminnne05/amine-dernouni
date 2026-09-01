@@ -5,19 +5,21 @@ export default function NextStepCTA() {
   const { t, path } = useLanguage();
 
   return (
-    <div className="flex w-full flex-col items-center gap-[18px] bg-encre py-24 md:py-[151px]">
-      <p className="text-center text-xs font-light tracking-widest text-[#a5a5a5]">
-        {t("nextStep.eyebrow")}
-      </p>
-      <p className="max-w-[480px] text-center text-2xl md:text-[32px] font-light leading-snug tracking-[-0.02em] text-ivoire">
-        <span className="font-thin">{t("nextStep.titlePlain")}</span>{" "}
-        <span className="font-medium tracking-[-0.04em] whitespace-nowrap">
-          {t("nextStep.titleBold")}
-        </span>
-      </p>
-      <CTAButton variant="white" href={path("/contact")}>
-        {t("nextStep.cta")}
-      </CTAButton>
-    </div>
+    <section className="w-full bg-encre py-28 md:py-36">
+      <div className="shell colonnes items-end gap-y-8">
+        <p className="type-micro col-span-16 text-ivoire/45 md:col-span-4">
+          {t("nextStep.eyebrow")}
+        </p>
+        <div className="col-span-16 flex flex-col items-start gap-8 md:col-span-11 md:col-start-6">
+          <p className="type-title max-w-[20ch] text-ivoire">
+            <span className="text-ivoire/45">{t("nextStep.titlePlain")}</span>{" "}
+            <span>{t("nextStep.titleBold")}</span>
+          </p>
+          <CTAButton variant="white" href={path("/contact")}>
+            {t("nextStep.cta")}
+          </CTAButton>
+        </div>
+      </div>
+    </section>
   );
 }

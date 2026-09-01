@@ -22,10 +22,10 @@ export default function ProjectDetail() {
     return (
       <div className="relative z-10 flex min-h-screen items-center justify-center bg-ivoire">
         <div className="text-center">
-          <p className="text-sm font-light text-encre">{t("projectDetail.notFound")}</p>
+          <p className="type-lede text-encre">{t("projectDetail.notFound")}</p>
           <Link
             to={path("/projets")}
-            className="mt-4 inline-block text-xs font-light uppercase tracking-widest text-taupe hover:text-encre"
+            className="type-micro mt-4 inline-block rounded-[var(--rayon-pastille)] border border-encre/25 px-4 py-2.5 text-taupe transition-colors duration-500 hover:border-encre hover:text-encre"
           >
             {t("projectDetail.backToProjects")}
           </Link>
@@ -39,9 +39,9 @@ export default function ProjectDetail() {
   return (
     <div className="relative z-10 bg-ivoire">
       <div className="shell pt-[92px] pb-24 md:pb-0">
-        <div className="flex flex-col gap-12 md:h-[calc(100vh-100px)] md:flex-row md:gap-16 md:overflow-hidden">
-          {/* PANNEAU GAUCHE — fixe, ne défile pas */}
-          <aside className="md:h-full md:w-[380px] md:shrink-0 md:overflow-hidden">
+        <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
+          {/* PANNEAU GAUCHE — collant, la page défile derrière lui */}
+          <aside className="md:sticky md:top-[92px] md:w-[380px] md:shrink-0 md:self-start">
             <div className="flex flex-col gap-8">
               <Link
                 to={path("/projets")}
@@ -62,38 +62,38 @@ export default function ProjectDetail() {
               </Link>
 
               <div className="flex flex-col gap-3">
-                <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">
+                <h1 className="type-title text-encre">
                   {project.title}
                 </h1>
-                <p className="text-sm font-light leading-relaxed text-encre/60">
+                <p className="type-caption text-encre/60">
                   {localized.intro}
                 </p>
               </div>
 
               {/* Détails */}
-              <dl className="flex flex-col gap-2 border-t border-encre/15 pt-8 text-xs font-light">
+              <dl className="type-micro flex flex-col gap-2 border-t border-encre/15 pt-8">
                 <div className="flex justify-between gap-4">
                   <dt className="text-taupe">{t("projectDetail.details.annee")}</dt>
-                  <dd className="font-medium text-encre">{project.year}</dd>
+                  <dd className="text-encre">{project.year}</dd>
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-taupe">{t("projectDetail.details.secteur")}</dt>
-                  <dd className="text-right font-medium text-encre">{localized.sector}</dd>
+                  <dd className="text-right text-encre">{localized.sector}</dd>
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-taupe">{t("projectDetail.details.services")}</dt>
-                  <dd className="text-right font-medium text-encre">{localized.services}</dd>
+                  <dd className="text-right text-encre">{localized.services}</dd>
                 </div>
                 {project.agence && (
                   <div className="flex justify-between gap-4">
                     <dt className="text-taupe">{t("projectDetail.details.collaboration")}</dt>
-                    <dd className="text-right font-medium text-encre">{project.agence}</dd>
+                    <dd className="text-right text-encre">{project.agence}</dd>
                   </div>
                 )}
                 {project.award && (
                   <div className="flex justify-between gap-4">
                     <dt className="text-taupe">{t("projectDetail.details.prix")}</dt>
-                    <dd className="text-right font-medium text-encre">{localized.award}</dd>
+                    <dd className="text-right text-encre">{localized.award}</dd>
                   </div>
                 )}
               </dl>
@@ -106,13 +106,12 @@ export default function ProjectDetail() {
                       key={key}
                       active={chapter === key}
                       onClick={() => setChapter(key)}
-                      className="text-xs"
                     >
                       {`0${i + 1} ${label}`}
                     </HoverTab>
                   ))}
                 </div>
-                <p className="min-h-[80px] text-sm font-light leading-relaxed text-encre">
+                <p className="type-caption min-h-[80px] text-encre">
                   {localized.chapters[chapter]}
                 </p>
               </div>
@@ -120,10 +119,10 @@ export default function ProjectDetail() {
           </aside>
 
           {/* GALERIE DROITE — seule zone qui défile en desktop */}
-          <div className="flex flex-1 flex-col gap-4 md:h-full md:overflow-y-auto md:overscroll-contain md:pb-16 md:pr-1">
+          <div className="flex flex-1 flex-col gap-[var(--gouttiere)] md:min-w-0 md:pb-24">
             {project.gallery.length > 0 ? (
               project.gallery.map((row, i) => (
-                <div key={i} className="flex gap-4">
+                <div key={i} className="flex gap-[var(--gouttiere)]">
                   {row.map((media, j) =>
                     isVideoSrc(media) ? (
                       <div

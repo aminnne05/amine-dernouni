@@ -37,7 +37,7 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
             />
           )
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-xs font-light text-white/60">
+          <div className="type-micro absolute inset-0 flex items-center justify-center text-white/60">
             {t("projectDetail.comingSoon")}
           </div>
         )}

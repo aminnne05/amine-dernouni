@@ -141,6 +141,9 @@
   --color-encre: #121212;
   --color-encre-soft: #0a0a0a;
   --color-taupe: #8a8a8a;
+  /* Rouge Pulpp, prélevé sur wearepulpp.com. Réservé aux compteurs et
+     aux survols : jamais un aplat, jamais deux fois au même endroit. */
+  --color-rouge: #eb3544;
   --color-gris-texte: rgba(90, 90, 90, 0.6);
   --color-noir-texte: #333333;
 }
@@ -222,7 +225,9 @@
 
 html,
 body {
-  overflow-x: hidden;
+  /* clip et non hidden : hidden ferait de la racine un conteneur de
+     défilement et casserait les panneaux collants (page projet). */
+  overflow-x: clip;
   overscroll-behavior-x: none;
   max-width: 100%;
 }
@@ -246,8 +251,4 @@ body {
   font-weight: 350;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-p {
-  margin: 0;
 }

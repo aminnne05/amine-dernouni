@@ -19,14 +19,6 @@ function ScrollToTop() {
   return null;
 }
 
-function Placeholder({ name }) {
-  return (
-    <div className="relative z-10 flex min-h-screen items-center justify-center bg-ivoire pt-14">
-      <p className="text-xl font-light text-encre">Page "{name}" — à venir</p>
-    </div>
-  );
-}
-
 function App() {
   const [loading, setLoading] = useState(true);
 

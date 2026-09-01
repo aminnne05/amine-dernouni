@@ -26,10 +26,10 @@ export default function IndexRow({
 
   const content = (
     <div
-      className={`colonnes group w-full items-baseline gap-y-3 border-t ${border} py-6 md:py-8`}
+      className={`colonnes group w-full items-start gap-y-3 border-t ${border} py-6 md:py-8`}
     >
       <span
-        className={`type-micro col-span-16 ${quiet} ${quietHover} transition-colors duration-500 md:col-span-1`}
+        className={`type-micro col-span-16 ${quiet} ${quietHover} transition-colors duration-500 md:col-span-1 md:mt-[0.36em]`}
       >
         {number}
       </span>
@@ -41,7 +41,7 @@ export default function IndexRow({
       </h3>
 
       {meta ? (
-        <span className={`type-micro col-span-16 ${quiet} md:col-span-2`}>
+        <span className={`type-micro col-span-16 ${quiet} md:col-span-2 md:mt-[0.36em]`}>
           {meta}
         </span>
       ) : (
@@ -49,7 +49,7 @@ export default function IndexRow({
       )}
 
       {description && (
-        <p className={`type-caption col-span-16 max-w-[42ch] ${quiet} md:col-span-5`}>
+        <p className={`type-caption col-span-16 max-w-[42ch] ${quiet} md:col-span-5 md:mt-[0.22em]`}>
           {description}
         </p>
       )}

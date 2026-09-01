@@ -60,7 +60,7 @@ export default function Contact() {
           <p className="type-micro col-span-16 text-ivoire/45 md:col-span-4">
             {t("contact.eyebrow")}
           </p>
-          <p className="type-lede col-span-16 max-w-[34ch] text-ivoire md:col-span-7 md:col-start-10">
+          <p className="type-lede col-span-16 max-w-[38ch] text-ivoire md:col-span-11 md:col-start-6">
             <span className="text-ivoire/45">{t("contact.titlePlain")}</span>{" "}
             <span>{t("contact.titleBold")}</span>
           </p>
@@ -73,7 +73,7 @@ export default function Contact() {
           <p className="type-micro col-span-16 text-taupe md:col-span-4">
             {t("contact.briefLabel")}
           </p>
-          <form onSubmit={handleSubmit} className="col-span-16 flex w-full flex-col gap-8 md:col-span-7 md:col-start-10">
+          <form onSubmit={handleSubmit} className="col-span-16 flex w-full flex-col gap-8 md:col-span-11 md:col-start-6">
             {status === "success" ? (
               <div className="flex flex-col gap-3 py-4">
                 <p className="type-lede text-encre">{t("contact.successTitle")}</p>
@@ -88,6 +88,7 @@ export default function Contact() {
               </div>
             ) : (
               <>
+                <div className="grid gap-8 md:grid-cols-2">
                 <label className="flex flex-col gap-2">
                   <span className="type-micro text-taupe">
                     {t("contact.yourName")}
@@ -115,6 +116,7 @@ export default function Contact() {
                     required
                   />
                 </label>
+                </div>
 
                 <div className="flex flex-col gap-3">
                   <span className="type-micro text-taupe">
@@ -154,7 +156,7 @@ export default function Contact() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder={t("contact.descPlaceholder")}
-                    rows={1}
+                    rows={4}
                     className="type-lede resize-none rounded-[var(--rayon-image)] border border-encre/20 bg-transparent px-4 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/50 focus:border-encre focus:outline-none"
                   />
                 </label>
@@ -191,14 +193,14 @@ export default function Contact() {
           <p className="type-micro col-span-16 text-taupe md:col-span-4">
             {t("contact.directLabel")}
           </p>
-          <div className="col-span-16 flex flex-col gap-8 md:col-span-7 md:col-start-10">
+          <div className="col-span-16 flex flex-col gap-8 md:col-span-11 md:col-start-6">
             <div className="flex flex-col gap-1">
               <span className="type-micro text-taupe">
                 {t("contact.email")}
               </span>
               <a
                 href="mailto:dernouniamine02@gmail.com"
-                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-encre"
+                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
               >
                 dernouniamine02@gmail.com
               </a>
@@ -209,7 +211,7 @@ export default function Contact() {
               </span>
               <a
                 href="tel:+33625020042"
-                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-encre"
+                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
               >
                 +33 6 25 02 00 42
               </a>
@@ -222,7 +224,7 @@ export default function Contact() {
                 href="https://www.instagram.com/amine_dernoui"
                 target="_blank"
                 rel="noreferrer"
-                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-encre"
+                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
               >
                 @amine_dernoui
               </a>

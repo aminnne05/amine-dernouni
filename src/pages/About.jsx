@@ -40,7 +40,7 @@ export default function About() {
             <p className="type-lede text-encre/45">{t("about.location")}</p>
             <a
               href="mailto:dernouniamine02@gmail.com"
-              className="type-lede text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-encre"
+              className="type-lede text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
             >
               dernouniamine02@gmail.com
             </a>
@@ -53,7 +53,7 @@ export default function About() {
         <div className="shell flex flex-col gap-8 py-24">
           <h2 className="type-micro text-taupe">
             {t("about.experienceTitle")}{" "}
-            <span className="text-encre/40">
+            <span className="text-rouge">
               ({String(experience.length).padStart(2, "0")})
             </span>
           </h2>
@@ -77,7 +77,7 @@ export default function About() {
         <div className="shell flex flex-col gap-8 py-24">
           <h2 className="type-micro text-ivoire/45">
             {t("about.collaborateTitle")}{" "}
-            <span className="text-ivoire/25">
+            <span className="text-rouge">
               ({String(collaborations.length).padStart(2, "0")})
             </span>
           </h2>
@@ -101,7 +101,7 @@ export default function About() {
         <div className="shell flex flex-col gap-8 py-24">
           <h2 className="type-micro text-taupe">
             {t("about.servicesTitle")}{" "}
-            <span className="text-encre/40">
+            <span className="text-rouge">
               ({String(practices.length).padStart(2, "0")})
             </span>
           </h2>
@@ -125,7 +125,7 @@ export default function About() {
           <div className="colonnes gap-y-4">
             <h2 className="type-micro col-span-16 text-ivoire/45 md:col-span-4">
               {t("about.methodologyTitle")}{" "}
-              <span className="text-ivoire/25">
+              <span className="text-rouge">
                 ({String(methodology.length).padStart(2, "0")})
               </span>
             </h2>

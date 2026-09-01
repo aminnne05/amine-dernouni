@@ -59,7 +59,7 @@ export default function Homepage() {
 
               <a
                 href="mailto:dernouniamine02@gmail.com"
-                className="type-lede text-ivoire underline decoration-ivoire/30 underline-offset-[6px] transition-colors duration-500 hover:decoration-ivoire"
+                className="type-lede text-ivoire underline decoration-ivoire/30 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
               >
                 dernouniamine02@gmail.com
               </a>
@@ -73,7 +73,7 @@ export default function Homepage() {
         <Reveal as="section" className="shell flex flex-col gap-6">
           <h2 className="type-micro text-taupe">
             {t("homepage.projectsTitle")}{" "}
-            <span className="text-encre/40">
+            <span className="text-rouge">
               ({String(projects.length).padStart(2, "0")})
             </span>
           </h2>
@@ -99,7 +99,7 @@ export default function Homepage() {
         <Reveal as="section" className="shell flex flex-col gap-8">
           <h2 className="type-micro text-taupe">
             {t("homepage.servicesTitle")}{" "}
-            <span className="text-encre/40">
+            <span className="text-rouge">
               ({String(practices.length).padStart(2, "0")})
             </span>
           </h2>
@@ -120,7 +120,7 @@ export default function Homepage() {
         <Reveal as="section" className="shell flex flex-col gap-8">
           <h2 className="type-micro text-taupe">
             {t("homepage.awardsTitle")}{" "}
-            <span className="text-encre/40">
+            <span className="text-rouge">
               ({String(awards.length).padStart(2, "0")})
             </span>
           </h2>
