@@ -42,13 +42,12 @@ export default function Projects() {
         </div>
 
         {/* Grille */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:auto-rows-[300px]">
+        <div className="grid grid-cols-1 gap-x-[var(--gouttiere)] gap-y-12 sm:grid-cols-2">
           {filtered.map((project, i) => (
             <ProjectCard
               key={project.slug}
               project={project}
               index={i}
-              className={project.tall ? "sm:row-span-2" : ""}
             />
           ))}
         </div>

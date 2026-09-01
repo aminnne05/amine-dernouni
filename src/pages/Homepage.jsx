@@ -3,6 +3,7 @@ import ProjectCard from "../components/ProjectCard";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
 import IndexRow from "../components/IndexRow";
+import AwardCard from "../components/AwardCard";
 import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
 import shotAmine from "../assets/images/hero-portrait.jpg";
 import useScrollProgress from "../hooks/useScrollProgress";
@@ -85,13 +86,12 @@ export default function Homepage() {
               ({String(projects.length).padStart(2, "0")})
             </span>
           </h2>
-          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:auto-rows-[300px]">
+          <div className="grid w-full grid-cols-1 gap-x-[var(--gouttiere)] gap-y-12 sm:grid-cols-2">
             {projects.map((project, i) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
                 index={i}
-                className={project.tall ? "sm:row-span-2" : ""}
               />
             ))}
           </div>
@@ -135,16 +135,17 @@ export default function Homepage() {
             </span>
           </h2>
           {awards.length > 0 ? (
-            <div className="flex flex-col border-b border-encre/15">
+            <div className="colonnes gap-y-14">
               {awards.map((award, i) => (
-                <IndexRow
+                <AwardCard
                   key={`${award.slug}-${award.title}`}
-                  number={award.year}
+                  year={award.year}
                   title={award.title}
-                  meta={award.body}
-                  description={award.project}
+                  body={award.body}
+                  project={award.project}
                   to={path(`/projets/${award.slug}`)}
-                  delay={i * 60}
+                  delay={i * 90}
+                  className={i % 2 === 1 ? "md:col-start-10" : ""}
                 />
               ))}
             </div>

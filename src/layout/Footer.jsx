@@ -8,6 +8,15 @@ import { useLanguage } from "../i18n/LanguageContext";
   - colonnes Trouver / Suivre / Écrire
   - logo horizontal géant en tout dernier, pleine largeur, coupé en bas
 */
+const reseaux = [
+  { name: "Instagram", href: "https://www.instagram.com/amine_dernouni/" },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/mohamed-el-amine-dernouni-b270a4211/",
+  },
+  { name: "Pulpp", href: "https://www.wearepulpp.com/" },
+];
+
 export default function Footer() {
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
@@ -28,13 +37,12 @@ export default function Footer() {
         ref={ref}
         className="fixed bottom-0 left-0 z-0 w-full bg-encre text-ivoire"
       >
-        <div className="shell flex flex-col gap-16 pb-8 pt-20">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-            <div className="flex flex-col gap-4">
-              <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">
-                {t("footer.find")}
-              </p>
-              <div className="text-sm font-light leading-relaxed">
+        <div className="shell flex flex-col gap-20 pb-8 pt-20">
+          {/* Coordonnées, en retrait */}
+          <div className="colonnes gap-y-10">
+            <div className="col-span-16 flex flex-col gap-3 md:col-span-4">
+              <p className="type-micro text-ivoire/45">{t("footer.find")}</p>
+              <div className="type-index text-ivoire">
                 <p>Nice, France.</p>
                 <a
                   href="tel:+33625020042"
@@ -45,54 +53,57 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">
-                {t("footer.follow")}
-              </p>
-              <div className="flex flex-col gap-1 text-sm font-light">
-                <a
-                  href="https://www.instagram.com/amine_dernouni/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-opacity hover:opacity-60"
-                >
-                  Instagram
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/mohamed-el-amine-dernouni-b270a4211/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-opacity hover:opacity-60"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://www.wearepulpp.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-opacity hover:opacity-60"
-                >
-                  Pulpp
-                </a>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <p className="text-xs font-light uppercase tracking-widest text-ivoire/50">
-                {t("footer.write")}
-              </p>
+            <div className="col-span-16 flex flex-col gap-3 md:col-span-6 md:col-start-6">
+              <p className="type-micro text-ivoire/45">{t("footer.write")}</p>
               <a
                 href="mailto:dernouniamine02@gmail.com"
-                className="text-sm font-light transition-opacity hover:opacity-60"
+                className="type-index text-ivoire transition-opacity hover:opacity-60"
               >
                 dernouniamine02@gmail.com
               </a>
             </div>
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-2 border-t border-ivoire/15 pt-4 pb-4 text-xs font-light text-ivoire/50 md:flex-row md:items-center">
-            <p>©2026 Amine Dernouni</p>
-            <p>{t("footer.tagline")}</p>
+          {/* Réseaux — le vrai poids du footer */}
+          <div className="flex flex-col gap-5">
+            <p className="type-micro text-ivoire/45">
+              {t("footer.follow")}{" "}
+              <span className="text-ivoire/25">
+                ({String(reseaux.length).padStart(2, "0")})
+              </span>
+            </p>
+            <div className="flex flex-col border-b border-ivoire/15">
+              {reseaux.map(({ name, href }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-center justify-between gap-6 border-t border-ivoire/15 py-5 md:py-7"
+                >
+                  <span className="type-title text-ivoire/60 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-ivoire">
+                    {name}
+                  </span>
+                  <svg
+                    className="h-3 w-3 shrink-0 text-ivoire/45 transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ivoire"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M1 11L11 1M11 1H3.5M11 1V8.5"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                    />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start justify-between gap-2 pt-2 md:flex-row md:items-center">
+            <p className="type-micro text-ivoire/45">©2026 Amine Dernouni</p>
+            <p className="type-micro text-ivoire/45">{t("footer.tagline")}</p>
           </div>
         </div>
 

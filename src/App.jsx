@@ -4,6 +4,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import { LanguageProvider } from "./i18n/LanguageContext";
+import { ReadyContext } from "./hooks/useReady";
 import Homepage from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -39,6 +40,7 @@ function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
+        <ReadyContext.Provider value={!loading}>
         {loading && <LoadingScreen onDone={() => setLoading(false)} />}
         <ScrollToTop />
         <Header />
@@ -59,6 +61,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        </ReadyContext.Provider>
       </LanguageProvider>
     </BrowserRouter>
   );

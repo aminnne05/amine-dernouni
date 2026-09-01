@@ -125,6 +125,9 @@
   /* Grille — reprise des proportions de gianlucagradogna.com :
      pas de largeur maximale, des marges et des gouttières en vw,
      16 colonnes. Tout respire de la même façon à chaque taille d'écran. */
+  /* Courbe d'entrée reprise de wolffolins.com (ease-quint) */
+  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
   --marge: clamp(1rem, 3.3vw, 4rem);
   --gouttiere: clamp(0.5rem, 0.86vw, 1.0625rem);
 

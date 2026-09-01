@@ -2,11 +2,29 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import LogoMark from "../assets/logo/logo-mark.svg?react";
 import { useLanguage } from "../i18n/LanguageContext";
+import useReady from "../hooks/useReady";
+
+const HAUTEUR = 52;
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { lang, t, path } = useLanguage();
   const { pathname } = useLocation();
+  const ready = useReady();
+  const [entered, setEntered] = useState(false);
+
+  // Entrée reprise de wolffolins.com : la barre se déroule depuis une
+  // hauteur nulle, son contenu découpé, pendant que le fond translucide
+  // se pose un peu plus lentement derrière.
+  useEffect(() => {
+    if (!ready) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setEntered(true);
+      return;
+    }
+    const timer = setTimeout(() => setEntered(true), 260);
+    return () => clearTimeout(timer);
+  }, [ready]);
 
   const navLinks = [
     { to: path("/"), label: t("nav.accueil") },
@@ -28,7 +46,22 @@ export default function Header() {
 
   return (
     <>
-      <header className="shell fixed top-0 left-0 z-50 flex h-[52px] w-full items-center justify-between border-b border-encre/10 bg-ivoire/70 backdrop-blur-xl">
+      <header
+        className="fixed top-0 left-0 z-50 w-full overflow-clip"
+        style={{
+          height: entered ? `${HAUTEUR}px` : "0px",
+          transition: "height 650ms var(--ease-quint)",
+        }}
+      >
+        <div
+          className="absolute inset-0 border-b border-encre/10 bg-ivoire/70 backdrop-blur-xl transition-opacity duration-500 ease-out"
+          style={{ opacity: entered ? 1 : 0 }}
+          aria-hidden
+        />
+        <div
+          className="shell relative flex w-full items-center justify-between"
+          style={{ height: `${HAUTEUR}px` }}
+        >
         <div className="flex items-center gap-10">
           <Link
             to={path("/")}
@@ -100,6 +133,7 @@ export default function Header() {
             className={`h-px w-5 bg-encre transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
           />
         </button>
+        </div>
       </header>
 
       {open && (

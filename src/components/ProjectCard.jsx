@@ -12,12 +12,13 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
     <Link
       ref={ref}
       to={path(`/projets/${slug}`)}
-      className={`group flex h-[340px] w-full flex-col gap-1.5 transition-all duration-700 ease-out sm:h-full ${
+      className={`group flex w-full flex-col gap-2 transition-all duration-700 ease-out ${
         visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       } ${className}`}
       style={{ transitionDelay: visible ? `${(index % 4) * 80}ms` : "0ms" }}
     >
-      <div className="relative min-h-0 flex-1 overflow-hidden bg-[#a6a6a6]">
+      {/* Toutes les couvertures partagent le même rectangle 5:3 */}
+      <div className="relative aspect-[5/3] w-full overflow-hidden bg-[#a6a6a6]">
         {image ? (
           isVideoSrc(image) ? (
             <video
@@ -41,9 +42,12 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
           </div>
         )}
       </div>
-      <div className="flex shrink-0 items-baseline gap-2">
-        <span className="text-sm font-medium text-encre">{title}</span>
-        <span className="text-xs font-normal text-taupe">{year}</span>
+      <div className="flex shrink-0 items-baseline gap-3">
+        <span className="type-micro text-taupe">
+          {`N.${String(index + 1).padStart(2, "0")}`}
+        </span>
+        <span className="type-index text-encre">{title}</span>
+        <span className="type-micro ml-auto text-taupe">{year}</span>
       </div>
     </Link>
   );
