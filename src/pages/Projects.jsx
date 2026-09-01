@@ -42,7 +42,7 @@ export default function Projects() {
         </div>
 
         {/* Grille */}
-        <div className="grid grid-cols-1 gap-x-[var(--gouttiere)] gap-y-12 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-[var(--gouttiere)] sm:grid-cols-2">
           {filtered.map((project, i) => (
             <ProjectCard
               key={project.slug}

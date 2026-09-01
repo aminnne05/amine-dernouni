@@ -17,8 +17,8 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
       } ${className}`}
       style={{ transitionDelay: visible ? `${(index % 4) * 80}ms` : "0ms" }}
     >
-      {/* Toutes les couvertures partagent le même rectangle 5:3 */}
-      <div className="relative aspect-[5/3] w-full overflow-hidden bg-[#a6a6a6]">
+      {/* Toutes les couvertures partagent le même rectangle 4:3 */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#a6a6a6]">
         {image ? (
           isVideoSrc(image) ? (
             <video

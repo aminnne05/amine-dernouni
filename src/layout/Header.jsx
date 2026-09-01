@@ -4,18 +4,24 @@ import LogoMark from "../assets/logo/logo-mark.svg?react";
 import { useLanguage } from "../i18n/LanguageContext";
 import useReady from "../hooks/useReady";
 
-const HAUTEUR = 52;
+const HAUTEUR = 48;
 
+/*
+  Barre reprise de wolffolins.com :
+  — à l'entrée, elle se déroule depuis une hauteur nulle, contenu découpé ;
+  — en haut de page, elle occupe toute la largeur, sans fond ;
+  — dès qu'on défile, elle se resserre en pastille centrée et un fond
+    dépoli vient se poser derrière ; elle se rouvre en revenant en haut.
+  Toutes les bascules suivent la même courbe (ease-quint, 650 ms).
+*/
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { lang, t, path } = useLanguage();
   const { pathname } = useLocation();
   const ready = useReady();
   const [entered, setEntered] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Entrée reprise de wolffolins.com : la barre se déroule depuis une
-  // hauteur nulle, son contenu découpé, pendant que le fond translucide
-  // se pose un peu plus lentement derrière.
   useEffect(() => {
     if (!ready) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -25,6 +31,23 @@ export default function Header() {
     const timer = setTimeout(() => setEntered(true), 260);
     return () => clearTimeout(timer);
   }, [ready]);
+
+  useEffect(() => {
+    let raf = null;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 80);
+        raf = null;
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const navLinks = [
     { to: path("/"), label: t("nav.accueil") },
@@ -37,6 +60,14 @@ export default function Header() {
   const frPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
   const enPath = isEn ? pathname : pathname === "/" ? "/en" : `/en${pathname}`;
 
+  // En haut de l'accueil la barre flotte sur le bloc noir du hero :
+  // le texte passe en clair tant que la pastille n'est pas posée.
+  const isHome = pathname === "/" || pathname === "/en";
+  const surFondNoir = isHome && !scrolled && !open;
+
+  const encreTexte = surFondNoir ? "text-ivoire" : "text-encre";
+  const encreDoux = surFondNoir ? "text-ivoire/50" : "text-taupe";
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -46,102 +77,118 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className="fixed top-0 left-0 z-50 w-full overflow-clip"
-        style={{
-          height: entered ? `${HAUTEUR}px` : "0px",
-          transition: "height 650ms var(--ease-quint)",
-        }}
-      >
+      <div className="shell pointer-events-none fixed top-0 left-0 z-50 w-full pt-3">
         <div
-          className="absolute inset-0 border-b border-encre/10 bg-ivoire/70 backdrop-blur-xl transition-opacity duration-500 ease-out"
-          style={{ opacity: entered ? 1 : 0 }}
-          aria-hidden
-        />
-        <div
-          className="shell relative flex w-full items-center justify-between"
-          style={{ height: `${HAUTEUR}px` }}
+          className="pointer-events-auto relative mx-auto overflow-clip rounded-[24px]"
+          style={{
+            maxWidth: scrolled ? "min(100%, 46rem)" : "100%",
+            height: entered ? `${HAUTEUR}px` : "0px",
+            transition:
+              "max-width 650ms var(--ease-quint), height 650ms var(--ease-quint)",
+          }}
         >
-        <div className="flex items-center gap-10">
-          <Link
-            to={path("/")}
-            onClick={() => setOpen(false)}
-            className="block w-[30px] shrink-0 text-encre"
-            aria-label="Amine Dernouni"
-          >
-            <LogoMark className="h-auto w-full" />
-          </Link>
+          {/* fond dépoli, posé un peu après le mouvement */}
+          <div
+            className="absolute inset-0 rounded-[24px] border border-encre/10 bg-ivoire/85 backdrop-blur-xl transition-opacity duration-500 ease-out"
+            style={{ opacity: scrolled ? 1 : 0 }}
+            aria-hidden
+          />
 
-          <nav className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end
-                className="type-index group relative inline-flex items-center justify-center px-3 py-1.5"
+          <div
+            className="relative flex w-full items-center justify-between px-4"
+            style={{ height: `${HAUTEUR}px` }}
+          >
+            <div className="flex items-center gap-8">
+              <Link
+                to={path("/")}
+                onClick={() => setOpen(false)}
+                className={`block w-[26px] shrink-0 transition-colors duration-500 ${encreTexte}`}
+                aria-label="Amine Dernouni"
               >
-                {({ isActive }) => (
-                  <>
-                    <span
-                      className={`absolute inset-0 border transition-all duration-300 ease-out ${
-                        isActive
-                          ? "scale-100 border-encre bg-encre opacity-100"
-                          : "scale-90 border-encre/20 opacity-0 group-hover:scale-100 group-hover:opacity-100"
-                      }`}
-                    />
-                    <span
-                      className={`relative transition-colors duration-300 ${
-                        isActive ? "text-ivoire" : "text-encre"
-                      }`}
-                    >
-                      {link.label}
-                    </span>
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </nav>
-        </div>
+                <LogoMark className="h-auto w-full" />
+              </Link>
 
-        <div className="type-micro hidden items-center gap-1 md:flex">
-          <Link
-            to={frPath}
-            className={`transition-colors ${lang === "fr" ? "font-medium text-encre" : "text-taupe hover:text-encre"}`}
-          >
-            FR
-          </Link>
-          <span className="text-taupe">/</span>
-          <Link
-            to={enPath}
-            className={`transition-colors ${lang === "en" ? "font-medium text-encre" : "text-taupe hover:text-encre"}`}
-          >
-            EN
-          </Link>
-        </div>
+              <nav className="hidden items-center gap-1 md:flex">
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end
+                    className="type-index group relative inline-flex items-center justify-center px-3 py-1"
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <span
+                          className={`absolute inset-0 rounded-full transition-all duration-500 ${
+                            surFondNoir ? "bg-ivoire" : "bg-encre"
+                          } ${
+                            isActive
+                              ? "scale-100 opacity-100"
+                              : "scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-10"
+                          }`}
+                        />
+                        <span
+                          className={`relative transition-colors duration-500 ${
+                            isActive
+                              ? surFondNoir
+                                ? "text-encre"
+                                : "text-ivoire"
+                              : encreTexte
+                          }`}
+                        >
+                          {link.label}
+                        </span>
+                      </>
+                    )}
+                  </NavLink>
+                ))}
+              </nav>
+            </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
-          aria-expanded={open}
-          className="relative z-50 -mr-1 flex h-8 w-8 flex-col items-center justify-end gap-[5px] md:hidden"
-        >
-          <span
-            className={`h-px w-5 bg-encre transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`}
-          />
-          <span
-            className={`h-px w-5 bg-encre transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
-          />
-        </button>
+            <div
+              className={`type-micro hidden items-center gap-1 transition-colors duration-500 md:flex ${encreDoux}`}
+            >
+              <Link
+                to={frPath}
+                className={`transition-colors ${lang === "fr" ? encreTexte : ""}`}
+              >
+                FR
+              </Link>
+              <span>/</span>
+              <Link
+                to={enPath}
+                className={`transition-colors ${lang === "en" ? encreTexte : ""}`}
+              >
+                EN
+              </Link>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
+              aria-expanded={open}
+              className="relative z-50 -mr-1 flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden"
+            >
+              <span
+                className={`h-px w-5 transition-all duration-300 ${
+                  surFondNoir ? "bg-ivoire" : "bg-encre"
+                } ${open ? "translate-y-[3px] rotate-45" : ""}`}
+              />
+              <span
+                className={`h-px w-5 transition-all duration-300 ${
+                  surFondNoir ? "bg-ivoire" : "bg-encre"
+                } ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
+              />
+            </button>
+          </div>
         </div>
-      </header>
+      </div>
 
       {open && (
         <div className="shell fixed inset-0 z-40 flex flex-col justify-between bg-ivoire pt-24 pb-8 md:hidden">
           <div className="flex flex-col gap-3">
-            <p className="type-micro text-taupe">
-              {t("nav.menuLabel")}
-            </p>
+            <p className="type-micro text-taupe">{t("nav.menuLabel")}</p>
             <nav className="flex flex-col">
               {navLinks.map((link, i) => (
                 <NavLink
@@ -150,13 +197,13 @@ export default function Header() {
                   end
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `flex items-center justify-between gap-4 border-t border-encre/15 py-5 text-2xl font-medium tracking-[-0.02em] transition-colors ${
+                    `type-title flex items-center justify-between gap-4 border-t border-encre/15 py-5 transition-colors ${
                       isActive ? "text-encre" : "text-encre/60"
                     }`
                   }
                 >
                   <span className="flex items-baseline gap-4">
-                    <span className="text-xs font-light text-taupe">{`0${i + 1}`}</span>
+                    <span className="type-micro text-taupe">{`0${i + 1}`}</span>
                     {link.label}
                   </span>
                   <svg
@@ -177,10 +224,8 @@ export default function Header() {
 
           <div className="flex items-end justify-between gap-4 border-t border-encre/15 pt-4">
             <div className="flex flex-col gap-4">
-              <p className="type-micro text-taupe">
-                {t("nav.socialLabel")}
-              </p>
-              <div className="flex flex-col gap-1 text-sm font-light text-encre">
+              <p className="type-micro text-taupe">{t("nav.socialLabel")}</p>
+              <div className="type-index flex flex-col gap-1 text-encre">
                 <a
                   href="https://www.instagram.com/amine_dernouni/"
                   target="_blank"
@@ -201,11 +246,11 @@ export default function Header() {
               </div>
             </div>
             <div className="flex flex-col items-end gap-3">
-              <div className="flex items-center gap-1 text-xs">
+              <div className="type-micro flex items-center gap-1">
                 <Link
                   to={frPath}
                   onClick={() => setOpen(false)}
-                  className={lang === "fr" ? "font-medium text-encre" : "text-taupe"}
+                  className={lang === "fr" ? "text-encre" : "text-taupe"}
                 >
                   FR
                 </Link>
@@ -213,12 +258,12 @@ export default function Header() {
                 <Link
                   to={enPath}
                   onClick={() => setOpen(false)}
-                  className={lang === "en" ? "font-medium text-encre" : "text-taupe"}
+                  className={lang === "en" ? "text-encre" : "text-taupe"}
                 >
                   EN
                 </Link>
               </div>
-              <p className="text-xs font-light text-taupe">©2026</p>
+              <p className="type-micro text-taupe">©2026</p>
             </div>
           </div>
         </div>

@@ -187,6 +187,13 @@
   font-weight: 400;
 }
 
+@utility type-lede {
+  font-size: clamp(1.0625rem, 2.08vw, 1.875rem);
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  font-weight: 350;
+}
+
 @utility type-body {
   font-size: clamp(0.875rem, 1vw, 1.25rem);
   line-height: 1.4;

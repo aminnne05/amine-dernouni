@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
 
 /*
-  Une distinction : l'année en grand chiffre comme événement visuel,
-  le reste en petites capitales. Volontairement plus posé et plus rare
-  que les lignes d'index des disciplines.
+  Une récompense : le titre du prix en grand, le projet juste dessous
+  comme second temps fort. L'année et l'organisme restent en petites
+  capitales, en mention.
 */
 export default function AwardCard({
   year,
@@ -17,17 +17,18 @@ export default function AwardCard({
 }) {
   return (
     <Reveal delay={delay} className={`col-span-16 md:col-span-7 ${className}`}>
-      <Link to={to} className="group flex flex-col gap-6 border-t border-encre pt-6">
-        <span className="type-micro text-taupe">{body}</span>
+      <Link to={to} className="group flex flex-col gap-5 border-t border-encre pt-5">
+        <span className="type-micro flex items-baseline justify-between gap-4 text-taupe">
+          <span>{body}</span>
+          <span>{year}</span>
+        </span>
 
-        <span className="type-display block text-encre">{year}</span>
+        <h3 className="type-title max-w-[16ch] text-encre">{title}</h3>
 
-        <span className="type-index max-w-[24ch] text-encre">{title}</span>
-
-        <span className="type-micro mt-2 flex items-center gap-2 text-taupe transition-colors duration-500 group-hover:text-encre">
+        <span className="type-lede flex items-center gap-3 text-encre/50 transition-colors duration-500 group-hover:text-encre">
           {project}
           <svg
-            className="h-[7px] w-[9px] transition-transform duration-500 ease-out group-hover:translate-x-1"
+            className="h-[9px] w-[11px] shrink-0 transition-transform duration-500 ease-out group-hover:translate-x-1"
             viewBox="0 0 11 9"
             fill="none"
             aria-hidden

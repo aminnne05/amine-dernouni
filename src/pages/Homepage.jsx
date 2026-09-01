@@ -19,54 +19,65 @@ export default function Homepage() {
 
   return (
     <div className="bg-ivoire">
-      {/* HERO — bloc noir */}
-      <Reveal as="section" className="bg-encre">
-        <div className="shell flex flex-col items-center gap-14 pt-[120px] pb-20 md:flex-row md:items-center md:justify-between md:gap-8 md:pb-28">
-          <div className="hidden shrink-0 flex-col gap-1 md:flex md:w-[220px]">
-            <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
-              {t("homepage.role")}
-            </p>
-            <p className="text-sm font-light text-ivoire/60">{t("homepage.location")}</p>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[260px] shrink-0 md:mx-0 md:max-w-[340px]">
-            <div className="aspect-[3/4] w-full overflow-hidden">
-              <img
-                src={shotAmine}
-                alt="Amine Dernouni"
-                className="h-full w-full object-cover object-center will-change-[filter,transform]"
-                style={{
-                  filter: `blur(${scroll * 14}px)`,
-                  transform: `scale(${1 + scroll * 0.06})`,
-                  opacity: 1 - scroll * 0.25,
-                }}
-              />
+      {/* ============================================
+          HERO — logique ninno.space : le portrait posé petit à gauche,
+          le logo dessus, et à droite une colonne de texte étroite, tout
+          au même corps. Une ligne de service ferme le bloc en bas.
+          ============================================ */}
+      <section className="bg-encre">
+        <div className="shell flex min-h-svh flex-col justify-between pt-[104px] pb-8">
+          <div className="colonnes flex-1 items-center gap-y-12 py-10">
+            {/* Portrait + logo */}
+            <div className="col-span-10 col-start-1 md:col-span-4">
+              <div className="relative w-full max-w-[260px] md:max-w-none">
+                <div className="aspect-[4/5] w-full overflow-hidden">
+                  <img
+                    src={shotAmine}
+                    alt="Amine Dernouni"
+                    className="h-full w-full object-cover object-center will-change-[transform]"
+                    style={{
+                      transform: `scale(${1 + scroll * 0.05})`,
+                      opacity: 1 - scroll * 0.2,
+                    }}
+                  />
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-5 px-4 md:bottom-7">
+                  <LogoHorizontal className="h-auto w-full text-ivoire drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]" />
+                </div>
+              </div>
             </div>
-            <div className="pointer-events-none absolute bottom-6 left-1/2 w-[135%] -translate-x-1/2 md:bottom-10">
-              <LogoHorizontal className="h-auto w-full text-ivoire drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]" />
-            </div>
-          </div>
 
-          <div className="hidden shrink-0 md:flex md:w-[220px] md:justify-end">
-            <CTAButton variant="white" href={path("/contact")}>
-              {t("homepage.contact")}
-            </CTAButton>
-          </div>
+            {/* Colonne de texte, à droite */}
+            <div className="col-span-16 flex flex-col gap-8 md:col-span-7 md:col-start-10">
+              <div className="type-lede flex flex-col text-ivoire">
+                <p>Amine Dernouni.</p>
+                <p>{t("homepage.role")}</p>
+                <p className="text-ivoire/45">{t("homepage.location")}</p>
+              </div>
 
-          {/* mobile only : infos empilées sous la photo */}
-          <div className="flex flex-col items-center gap-5 text-center md:hidden">
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
-                {t("homepage.role")}
+              <p className="type-lede max-w-[34ch] text-ivoire/70">
+                {t("homepage.manifesto")}
               </p>
-              <p className="text-sm font-light text-ivoire/60">{t("homepage.location")}</p>
+
+              <div className="pt-2">
+                <CTAButton variant="white" href={path("/contact")}>
+                  {t("homepage.contact")}
+                </CTAButton>
+              </div>
             </div>
-            <CTAButton variant="white" href={path("/contact")}>
-              {t("homepage.contact")}
-            </CTAButton>
+          </div>
+
+          {/* Pied de hero */}
+          <div className="colonnes shrink-0 items-baseline gap-y-3 border-t border-ivoire/15 pt-4">
+            <p className="type-micro col-span-8 text-ivoire/45 md:col-span-4">
+              ©2026
+            </p>
+            <p className="type-micro col-span-8 text-right text-ivoire/45 md:col-span-7 md:col-start-10 md:text-left">
+              {t("homepage.scroll")}
+            </p>
           </div>
         </div>
-      </Reveal>
+      </section>
 
       <div className="flex w-full flex-col gap-32 pt-32 pb-32">
         {/* INTRO STATEMENT */}
@@ -86,7 +97,7 @@ export default function Homepage() {
               ({String(projects.length).padStart(2, "0")})
             </span>
           </h2>
-          <div className="grid w-full grid-cols-1 gap-x-[var(--gouttiere)] gap-y-12 sm:grid-cols-2">
+          <div className="grid w-full grid-cols-1 gap-[var(--gouttiere)] sm:grid-cols-2">
             {projects.map((project, i) => (
               <ProjectCard
                 key={project.slug}
