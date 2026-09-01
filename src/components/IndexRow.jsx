@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
+import { highlightPulpp } from "../utils/pulpp";
 
 /*
   Ligne d'index éditorial : numéro, titre en grand, mention, texte.
@@ -37,7 +38,7 @@ export default function IndexRow({
       <h3
         className={`type-title col-span-16 ${loud} transition-transform duration-700 ease-out group-hover:translate-x-1 md:col-span-8`}
       >
-        {title}
+        {highlightPulpp(title)}
       </h3>
 
       {meta ? (
@@ -50,7 +51,7 @@ export default function IndexRow({
 
       {description && (
         <p className={`type-caption col-span-16 max-w-[42ch] ${quiet} md:col-span-5 md:mt-[0.22em]`}>
-          {description}
+          {highlightPulpp(description)}
         </p>
       )}
     </div>

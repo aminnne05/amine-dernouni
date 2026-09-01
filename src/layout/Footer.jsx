@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
 import { useLanguage } from "../i18n/LanguageContext";
+import { highlightPulpp } from "../utils/pulpp";
 
 /*
   Footer style JKR :
@@ -83,7 +84,7 @@ export default function Footer() {
                     className="group flex items-center gap-4"
                   >
                     <span className="type-display text-ivoire/55 transition-colors duration-500 ease-out group-hover:text-ivoire">
-                      {name}
+                      {highlightPulpp(name)}
                     </span>
                     <svg
                       className="h-3 w-3 shrink-0 text-ivoire/35 transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ivoire"

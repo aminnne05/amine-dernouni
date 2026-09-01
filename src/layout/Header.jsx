@@ -143,13 +143,13 @@ export default function Header() {
                   </NavLink>
                 ))}
               </nav>
-            </div>
 
-            <div className="hidden items-center gap-8 md:flex">
+              {/* Hors Cadre : tenu à l'écart des pages client, mais gardé
+                  dans le premier tiers de la barre. */}
               <NavLink
                 to={horsCadre.to}
                 end
-                className="type-index group relative inline-flex items-center justify-center px-3 py-1"
+                className="type-index group relative ml-20 hidden items-center justify-center px-3 py-1 md:inline-flex"
               >
                 {({ isActive }) => (
                   <>
@@ -176,10 +176,11 @@ export default function Header() {
                   </>
                 )}
               </NavLink>
+            </div>
 
-              <div
-                className={`type-micro flex items-center gap-1 transition-colors duration-500 ${encreDoux}`}
-              >
+            <div
+              className={`type-micro hidden items-center gap-1 transition-colors duration-500 md:flex ${encreDoux}`}
+            >
               <Link
                 to={frPath}
                 className={`transition-colors ${lang === "fr" ? encreTexte : ""}`}
@@ -193,7 +194,6 @@ export default function Header() {
               >
                 EN
               </Link>
-              </div>
             </div>
 
             <button
@@ -297,7 +297,7 @@ export default function Header() {
                   LinkedIn
                 </a>
                 <a href="https://www.wearepulpp.com/" target="_blank" rel="noreferrer">
-                  Pulpp
+                  <span className="text-rouge">Pulpp</span>
                 </a>
               </div>
             </div>
