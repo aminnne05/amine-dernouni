@@ -3,81 +3,76 @@ import ProjectCard from "../components/ProjectCard";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
 import RevealRow from "../components/RevealRow";
-import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
-import shotAmine from "../assets/images/hero-portrait.jpg";
-import useScrollProgress from "../hooks/useScrollProgress";
+import LineReveal from "../components/LineReveal";
+import heroPortrait from "../assets/images/hero-portrait.jpg";
 import { projects } from "../data/projects";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Homepage() {
-  const scroll = useScrollProgress(450);
   const { t, path } = useLanguage();
   const practices = t("practices");
 
   return (
     <div className="bg-ivoire">
-      {/* HERO — bloc noir */}
-      <Reveal as="section" className="bg-encre">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-14 px-6 pt-[129px] pb-20 md:flex-row md:items-center md:justify-between md:gap-8 md:px-[27px] md:pb-28">
-          <div className="hidden shrink-0 flex-col gap-1 md:flex md:w-[220px]">
-            <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
-              {t("homepage.role")}
-            </p>
-            <p className="text-sm font-light text-ivoire/60">{t("homepage.location")}</p>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[260px] shrink-0 md:mx-0 md:max-w-[340px]">
-            <div className="aspect-[3/4] w-full overflow-hidden">
-              <img
-                src={shotAmine}
-                alt="Amine Dernouni"
-                className="h-full w-full object-cover object-center will-change-[filter,transform]"
-                style={{
-                  filter: `blur(${scroll * 14}px)`,
-                  transform: `scale(${1 + scroll * 0.06})`,
-                  opacity: 1 - scroll * 0.25,
-                }}
-              />
-            </div>
-            <div className="pointer-events-none absolute bottom-6 left-1/2 w-[135%] -translate-x-1/2 md:bottom-10">
-              <LogoHorizontal className="h-auto w-full text-ivoire drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]" />
-            </div>
-          </div>
-
-          <div className="hidden shrink-0 md:flex md:w-[220px] md:justify-end">
-            <CTAButton variant="white" href={path("/contact")}>
-              {t("homepage.contact")}
-            </CTAButton>
-          </div>
-
-          {/* mobile only : infos empilées sous la photo */}
-          <div className="flex flex-col items-center gap-5 text-center md:hidden">
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-medium uppercase tracking-[-0.03em] text-ivoire">
-                {t("homepage.role")}
-              </p>
-              <p className="text-sm font-light text-ivoire/60">{t("homepage.location")}</p>
-            </div>
-            <CTAButton variant="white" href={path("/contact")}>
-              {t("homepage.contact")}
-            </CTAButton>
+      {/* ============================================
+          HERO — la déclaration typographique est l'événement
+          de la page ; le portrait devient une note en marge.
+          ============================================ */}
+      <section className="flex min-h-svh flex-col px-6 pt-[110px] pb-8 md:px-[27px] md:pt-[132px] md:pb-10">
+        {/* Bandeau utilitaire */}
+        <div className="mx-auto w-full max-w-[1440px] shrink-0">
+          <div className="flex items-baseline justify-between gap-6 border-b border-encre/12 pb-4">
+            <p className="type-label text-encre">{t("homepage.role")}</p>
+            <p className="type-label text-taupe">{t("homepage.location")}</p>
           </div>
         </div>
-      </Reveal>
 
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 pt-32 pb-32">
+        {/* La déclaration + le portrait, centrés dans l'espace restant */}
+        <div className="mx-auto flex w-full max-w-[1440px] flex-1 items-center py-12 md:py-16">
+          <div className="flex w-full flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+            <h1 className="type-display text-encre">
+              <LineReveal lines={t("homepage.statementLines")} delay={120} />
+            </h1>
+
+            <figure className="flex w-[128px] shrink-0 flex-col gap-3 lg:w-[200px]">
+              <div className="aspect-[3/4] w-full overflow-hidden bg-ivoire-soft">
+                <img
+                  src={heroPortrait}
+                  alt="Amine Dernouni"
+                  width="800"
+                  height="1067"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+              <figcaption className="type-label text-taupe">
+                Amine Dernouni
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        {/* Pied de hero */}
+        <div className="mx-auto flex w-full max-w-[1440px] shrink-0 items-end justify-between gap-6">
+          <p className="type-label text-taupe">{t("homepage.scroll")}</p>
+          <CTAButton variant="black" href={path("/contact")}>
+            {t("homepage.contact")}
+          </CTAButton>
+        </div>
+      </section>
+
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-32 pt-24 pb-32 md:pt-32">
         {/* INTRO STATEMENT */}
         <Reveal as="section" className="flex justify-end px-6 md:px-[27px]">
-          <p className="max-w-[820px] text-[30px] font-medium leading-snug tracking-[-0.04em] text-encre">
+          <p className="type-statement max-w-[900px] text-encre">
             {t("homepage.manifesto")}
           </p>
         </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
+        <div className="h-px w-full bg-encre/12" />
 
         {/* PROJETS SÉLECTIONNÉS */}
         <Reveal as="section" className="flex flex-col gap-6 px-6 md:px-[27px]">
-          <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
+          <h2 className="type-label text-taupe">
             {t("homepage.projectsTitle")}
           </h2>
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:auto-rows-[300px]">
@@ -92,19 +87,17 @@ export default function Homepage() {
           </div>
           <a
             href={path("/projets")}
-            className="flex items-center justify-center self-end p-[10px] text-xs font-light uppercase tracking-widest text-encre hover:opacity-70"
+            className="type-label flex items-center justify-center self-end p-[10px] text-encre hover:opacity-60"
           >
             {t("homepage.viewAll")}
           </a>
         </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
+        <div className="h-px w-full bg-encre/12" />
 
         {/* SERVICES */}
         <Reveal as="section" className="flex flex-col gap-8 px-6 md:px-[27px]">
-          <h2 className="text-xl font-medium tracking-[-0.03em] text-encre">
-            {t("homepage.servicesTitle")}
-          </h2>
+          <h2 className="type-label text-taupe">{t("homepage.servicesTitle")}</h2>
           <div className="flex flex-col">
             {practices.map((practice, i) => (
               <RevealRow

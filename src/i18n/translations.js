@@ -28,8 +28,10 @@ export const translations = {
       role: "Directeur artistique",
       location: "Nice, France.",
       contact: "CONTACT",
+      statementLines: ["L'image", "et l'idée", "ne font qu'une."],
+      scroll: "Défiler",
       manifesto:
-        "Je travaille à l'endroit où l'esthétique rejoint l'intention. Chaque projet a une matière propre : je la lis, je la cadre, je lui donne une forme qui a du sens autant que de l'allure. Pour qu'au premier regard, l'image et l'idée ne fassent plus qu'une.",
+        "Je travaille à l'endroit où l'esthétique rejoint l'intention. Chaque projet a une matière propre : je la lis, je la cadre, je lui donne une forme qui a du sens autant que de l'allure.",
       projectsTitle: "Projets séléctionnés",
       viewAll: "Voir tous les projets",
       servicesTitle: "Services",
@@ -236,8 +238,10 @@ export const translations = {
       role: "Art Director",
       location: "Nice, France.",
       contact: "CONTACT",
+      statementLines: ["The image", "and the idea", "become one."],
+      scroll: "Scroll",
       manifesto:
-        "I work where aesthetics meet intention. Every project has its own material: I read it, frame it, give it a form that carries as much meaning as style. So that at first glance, image and idea become one.",
+        "I work where aesthetics meet intention. Every project has its own material: I read it, frame it, give it a form that carries as much meaning as style.",
       projectsTitle: "Selected Projects",
       viewAll: "View all projects",
       servicesTitle: "Services",
