@@ -1,4 +1,3 @@
-import CTAButton from "../components/CTAButton";
 import ProjectCard from "../components/ProjectCard";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
@@ -25,12 +24,12 @@ export default function Homepage() {
           au même corps. Une ligne de service ferme le bloc en bas.
           ============================================ */}
       <section className="bg-encre">
-        <div className="shell flex min-h-svh flex-col justify-between pt-[104px] pb-8">
-          <div className="colonnes flex-1 items-center gap-y-12 py-10">
-            {/* Portrait + logo */}
-            <div className="col-span-10 col-start-1 md:col-span-4">
-              <div className="relative w-full max-w-[260px] md:max-w-none">
-                <div className="aspect-[4/5] w-full overflow-hidden">
+        <div className="shell flex min-h-svh flex-col pt-[104px] pb-14">
+          <div className="colonnes flex-1 items-end gap-y-12 py-10">
+            {/* Portrait + logo, calé sur le bas de la colonne de texte */}
+            <div className="col-span-9 col-start-1 md:col-span-3">
+              <div className="relative w-full max-w-[220px] md:max-w-none">
+                <div className="aspect-[4/5] w-full overflow-hidden rounded-[var(--rayon-image)]">
                   <img
                     src={shotAmine}
                     alt="Amine Dernouni"
@@ -41,7 +40,7 @@ export default function Homepage() {
                     }}
                   />
                 </div>
-                <div className="pointer-events-none absolute inset-x-0 bottom-5 px-4 md:bottom-7">
+                <div className="pointer-events-none absolute inset-x-0 bottom-4 px-3">
                   <LogoHorizontal className="h-auto w-full text-ivoire drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]" />
                 </div>
               </div>
@@ -50,7 +49,6 @@ export default function Homepage() {
             {/* Colonne de texte, à droite */}
             <div className="col-span-16 flex flex-col gap-8 md:col-span-7 md:col-start-10">
               <div className="type-lede flex flex-col text-ivoire">
-                <p>Amine Dernouni.</p>
                 <p>{t("homepage.role")}</p>
                 <p className="text-ivoire/45">{t("homepage.location")}</p>
               </div>
@@ -59,36 +57,18 @@ export default function Homepage() {
                 {t("homepage.manifesto")}
               </p>
 
-              <div className="pt-2">
-                <CTAButton variant="white" href={path("/contact")}>
-                  {t("homepage.contact")}
-                </CTAButton>
-              </div>
+              <a
+                href="mailto:dernouniamine02@gmail.com"
+                className="type-lede text-ivoire underline decoration-ivoire/30 underline-offset-[6px] transition-colors duration-500 hover:decoration-ivoire"
+              >
+                dernouniamine02@gmail.com
+              </a>
             </div>
-          </div>
-
-          {/* Pied de hero */}
-          <div className="colonnes shrink-0 items-baseline gap-y-3 border-t border-ivoire/15 pt-4">
-            <p className="type-micro col-span-8 text-ivoire/45 md:col-span-4">
-              ©2026
-            </p>
-            <p className="type-micro col-span-8 text-right text-ivoire/45 md:col-span-7 md:col-start-10 md:text-left">
-              {t("homepage.scroll")}
-            </p>
           </div>
         </div>
       </section>
 
       <div className="flex w-full flex-col gap-32 pt-32 pb-32">
-        {/* INTRO STATEMENT */}
-        <Reveal as="section" className="shell flex justify-end">
-          <p className="max-w-[820px] text-[30px] font-medium leading-snug tracking-[-0.04em] text-encre">
-            {t("homepage.manifesto")}
-          </p>
-        </Reveal>
-
-        <div className="h-px w-full bg-encre/15" />
-
         {/* PROJETS SÉLECTIONNÉS */}
         <Reveal as="section" className="shell flex flex-col gap-6">
           <h2 className="type-micro text-taupe">
@@ -114,7 +94,6 @@ export default function Homepage() {
           </a>
         </Reveal>
 
-        <div className="h-px w-full bg-encre/15" />
 
         {/* SERVICES */}
         <Reveal as="section" className="shell flex flex-col gap-8">

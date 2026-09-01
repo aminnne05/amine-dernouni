@@ -9,9 +9,8 @@ const HAUTEUR = 48;
 /*
   Barre reprise de wolffolins.com :
   — à l'entrée, elle se déroule depuis une hauteur nulle, contenu découpé ;
-  — en haut de page, elle occupe toute la largeur, sans fond ;
-  — dès qu'on défile, elle se resserre en pastille centrée et un fond
-    dépoli vient se poser derrière ; elle se rouvre en revenant en haut.
+  — elle occupe toute la largeur, sans fond, en haut de page ;
+  — dès qu'on défile, un fond dépoli vient se poser derrière elle.
   Toutes les bascules suivent la même courbe (ease-quint, 650 ms).
 */
 export default function Header() {
@@ -60,10 +59,10 @@ export default function Header() {
   const frPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
   const enPath = isEn ? pathname : pathname === "/" ? "/en" : `/en${pathname}`;
 
-  // En haut de l'accueil la barre flotte sur le bloc noir du hero :
-  // le texte passe en clair tant que la pastille n'est pas posée.
-  const isHome = pathname === "/" || pathname === "/en";
-  const surFondNoir = isHome && !scrolled && !open;
+  // Les pages qui s'ouvrent sur un bloc noir : la barre y flotte en clair
+  // tant que le fond dépoli n'est pas posé.
+  const debutSombre = ["/", "/en", "/contact", "/en/contact"].includes(pathname);
+  const surFondNoir = debutSombre && !scrolled && !open;
 
   const encreTexte = surFondNoir ? "text-ivoire" : "text-encre";
   const encreDoux = surFondNoir ? "text-ivoire/50" : "text-taupe";
@@ -79,17 +78,15 @@ export default function Header() {
     <>
       <div className="shell pointer-events-none fixed top-0 left-0 z-50 w-full pt-3">
         <div
-          className="pointer-events-auto relative mx-auto overflow-clip rounded-[24px]"
+          className="pointer-events-auto relative mx-auto overflow-clip rounded-[var(--rayon-pastille)]"
           style={{
-            maxWidth: scrolled ? "min(100%, 46rem)" : "100%",
             height: entered ? `${HAUTEUR}px` : "0px",
-            transition:
-              "max-width 650ms var(--ease-quint), height 650ms var(--ease-quint)",
+            transition: "height 650ms var(--ease-quint)",
           }}
         >
           {/* fond dépoli, posé un peu après le mouvement */}
           <div
-            className="absolute inset-0 rounded-[24px] border border-encre/10 bg-ivoire/85 backdrop-blur-xl transition-opacity duration-500 ease-out"
+            className="absolute inset-0 rounded-[var(--rayon-pastille)] border border-encre/10 bg-ivoire/85 backdrop-blur-xl transition-opacity duration-500 ease-out"
             style={{ opacity: scrolled ? 1 : 0 }}
             aria-hidden
           />

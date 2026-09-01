@@ -18,7 +18,7 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
       style={{ transitionDelay: visible ? `${(index % 4) * 80}ms` : "0ms" }}
     >
       {/* Toutes les couvertures partagent le même rectangle 4:3 */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#a6a6a6]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--rayon-image)] bg-[#a6a6a6]">
         {image ? (
           isVideoSrc(image) ? (
             <video

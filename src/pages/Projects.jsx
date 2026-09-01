@@ -17,13 +17,17 @@ export default function Projects() {
 
   return (
     <div className="relative z-10 bg-ivoire">
-      <div className="shell flex flex-col gap-20 pt-[120px] pb-32">
-        {/* En-tête : titre + description à droite (référence Moonstone) */}
-        <Reveal as="section" className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <h1 className="text-4xl font-medium tracking-[-0.04em] text-encre md:text-5xl">
-            {t("projectsPage.title")}
+      <div className="shell flex flex-col gap-12 pt-[104px] pb-32">
+        {/* En-tête, même construction que l'accueil : petite étiquette à
+            gauche, colonne de texte étroite à droite */}
+        <Reveal as="section" className="colonnes items-end gap-y-6 py-10">
+          <h1 className="type-micro col-span-16 text-taupe md:col-span-4">
+            {t("projectsPage.title")}{" "}
+            <span className="text-encre/40">
+              ({String(projects.length).padStart(2, "0")})
+            </span>
           </h1>
-          <p className="max-w-[420px] text-sm font-light leading-relaxed text-encre/60">
+          <p className="type-lede col-span-16 max-w-[34ch] text-encre/60 md:col-span-7 md:col-start-10">
             {t("projectsPage.description")}
           </p>
         </Reveal>
@@ -53,7 +57,7 @@ export default function Projects() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="py-16 text-center text-sm font-light text-encre/50">
+          <p className="type-lede py-16 text-center text-encre/50">
             {t("projectsPage.empty")}
           </p>
         )}

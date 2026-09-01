@@ -128,7 +128,7 @@ export default function ProjectDetail() {
                     isVideoSrc(media) ? (
                       <div
                         key={j}
-                        className="w-full flex-1 overflow-hidden bg-[#a6a6a6]"
+                        className="w-full flex-1 overflow-hidden rounded-[var(--rayon-image)] bg-[#a6a6a6]"
                       >
                         <video
                           src={media}
@@ -142,7 +142,7 @@ export default function ProjectDetail() {
                     ) : (
                       <div
                         key={j}
-                        className="w-full flex-1 overflow-hidden bg-[#a6a6a6]"
+                        className="w-full flex-1 overflow-hidden rounded-[var(--rayon-image)] bg-[#a6a6a6]"
                       >
                         <img
                           src={media}
@@ -158,7 +158,7 @@ export default function ProjectDetail() {
               [1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="flex aspect-[4/3] w-full items-center justify-center bg-encre/8 text-xs font-light text-encre/40"
+                  className="type-micro flex aspect-[4/3] w-full items-center justify-center rounded-[var(--rayon-image)] bg-encre/8 text-encre/40"
                 >
                   {t("projectDetail.comingSoon")}
                 </div>
