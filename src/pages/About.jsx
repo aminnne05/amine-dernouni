@@ -54,7 +54,7 @@ export default function About() {
         <div className="shell flex flex-col gap-8 py-24">
           <h2 className="type-micro text-taupe">
             {t("about.experienceTitle")}{" "}
-            <span className="text-rouge">
+            <span className="text-encre/35">
               ({String(experience.length).padStart(2, "0")})
             </span>
           </h2>
@@ -78,7 +78,7 @@ export default function About() {
         <div className="shell flex flex-col gap-8 py-24">
           <h2 className="type-micro text-ivoire/45">
             {t("about.collaborateTitle")}{" "}
-            <span className="text-rouge">
+            <span className="text-ivoire/25">
               ({String(collaborations.length).padStart(2, "0")})
             </span>
           </h2>
@@ -102,7 +102,7 @@ export default function About() {
         <div className="shell flex flex-col gap-8 py-24">
           <h2 className="type-micro text-taupe">
             {t("about.servicesTitle")}{" "}
-            <span className="text-rouge">
+            <span className="text-encre/35">
               ({String(practices.length).padStart(2, "0")})
             </span>
           </h2>
@@ -126,7 +126,7 @@ export default function About() {
           <div className="colonnes gap-y-4">
             <h2 className="type-micro col-span-16 text-ivoire/45 md:col-span-4">
               {t("about.methodologyTitle")}{" "}
-              <span className="text-rouge">
+              <span className="text-ivoire/25">
                 ({String(methodology.length).padStart(2, "0")})
               </span>
             </h2>

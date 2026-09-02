@@ -127,6 +127,9 @@
      16 colonnes. Tout respire de la même façon à chaque taille d'écran. */
   /* Courbe d'entrée reprise de wolffolins.com (ease-quint) */
   --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Courbe des visuels : elle démarre franchement puis s'éteint très
+     longuement, sans à-coup ni rebond. */
+  --ease-doux: cubic-bezier(0.16, 0.84, 0.44, 1);
 
   /* Rayons : pastille pour tout ce qui se clique, 6 px pour les visuels
      (la rondeur discrète de koto.com) */
@@ -276,29 +279,34 @@ body {
   transform: translateY(0);
 }
 
-/* Dévoilement des visuels : le cadre s'ouvre par le bas pendant que
-   l'image, d'abord surdimensionnée, revient à sa taille. */
+/* Dévoilement des visuels : le cadre se pose en montant d'un cheveu
+   pendant que l'image se détend depuis un très léger agrandissement.
+   Un seul geste, une seule durée — aucun volet qui balaie l'image. */
 .devoile {
-  clip-path: inset(0 0 100% 0 round var(--rayon-image));
-  transition: clip-path 1100ms var(--ease-quint);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 1000ms var(--ease-doux),
+    transform 1000ms var(--ease-doux);
 }
 
 .devoile > * {
-  transform: scale(1.12);
-  transition: transform 1500ms var(--ease-quint);
+  transform: scale(1.04);
+  transition: transform 1000ms var(--ease-doux);
 }
 
 .devoile.is-in {
-  clip-path: inset(0 0 0 0 round var(--rayon-image));
+  opacity: 1;
+  transform: none;
 }
 
 .devoile.is-in > * {
-  transform: scale(1);
+  transform: none;
 }
 
 .group:hover .devoile.is-in > * {
-  transform: scale(1.04);
-  transition-duration: 800ms;
+  transform: scale(1.03);
+  transition-duration: 900ms;
 }
 
 /* Glissement au défilement, sans une ligne de JavaScript. Les
@@ -313,10 +321,10 @@ body {
 
 @keyframes glisse-y {
   from {
-    transform: translateY(-2.5%) scale(1.06);
+    transform: translateY(-2%) scale(1.05);
   }
   to {
-    transform: translateY(2.5%) scale(1.06);
+    transform: translateY(2%) scale(1.05);
   }
 }
 

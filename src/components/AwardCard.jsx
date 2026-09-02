@@ -56,7 +56,7 @@ export default function AwardCard({
 
         <div className="type-micro col-span-16 flex items-baseline gap-3 text-taupe md:col-span-3 md:col-start-14 md:flex-col md:items-end md:gap-1 md:text-right">
           <span>{body}</span>
-          <span className="text-rouge">{year}</span>
+          <span>{year}</span>
         </div>
       </Link>
     </Reveal>

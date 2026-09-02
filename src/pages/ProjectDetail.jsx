@@ -134,10 +134,12 @@ export default function ProjectDetail() {
                       >
                         <video
                           src={media}
+                          autoPlay
                           controls
                           loop
                           muted
                           playsInline
+                          preload="metadata"
                           className="h-auto w-full"
                         />
                       </MediaReveal>

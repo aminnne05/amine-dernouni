@@ -70,7 +70,7 @@ export default function Footer() {
             <div className="col-span-16 flex flex-col items-end gap-5 md:col-span-9 md:col-start-8">
               <p className="type-micro text-ivoire/45">
                 {t("footer.follow")}{" "}
-                <span className="text-rouge">
+                <span className="text-ivoire/25">
                   ({String(reseaux.length).padStart(2, "0")})
                 </span>
               </p>

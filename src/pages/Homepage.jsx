@@ -76,7 +76,7 @@ export default function Homepage() {
         <Reveal as="section" className="shell flex flex-col gap-6">
           <h2 className="type-micro text-taupe">
             {t("homepage.projectsTitle")}{" "}
-            <span className="text-rouge">
+            <span className="text-encre/35">
               ({String(projects.length).padStart(2, "0")})
             </span>
           </h2>
@@ -102,7 +102,7 @@ export default function Homepage() {
         <Reveal as="section" className="shell flex flex-col gap-8">
           <h2 className="type-micro text-taupe">
             {t("homepage.servicesTitle")}{" "}
-            <span className="text-rouge">
+            <span className="text-encre/35">
               ({String(practices.length).padStart(2, "0")})
             </span>
           </h2>
@@ -123,7 +123,7 @@ export default function Homepage() {
         <Reveal as="section" className="shell flex flex-col gap-8">
           <h2 className="type-micro text-taupe">
             {t("homepage.awardsTitle")}{" "}
-            <span className="text-rouge">
+            <span className="text-encre/35">
               ({String(awards.length).padStart(2, "0")})
             </span>
           </h2>

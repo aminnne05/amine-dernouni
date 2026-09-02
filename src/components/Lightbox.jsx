@@ -52,7 +52,7 @@ export default function Lightbox({ piece, onClose }) {
           {total > 1 && (
             <p className="type-micro text-ivoire/45">
               {String(index + 1).padStart(2, "0")}
-              <span className="text-rouge"> / </span>
+              <span className="text-ivoire/25"> / </span>
               {String(total).padStart(2, "0")}
             </p>
           )}

@@ -23,7 +23,7 @@ export default function HorsCadre() {
         <Reveal as="section" className="colonnes items-end gap-y-6 py-10">
           <h1 className="type-micro col-span-16 text-taupe md:col-span-4">
             {t("horsCadre.title")}{" "}
-            <span className="text-rouge">
+            <span className="text-encre/35">
               ({String(pieces.length).padStart(2, "0")})
             </span>
           </h1>
