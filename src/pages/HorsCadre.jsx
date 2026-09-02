@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Lightbox from "../components/Lightbox";
 import Reveal from "../components/Reveal";
+import MediaReveal from "../components/MediaReveal";
 import { getHorsCadre } from "../data/horsCadre";
 import { isVideoSrc } from "../utils/media";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -40,14 +41,14 @@ export default function HorsCadre() {
                 onClick={() => setOpen(piece)}
                 className="group mb-[var(--gouttiere)] block w-full break-inside-avoid text-left"
               >
-                <div className="overflow-hidden rounded-[var(--rayon-image)] bg-ivoire-soft">
+                <MediaReveal className="rounded-[var(--rayon-image)] bg-ivoire-soft">
                   {isVideoSrc(piece.cover) ? (
                     <video
                       src={piece.cover}
                       muted
                       loop
                       playsInline
-                      className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      className="w-full"
                     />
                   ) : (
                     <img
@@ -55,10 +56,10 @@ export default function HorsCadre() {
                       alt={piece.title}
                       loading={i < 6 ? "eager" : "lazy"}
                       decoding="async"
-                      className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      className="w-full"
                     />
                   )}
-                </div>
+                </MediaReveal>
                 <p className="type-index mt-2 flex items-baseline gap-2 text-encre">
                   {piece.title}
                   {piece.media.length > 1 && (

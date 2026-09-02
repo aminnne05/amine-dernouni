@@ -252,3 +252,100 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* ============================================
+   MOUVEMENT
+   Trois gestes seulement, tous sur la même courbe :
+   — les lignes de texte montent depuis un masque ;
+   — les visuels se dévoilent par le bas en se posant d'un cran ;
+   — les grands visuels glissent doucement pendant le défilement.
+   Tout est neutralisé si l'utilisateur demande moins d'animations.
+   ============================================ */
+.ligne-masque {
+  display: block;
+  overflow: hidden;
+}
+
+.ligne-masque > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 1000ms var(--ease-quint);
+}
+
+.ligne-masque.is-in > span {
+  transform: translateY(0);
+}
+
+/* Dévoilement des visuels : le cadre s'ouvre par le bas pendant que
+   l'image, d'abord surdimensionnée, revient à sa taille. */
+.devoile {
+  clip-path: inset(0 0 100% 0 round var(--rayon-image));
+  transition: clip-path 1100ms var(--ease-quint);
+}
+
+.devoile > * {
+  transform: scale(1.12);
+  transition: transform 1500ms var(--ease-quint);
+}
+
+.devoile.is-in {
+  clip-path: inset(0 0 0 0 round var(--rayon-image));
+}
+
+.devoile.is-in > * {
+  transform: scale(1);
+}
+
+.group:hover .devoile.is-in > * {
+  transform: scale(1.04);
+  transition-duration: 800ms;
+}
+
+/* Glissement au défilement, sans une ligne de JavaScript. Les
+   navigateurs qui ne savent pas faire affichent simplement l'image fixe. */
+@supports (animation-timeline: view()) {
+  .glisse > * {
+    animation: glisse-y linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+@keyframes glisse-y {
+  from {
+    transform: translateY(-2.5%) scale(1.06);
+  }
+  to {
+    transform: translateY(2.5%) scale(1.06);
+  }
+}
+
+/* Entrée de page */
+.page-entre {
+  animation: page-entre 650ms var(--ease-quint) both;
+}
+
+@keyframes page-entre {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-entre,
+  .ligne-masque > span,
+  .devoile,
+  .devoile > *,
+  .glisse > * {
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

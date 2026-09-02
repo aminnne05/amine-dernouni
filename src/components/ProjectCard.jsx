@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MediaReveal from "./MediaReveal";
 import useReveal from "../hooks/useReveal";
 import { isVideoSrc } from "../utils/media";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -12,13 +13,13 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
     <Link
       ref={ref}
       to={path(`/projets/${slug}`)}
-      className={`group flex w-full flex-col gap-2 transition-all duration-700 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-      } ${className}`}
-      style={{ transitionDelay: visible ? `${(index % 4) * 80}ms` : "0ms" }}
+      className={`group flex w-full flex-col gap-2 ${className}`}
     >
       {/* Toutes les couvertures partagent le même rectangle 4:3 */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--rayon-image)] bg-[#a6a6a6]">
+      <MediaReveal
+        delay={(index % 2) * 110}
+        className="relative aspect-[4/3] w-full rounded-[var(--rayon-image)] bg-[#a6a6a6]"
+      >
         {image ? (
           isVideoSrc(image) ? (
             <video
@@ -27,13 +28,13 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
               loop
               muted
               playsInline
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           ) : (
             <img
               src={image}
               alt={title}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           )
         ) : (
@@ -41,8 +42,13 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
             {t("projectDetail.comingSoon")}
           </div>
         )}
-      </div>
-      <div className="flex shrink-0 items-baseline gap-3">
+      </MediaReveal>
+      <div
+        className={`flex shrink-0 items-baseline gap-3 transition-[opacity,transform] duration-[900ms] [transition-timing-function:var(--ease-quint)] ${
+          visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+        }`}
+        style={{ transitionDelay: `${(index % 2) * 110 + 380}ms` }}
+      >
         <span className="type-micro text-taupe">
           {`N.${String(index + 1).padStart(2, "0")}`}
         </span>

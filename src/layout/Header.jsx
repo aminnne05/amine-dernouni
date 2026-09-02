@@ -20,6 +20,7 @@ export default function Header() {
   const ready = useReady();
   const [entered, setEntered] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [avancee, setAvancee] = useState(0);
 
   useEffect(() => {
     if (!ready) return;
@@ -37,6 +38,9 @@ export default function Header() {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         setScrolled(window.scrollY > 80);
+        const course =
+          document.documentElement.scrollHeight - window.innerHeight;
+        setAvancee(course > 0 ? Math.min(window.scrollY / course, 1) : 0);
         raf = null;
       });
     };
@@ -91,6 +95,17 @@ export default function Header() {
           <div
             className="absolute inset-0 rounded-[var(--rayon-pastille)] border border-encre/10 bg-ivoire/85 backdrop-blur-xl transition-opacity duration-500 ease-out"
             style={{ opacity: scrolled ? 1 : 0 }}
+            aria-hidden
+          />
+
+          {/* progression de lecture, dans le rouge du studio */}
+          <span
+            className="absolute bottom-0 left-0 h-px w-full origin-left bg-rouge"
+            style={{
+              transform: `scaleX(${avancee})`,
+              opacity: scrolled ? 1 : 0,
+              transition: "opacity 500ms ease-out",
+            }}
             aria-hidden
           />
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
+import MediaReveal from "./MediaReveal";
 
 /*
   Une récompense occupe toute la largeur : la couverture du projet à
@@ -23,15 +24,15 @@ export default function AwardCard({
         className="colonnes group w-full items-center gap-y-5 border-t border-encre py-8 md:py-10"
       >
         {cover && (
-          <div className="col-span-6 overflow-hidden rounded-[var(--rayon-image)] bg-ivoire-soft md:col-span-3">
+          <MediaReveal className="col-span-6 rounded-[var(--rayon-image)] bg-ivoire-soft md:col-span-3">
             <img
               src={cover}
               alt={project}
               loading="lazy"
               decoding="async"
-              className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="aspect-[4/3] w-full object-cover"
             />
-          </div>
+          </MediaReveal>
         )}
 
         <div className="col-span-16 flex flex-col gap-3 md:col-span-8 md:col-start-5">

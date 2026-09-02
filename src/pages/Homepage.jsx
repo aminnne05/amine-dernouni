@@ -1,6 +1,8 @@
 import ProjectCard from "../components/ProjectCard";
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
+import LineReveal from "../components/LineReveal";
+import MediaReveal from "../components/MediaReveal";
 import IndexRow from "../components/IndexRow";
 import AwardCard from "../components/AwardCard";
 import LogoHorizontal from "../assets/logo/logo-horizontal.svg?react";
@@ -29,17 +31,14 @@ export default function Homepage() {
             {/* Portrait + logo, calé sur le bas de la colonne de texte */}
             <div className="col-span-9 col-start-1 md:col-span-3">
               <div className="relative w-full max-w-[220px] md:max-w-none">
-                <div className="aspect-[4/5] w-full overflow-hidden rounded-[var(--rayon-image)]">
+                <MediaReveal className="aspect-[4/5] w-full rounded-[var(--rayon-image)]">
                   <img
                     src={shotAmine}
                     alt="Amine Dernouni"
-                    className="h-full w-full object-cover object-center will-change-[transform]"
-                    style={{
-                      transform: `scale(${1 + scroll * 0.05})`,
-                      opacity: 1 - scroll * 0.2,
-                    }}
+                    className="h-full w-full object-cover object-center"
+                    style={{ opacity: 1 - scroll * 0.2 }}
                   />
-                </div>
+                </MediaReveal>
                 <div className="pointer-events-none absolute inset-x-0 bottom-4 px-3">
                   <LogoHorizontal className="h-auto w-full text-ivoire drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]" />
                 </div>
@@ -49,20 +48,24 @@ export default function Homepage() {
             {/* Colonne de texte, à droite */}
             <div className="col-span-16 flex flex-col gap-8 md:col-span-7 md:col-start-10">
               <div className="type-lede flex flex-col text-ivoire">
-                <p>{t("homepage.role")}</p>
-                <p className="text-ivoire/45">{t("homepage.location")}</p>
+                <LineReveal lines={[t("homepage.role")]} delay={120} />
+                <span className="text-ivoire/45">
+                  <LineReveal lines={[t("homepage.location")]} delay={210} />
+                </span>
               </div>
 
-              <p className="type-lede max-w-[34ch] text-ivoire/70">
+              <Reveal delay={320} as="p" className="type-lede max-w-[34ch] text-ivoire/70">
                 {t("homepage.manifesto")}
-              </p>
+              </Reveal>
 
-              <a
-                href="mailto:dernouniamine02@gmail.com"
-                className="type-lede text-ivoire underline decoration-ivoire/30 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
-              >
-                dernouniamine02@gmail.com
-              </a>
+              <Reveal delay={440}>
+                <a
+                  href="mailto:dernouniamine02@gmail.com"
+                  className="type-lede text-ivoire underline decoration-ivoire/30 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
+                >
+                  dernouniamine02@gmail.com
+                </a>
+              </Reveal>
             </div>
           </div>
         </div>

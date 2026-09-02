@@ -5,6 +5,7 @@ import Footer from "./layout/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { ReadyContext } from "./hooks/useReady";
+import PageTransition from "./components/PageTransition";
 import Homepage from "./pages/Homepage";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -39,6 +40,7 @@ function App() {
         <Header />
         {/* main au-dessus du footer fixé : effet reveal */}
         <main className="relative z-10 bg-ivoire shadow-[0_20px_60px_rgba(0,0,0,0.15)]">
+          <PageTransition>
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/projets" element={<Projects />} />
@@ -54,6 +56,7 @@ function App() {
             <Route path="/en/a-propos" element={<About />} />
             <Route path="/en/contact" element={<Contact />} />
           </Routes>
+          </PageTransition>
         </main>
         <Footer />
         </ReadyContext.Provider>

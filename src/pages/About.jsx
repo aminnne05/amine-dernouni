@@ -1,5 +1,6 @@
 import NextStepCTA from "../components/NextStepCTA";
 import Reveal from "../components/Reveal";
+import MediaReveal from "../components/MediaReveal";
 import IndexRow from "../components/IndexRow";
 import aboutPortrait from "../assets/images/about-portrait.jpg";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -20,13 +21,13 @@ export default function About() {
       <section className="shell flex flex-col pt-[104px] pb-28">
         <div className="colonnes items-end gap-y-12 py-10">
           <div className="col-span-9 col-start-1 md:col-span-3">
-            <div className="aspect-[4/5] w-full max-w-[220px] overflow-hidden rounded-[var(--rayon-image)] md:max-w-none">
+            <MediaReveal className="aspect-[4/5] w-full max-w-[220px] rounded-[var(--rayon-image)] md:max-w-none">
               <img
                 src={aboutPortrait}
                 alt="Amine Dernouni"
                 className="h-full w-full object-cover object-center"
               />
-            </div>
+            </MediaReveal>
           </div>
 
           <div className="col-span-16 flex flex-col gap-8 md:col-span-7 md:col-start-10">

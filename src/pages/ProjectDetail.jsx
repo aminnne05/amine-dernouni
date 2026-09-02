@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import NextStepCTA from "../components/NextStepCTA";
+import MediaReveal from "../components/MediaReveal";
 import HoverTab from "../components/HoverTab";
 import { projects } from "../data/projects";
 import { isVideoSrc } from "../utils/media";
@@ -125,9 +126,11 @@ export default function ProjectDetail() {
                 <div key={i} className="flex gap-[var(--gouttiere)]">
                   {row.map((media, j) =>
                     isVideoSrc(media) ? (
-                      <div
+                      <MediaReveal
                         key={j}
-                        className="w-full flex-1 overflow-hidden rounded-[var(--rayon-image)] bg-[#a6a6a6]"
+                        glisse
+                        delay={j * 90}
+                        className="w-full flex-1 rounded-[var(--rayon-image)] bg-[#a6a6a6]"
                       >
                         <video
                           src={media}
@@ -137,18 +140,20 @@ export default function ProjectDetail() {
                           playsInline
                           className="h-auto w-full"
                         />
-                      </div>
+                      </MediaReveal>
                     ) : (
-                      <div
+                      <MediaReveal
                         key={j}
-                        className="w-full flex-1 overflow-hidden rounded-[var(--rayon-image)] bg-[#a6a6a6]"
+                        glisse
+                        delay={j * 90}
+                        className="w-full flex-1 rounded-[var(--rayon-image)] bg-[#a6a6a6]"
                       >
                         <img
                           src={media}
                           alt={`${project.title} — ${t("projectDetail.visualAlt")} ${i + 1}.${j + 1}`}
                           className="h-auto w-full object-cover"
                         />
-                      </div>
+                      </MediaReveal>
                     )
                   )}
                 </div>
