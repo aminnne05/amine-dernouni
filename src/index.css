@@ -346,8 +346,8 @@ body {
   transition-duration: 1100ms;
 }
 
-/* Direct-style controls: one stable shape, a clean colour inversion and a
-   quick highlight passing through the surface. Text never leaves the button. */
+/* Flat controls: one stable shape and a clean colour inversion. No shine,
+   shadow or pressed-depth effect. */
 .morph-button {
   position: relative;
   overflow: hidden;
@@ -355,43 +355,24 @@ body {
   transition:
     color 360ms var(--ease-quint),
     border-color 360ms var(--ease-quint),
-    background-color 360ms var(--ease-quint),
-    background-position 700ms var(--ease-quint),
-    box-shadow 420ms var(--ease-quint),
-    transform 180ms ease-out;
+    background-color 360ms var(--ease-quint);
 }
 
 .morph-button--grey {
   border-color: transparent;
   background: #dededc;
-  background-image: linear-gradient(
-    108deg,
-    transparent 0%,
-    transparent 36%,
-    rgba(255, 255, 255, 0.78) 50%,
-    transparent 64%,
-    transparent 100%
-  );
-  background-position: 125% 0;
-  background-size: 250% 100%;
   color: var(--color-encre);
 }
 
 .morph-button:hover,
 .morph-button:focus-visible {
   border-color: color-mix(in srgb, currentColor 35%, transparent);
-  box-shadow: 0 8px 22px rgba(29, 29, 27, 0.13);
 }
 
 .morph-button--grey:hover,
 .morph-button--grey:focus-visible {
   background-color: var(--color-encre);
-  background-position: -125% 0;
   color: var(--color-ivoire);
-}
-
-.morph-button:active {
-  transform: scale(0.98);
 }
 
 .direct-button svg {
