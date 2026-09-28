@@ -11,7 +11,7 @@ export default function Reveal({
   return (
     <Tag
       ref={ref}
-      className={`transition-[opacity,transform] duration-[900ms] [transition-timing-function:var(--ease-quint)] ${
+      className={`transition-[opacity,transform] duration-[1100ms] [transition-timing-function:var(--ease-doux)] ${
         visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
       } ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}

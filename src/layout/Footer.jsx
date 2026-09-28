@@ -38,52 +38,36 @@ export default function Footer() {
         ref={ref}
         className="fixed bottom-0 left-0 z-0 w-full bg-encre text-ivoire"
       >
-        <div className="shell flex flex-col gap-16 pb-8 pt-20">
-          <div className="colonnes gap-y-14">
-            {/* Coordonnées, à gauche et discrètes */}
-            <div className="col-span-16 flex flex-col gap-10 md:col-span-5">
-              <div className="flex flex-col gap-3">
-                <p className="type-micro text-ivoire/45">{t("footer.find")}</p>
-                <div className="type-index text-ivoire">
-                  <p>Nice, France.</p>
-                  <a
-                    href="tel:+33625020042"
-                    className="block transition-opacity hover:opacity-60"
-                  >
-                    +33 625 020 042
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <p className="type-micro text-ivoire/45">{t("footer.write")}</p>
-                <a
-                  href="mailto:dernouniamine02@gmail.com"
-                  className="type-index text-ivoire transition-opacity hover:opacity-60"
-                >
-                  dernouniamine02@gmail.com
-                </a>
-              </div>
+        <div className="shell flex flex-col gap-8 pb-5 pt-10 md:gap-16 md:pb-8 md:pt-20">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-8 md:colonnes md:gap-y-14">
+            <div className="col-span-1 flex min-w-0 flex-col gap-2 md:col-span-5 md:gap-3">
+              <p className="type-nav text-ivoire/55">Nice, France.</p>
+              <a
+                href="tel:+33625020042"
+                className="type-nav text-ivoire transition-opacity hover:opacity-60"
+              >
+                +33 625 020 042
+              </a>
+              <a
+                href="mailto:dernouniamine02@gmail.com"
+                className="type-nav text-ivoire transition-opacity hover:opacity-60"
+              >
+                <span className="md:hidden">Email ↗</span>
+                <span className="hidden md:inline">dernouniamine02@gmail.com</span>
+              </a>
             </div>
 
-            {/* Réseaux — à droite, alignés au bord, en grand */}
-            <div className="col-span-16 flex flex-col items-end gap-5 md:col-span-9 md:col-start-8">
-              <p className="type-micro text-ivoire/45">
-                {t("footer.follow")}{" "}
-                <span className="text-ivoire/25">
-                  ({String(reseaux.length).padStart(2, "0")})
-                </span>
-              </p>
-              <div className="flex w-full flex-col items-end">
+            <div className="col-span-1 flex min-w-0 flex-col items-start md:col-span-9 md:col-start-8">
+              <div className="flex w-full flex-col items-start">
                 {reseaux.map(({ name, href }) => (
                   <a
                     key={name}
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-center gap-4"
+                    className="group flex items-center gap-2"
                   >
-                    <span className="type-display text-ivoire/55 transition-colors duration-500 ease-out group-hover:text-ivoire">
+                    <span className="type-index text-ivoire/65 transition-colors duration-500 ease-out group-hover:text-ivoire md:type-subtitle">
                       {highlightPulpp(name)}
                     </span>
                     <svg

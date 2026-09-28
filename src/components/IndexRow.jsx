@@ -53,7 +53,7 @@ export default function IndexRow({
 
         <h3 className={`col-span-16 md:col-span-8`}>
           <span
-            className={`ligne-masque type-title ${loud} ${visible ? "is-in" : ""}`}
+            className={`ligne-masque type-subtitle ${loud} ${visible ? "is-in" : ""}`}
           >
             <span style={{ transitionDelay: `${delay + 120}ms` }}>
               <span className="inline-block transition-transform duration-700 ease-out group-hover:translate-x-1">

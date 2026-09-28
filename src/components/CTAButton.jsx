@@ -1,18 +1,17 @@
+import { Link } from "react-router-dom";
+
 export default function CTAButton({
   children,
-  variant = "black",
   href = "#",
   className = "",
 }) {
-  const dark = variant === "white";
-  const tone = dark
-    ? "border-ivoire/30 text-ivoire hover:border-ivoire"
-    : "border-encre/25 text-encre hover:border-encre";
+  const internal = href.startsWith("/");
+  const Tag = internal ? Link : "a";
 
   return (
-    <a
-      href={href}
-      className={`type-micro group inline-flex items-center gap-2 rounded-[var(--rayon-pastille)] border px-4 py-2.5 transition-colors duration-500 ${tone} ${className}`}
+    <Tag
+      {...(internal ? { to: href } : { href })}
+      className={`type-micro morph-button morph-button--grey direct-button group inline-flex min-h-11 items-center gap-3 px-5 py-3 ${className}`}
     >
       <span className="whitespace-nowrap">{children}</span>
       <svg
@@ -27,6 +26,6 @@ export default function CTAButton({
           strokeWidth="1"
         />
       </svg>
-    </a>
+    </Tag>
   );
 }

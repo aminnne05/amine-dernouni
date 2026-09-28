@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { isVideoSrc } from "../utils/media";
 
-/*
-  Vue plein écran d'une pièce : on avance dans la série au clic, aux
-  flèches ou au clavier, on ferme avec Échap ou la croix. Aucun texte
-  en dehors du titre et du compteur.
-*/
 export default function Lightbox({ piece, onClose }) {
   const [index, setIndex] = useState(0);
+  const closeRef = useRef(null);
   const total = piece?.media.length ?? 0;
 
   const go = useCallback(
-    (step) => setIndex((i) => (i + step + total) % total),
+    (step) => {
+      if (total < 2) return;
+      setIndex((current) => (current + step + total) % total);
+    },
     [total]
   );
 
@@ -20,122 +20,171 @@ export default function Lightbox({ piece, onClose }) {
   }, [piece]);
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") go(1);
-      if (e.key === "ArrowLeft") go(-1);
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement;
+    const onKey = (event) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowRight") go(1);
+      if (event.key === "ArrowLeft") go(-1);
     };
-    window.addEventListener("keydown", onKey);
+
     document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    closeRef.current?.focus();
+
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      if (previousFocus instanceof HTMLElement) previousFocus.focus();
     };
   }, [go, onClose]);
 
-  if (!piece) return null;
+  if (!piece || total === 0) return null;
   const current = piece.media[index];
 
-  return (
+  const previousButton = (
+    <button
+      type="button"
+      onClick={() => go(-1)}
+      aria-label="Précédent"
+      className="morph-button group hidden shrink-0 flex-col items-center gap-2 border border-ivoire/20 px-3 py-4 text-ivoire/70 transition-colors duration-500 hover:border-ivoire/60 hover:text-ivoire md:flex"
+    >
+      <span className="text-3xl leading-none transition-transform duration-500 group-hover:-translate-x-1" aria-hidden="true">←</span>
+      <span className="type-micro">Précédent</span>
+    </button>
+  );
+
+  const nextButton = (
+    <button
+      type="button"
+      onClick={() => go(1)}
+      aria-label="Suivant"
+      className="morph-button group hidden shrink-0 flex-col items-center gap-2 border border-ivoire/20 px-3 py-4 text-ivoire/70 transition-colors duration-500 hover:border-ivoire/60 hover:text-ivoire md:flex"
+    >
+      <span className="text-3xl leading-none transition-transform duration-500 group-hover:translate-x-1" aria-hidden="true">→</span>
+      <span className="type-micro">Suivant</span>
+    </button>
+  );
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex flex-col bg-encre/97 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex flex-col bg-encre/98 text-ivoire backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label={piece.title}
+      tabIndex={-1}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
     >
-      {/* barre : titre à gauche, compteur et fermeture à droite */}
-      <div className="shell flex shrink-0 items-center justify-between gap-6 pt-6 pb-4">
-        <p className="type-index text-ivoire">
-          {piece.title}
-        </p>
-        <div className="flex items-center gap-6">
-          {total > 1 && (
-            <p className="type-micro text-ivoire/45">
-              {String(index + 1).padStart(2, "0")}
-              <span className="text-ivoire/25"> / </span>
-              {String(total).padStart(2, "0")}
-            </p>
-          )}
+      <header className="shell flex shrink-0 items-center justify-between gap-6 border-b border-ivoire/15 py-4 md:py-5">
+        <p className="type-index min-w-0 truncate">{piece.title}</p>
+        <div className="flex shrink-0 items-center gap-5">
+          <p className="type-micro tabular-nums text-ivoire/65" aria-live="polite">
+            {String(index + 1).padStart(2, "0")}
+            <span className="px-1 text-ivoire/30">/</span>
+            {String(total).padStart(2, "0")}
+          </p>
           <button
+            ref={closeRef}
             type="button"
             onClick={onClose}
-            aria-label="Fermer"
-            className="flex h-9 w-9 items-center justify-center rounded-[var(--rayon-pastille)] border border-ivoire/25 text-ivoire transition-colors duration-500 hover:border-ivoire"
+            aria-label="Fermer la galerie"
+            className="morph-button group flex min-h-11 items-center gap-3 border border-ivoire/35 px-3 py-2 text-ivoire transition-colors duration-500 hover:border-ivoire focus-visible:outline focus-visible:outline-1 focus-visible:outline-ivoire"
           >
-            <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" aria-hidden>
-              <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1" />
-            </svg>
+            <span className="relative z-10 text-lg leading-none" aria-hidden="true">×</span>
+            <span className="type-micro relative z-10">Fermer</span>
           </button>
         </div>
+      </header>
+
+      <div className="shell flex min-h-0 flex-1 items-center gap-1 py-3 md:gap-4 md:py-5">
+        {total > 1 && previousButton}
+        <div className="flex min-h-0 min-w-0 flex-1 items-center justify-center">
+          {isVideoSrc(current) ? (
+            <video
+              key={current}
+              src={current}
+              controls
+              autoPlay
+              loop
+              playsInline
+              className="max-h-full max-w-full object-contain"
+            />
+          ) : (
+            <img
+              key={current}
+              src={current}
+              alt={`${piece.title} — ${index + 1} sur ${total}`}
+              className="max-h-full max-w-full object-contain"
+            />
+          )}
+        </div>
+        {total > 1 && nextButton}
       </div>
 
-      {/* le visuel */}
-      <div className="relative flex min-h-0 flex-1 items-center justify-center px-[var(--marge)] pb-6">
-        {isVideoSrc(current) ? (
-          <video
-            key={current}
-            src={current}
-            controls
-            autoPlay
-            loop
-            playsInline
-            className="max-h-full max-w-full rounded-[var(--rayon-image)] object-contain"
-          />
-        ) : (
-          <img
-            key={current}
-            src={current}
-            alt={piece.title}
-            className="max-h-full max-w-full rounded-[var(--rayon-image)] object-contain"
-          />
-        )}
-
-        {total > 1 && (
-          <>
+      {total > 1 && (
+        <>
+          <div className="shell flex shrink-0 items-center justify-between border-t border-ivoire/15 py-3 md:hidden">
             <button
               type="button"
               onClick={() => go(-1)}
-              aria-label="Précédent"
-              className="absolute inset-y-0 left-0 w-1/4 cursor-w-resize"
-            />
+              className="type-micro morph-button border border-ivoire/25 px-3 py-2 text-ivoire/85"
+            >
+              ← Précédent
+            </button>
             <button
               type="button"
               onClick={() => go(1)}
-              aria-label="Suivant"
-              className="absolute inset-y-0 right-0 w-1/4 cursor-e-resize"
-            />
-          </>
-        )}
-      </div>
-
-      {/* pellicule */}
-      {total > 1 && (
-        <div className="shell flex shrink-0 gap-2 overflow-x-auto pb-6">
-          {piece.media.map((media, i) => (
-            <button
-              key={media}
-              type="button"
-              onClick={() => setIndex(i)}
-              className={`h-14 w-14 shrink-0 overflow-hidden rounded-[var(--rayon-image)] border transition-opacity duration-500 ${
-                i === index
-                  ? "border-ivoire opacity-100"
-                  : "border-transparent opacity-40 hover:opacity-80"
-              }`}
+              className="type-micro morph-button border border-ivoire/25 px-3 py-2 text-ivoire/85"
             >
-              {isVideoSrc(media) ? (
-                <video src={media} muted playsInline className="h-full w-full object-cover" />
-              ) : (
-                <img
-                  src={media}
-                  alt=""
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
-              )}
+              Suivant →
             </button>
-          ))}
-        </div>
+          </div>
+          <nav
+            className="shell flex shrink-0 gap-2 overflow-x-auto border-t border-ivoire/15 py-3 md:py-4"
+            aria-label="Choisir une image"
+          >
+            {piece.media.map((media, slide) => (
+              <button
+                key={media}
+                type="button"
+                onClick={() => setIndex(slide)}
+                aria-label={`Diapositive ${slide + 1}`}
+                aria-pressed={slide === index}
+                className={`relative h-12 w-[4.5rem] shrink-0 overflow-hidden border transition-opacity duration-300 sm:h-14 sm:w-20 ${
+                  slide === index
+                    ? "border-ivoire opacity-100"
+                    : "border-ivoire/20 opacity-55 hover:opacity-90"
+                }`}
+              >
+                {isVideoSrc(media) ? (
+                  <video
+                    src={media}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={media}
+                    alt=""
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                )}
+                {isVideoSrc(media) && (
+                  <span className="absolute inset-x-0 bottom-0 bg-encre/75 py-0.5 text-center text-[11px] leading-none text-ivoire">
+                    VIDÉO
+                  </span>
+                )}
+              </button>
+            ))}
+          </nav>
+        </>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }

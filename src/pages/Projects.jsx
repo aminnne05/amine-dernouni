@@ -17,15 +17,11 @@ export default function Projects() {
 
   return (
     <div className="relative z-10 bg-ivoire">
-      <div className="shell flex flex-col gap-12 pt-[104px] pb-32">
-        {/* En-tête, même construction que l'accueil : petite étiquette à
-            gauche, colonne de texte étroite à droite */}
-        <Reveal as="section" className="colonnes items-end gap-y-6 py-10">
-          <h1 className="type-micro col-span-16 text-taupe md:col-span-4">
-            {t("projectsPage.title")}{" "}
-            <span className="text-encre/35">
-              ({String(projects.length).padStart(2, "0")})
-            </span>
+      <div className="shell flex flex-col gap-[clamp(4rem,7vw,7rem)] page-top page-bottom">
+        {/* Titre du catalogue et introduction */}
+        <Reveal as="section" className="colonnes items-end gap-y-8">
+          <h1 className="type-title col-span-16 text-encre md:col-span-7">
+            {t("projectsPage.title")}
           </h1>
           <p className="type-lede col-span-16 max-w-[34ch] text-encre/60 md:col-span-7 md:col-start-10">
             {t("projectsPage.description")}

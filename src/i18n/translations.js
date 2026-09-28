@@ -22,40 +22,27 @@ export const translations = {
       eyebrow: "PROCHAINE ÉTAPE",
       titlePlain: "Un projet auquel vous tenez ?",
       titleBold: "Parlons-en.",
-      cta: "EN SAVOIR PLUS",
+      body: "Identité, campagne ou collaboration : racontez-moi ce que vous avez en tête.",
+      cta: "ME CONTACTER",
     },
     homepage: {
       role: "Directeur artistique",
       location: "Nice, France.",
       contact: "CONTACT",
       manifesto:
-        "Je travaille à l'endroit où l'esthétique rejoint l'intention. Chaque projet a une matière propre : je la lis, je la cadre, je lui donne une forme qui a du sens autant que de l'allure. Pour qu'au premier regard, l'image et l'idée ne fassent plus qu'une.",
-      projectsTitle: "Projets séléctionnés",
+        "J’imagine et construis des identités, des images et des interfaces. À chaque projet, je cherche la forme la plus juste pour faire tenir ensemble l’idée, le ton et le détail.",
+      projectsTitle: "Projets sélectionnés",
       viewAll: "Voir tous les projets",
       servicesTitle: "Services",
+      clientsTitle: "Clients",
       scroll: "Défiler",
       awardsTitle: "Awards",
       awardsEmpty: "Awards à venir.",
     },
     about: {
-      heroSegments: [
-        { text: "Directeur artistique", bold: true },
-        { text: " formé entre deux cultures, je travaille ", bold: false },
-        {
-          text: "le branding, la direction artistique, le motion et l'UX/UI",
-          bold: true,
-        },
-        { text: ". Mon œil s'est aiguisé ", bold: false },
-        {
-          text: "en agence, puis en freelance et au sein du studio que j'ai co-fondé",
-          bold: true,
-        },
-        {
-          text: ". Curieux jusqu'à l'obsession, je m'attarde sur le détail qui fait qu'une idée sonne juste. ",
-          bold: false,
-        },
-        { text: "Rigoureux dans la méthode, libre dans la forme.", bold: true },
-      ],
+      heroTitle: "Directeur artistique formé entre deux cultures.",
+      heroBody:
+        "Je conçois des identités et des images pour les marques, les artistes et le numérique. Mon parcours en agence, en studio et en indépendant m’a appris à tenir une idée jusque dans les détails.",
       location: "Nice, France.",
       contact: "CONTACT",
       experienceTitle: "Expérience",
@@ -63,18 +50,19 @@ export const translations = {
       servicesTitle: "Services",
       methodologyTitle: "Méthodologie",
       methodologyIntro:
-        "Quatre étapes, jamais sautées. Survole chaque étape pour voir le détail. Le but est qu'à chaque livraison, tu saches exactement où on en est et pourquoi.",
+        "Trois étapes pour passer d’une idée claire à une réalisation cohérente, du premier échange à la livraison.",
     },
     horsCadre: {
       nav: "Hors Cadre",
       title: "Hors Cadre",
-      lede: "Covers, affiches et propositions restées sans client.",
+      lede: "Covers, affiches et explorations personnelles.",
+      viewAll: "Voir la galerie",
       empty: "Les pièces arrivent bientôt.",
     },
     projectsPage: {
       title: "Sélection de projets",
       description:
-        "Une sélection de projets où l'image et l'idée ne font qu'une : identités, campagnes, packagings et directions artistiques, pensés du concept à la déclinaison.",
+        "Identités, campagnes, packaging et direction artistique : une sélection de projets du concept aux applications.",
       empty: "Aucun projet dans cette catégorie pour le moment.",
     },
     projectDetail: {
@@ -87,6 +75,8 @@ export const translations = {
         demarche: "Démarche",
         reponse: "Réponse",
       },
+      chaptersLabel: "Chapitres",
+      overview: "Aperçu",
       details: {
         annee: "Année",
         secteur: "Secteur",
@@ -97,26 +87,29 @@ export const translations = {
     },
     contact: {
       eyebrow: "CONTACT",
-      titlePlain: "Un projet auquel vous tenez ?",
-      titleBold: "Construisons le ensemble.",
-      briefLabel: "01 — Brief",
-      directLabel: "02 — Direct",
-      yourName: "Ton nom",
+      titlePlain: "Une idée ?",
+      titleBold: "Écrivez-moi.",
+      intro: "Identité, campagne, image ou collaboration : dites-moi ce que vous avez en tête.",
+      emailCta: "M’écrire directement",
+      briefLabel: "Parlons du projet",
+      directLabel: "Contact direct",
+      directIntro: "Vous préférez appeler ou échanger sur les réseaux ?",
+      yourName: "Votre nom",
       namePlaceholder: "Écrire ici",
       email: "Email",
       emailPlaceholderForm: "contact@tamarque.com",
       projectType: "Type de projet",
-      timeline: "Timeline souhaitée",
+      timeline: "Quand souhaitez-vous commencer ?",
       projectTypes: ["Branding", "Motion", "Direction artistique", "UX/UI", "Autre"],
       timelines: ["Aucune urgence", "1 à 3 mois", "Dans le mois", "Urgent"],
       projectDescription: "Le projet en quelques lignes",
-      descPlaceholder: "Contexte, audience, ce qui te bloque, ce dont tu rêves...",
+      descPlaceholder: "Contexte, public, objectifs, ce que vous imaginez...",
       submit: "ENVOYER LE BRIEF",
       sending: "ENVOI EN COURS...",
       successTitle: "Message envoyé.",
-      successBody: "Merci, je te réponds au plus vite.",
+      successBody: "Merci, je vous réponds au plus vite.",
       errorTitle: "Un souci est survenu.",
-      errorBody: "Réessaie, ou écris-moi directement à dernouniamine02@gmail.com.",
+      errorBody: "Réessayez, ou écrivez-moi directement à dernouniamine02@gmail.com.",
       sendAnother: "Envoyer un autre message",
       numberLabel: "Numéro",
       instagramLabel: "Instagram",
@@ -129,47 +122,75 @@ export const translations = {
         timeline: "Timeline souhaitée",
       },
     },
+    servicesIntro:
+      "J’interviens de la direction initiale aux fichiers livrés. Chaque mission s’adapte au projet, avec un périmètre clair dès le départ.",
     practices: [
       {
         number: "01",
         title: "Branding",
         description:
-          "Des identités cohérentes et reconnaissables : un système, une grammaire, une voix qui tiennent ensemble bien au-delà du logo.",
+          "Je construis une identité capable de rester cohérente bien après la création du logo.",
+        deliverables: [
+          "Positionnement visuel et moodboard",
+          "Logotype et système identitaire",
+          "Typographies, couleurs et iconographie",
+          "Guidelines et déclinaisons clés",
+        ],
       },
       {
         number: "02",
         title: "Direction artistique",
         description:
-          "Une direction claire pour un projet ou une marque, du concept à l'image finale, où chaque choix répond à une intention.",
+          "Je définis un territoire visuel clair, puis je le tiens du concept jusqu’aux images finales.",
+        deliverables: [
+          "Concept et territoire visuel",
+          "Direction photo et image",
+          "Campagnes, key visuals et supervision",
+        ],
       },
       {
         number: "03",
         title: "Motion design",
         description:
-          "Le mouvement comme prolongement de l'identité : du rythme, une respiration, une présence à l'écran.",
+          "J’anime les identités avec un langage de mouvement simple, reconnaissable et utile.",
+        deliverables: [
+          "Principes de mouvement",
+          "Logo animation",
+          "Social content et formats courts",
+        ],
       },
       {
         number: "04",
         title: "UX / UI",
         description:
-          "Des interfaces nettes et lisibles, où la forme travaille pour l'usage et jamais contre lui.",
+          "Je transforme l’identité en interface claire, cohérente et pensée pour des usages réels.",
+        deliverables: [
+          "Architecture et wireframes",
+          "Direction d’interface et design system",
+          "Prototype et handoff",
+        ],
       },
     ],
+    collaborationsIntro:
+      "Je peux porter une direction complète ou rejoindre une équipe existante, selon l’échelle et le rythme du projet.",
     collaborations: [
       {
         number: "01",
         who: "Marques",
-        text: "Existantes ou en création, packaging, identité, refonte complète.",
+        text: "Pour créer une identité, faire évoluer une marque existante ou construire un système plus cohérent.",
+        tags: ["Identité", "Packaging", "Rebranding"],
       },
       {
         number: "02",
         who: "Agences",
-        text: "Renfort sur des projets ponctuels ou collaboration longue durée.",
+        text: "Pour renforcer une équipe sur une direction, un pitch ou une phase de production exigeante.",
+        tags: ["Renfort DA", "Pitchs", "Production"],
       },
       {
         number: "03",
         who: "Artistes",
-        text: "Musiciens, producteurs, covers, lyric videos, visuels de tournée.",
+        text: "Pour donner une forme visuelle forte à une sortie, un univers ou une campagne musicale.",
+        tags: ["Covers", "Campagnes visuelles", "Motion"],
       },
     ],
     experience: [
@@ -195,17 +216,32 @@ export const translations = {
       {
         number: "01.",
         title: "Compréhension",
-        text: "Tout commence par les bonnes questions. Questionnaire, recherches, échanges : je creuse l'intention du projet, son contexte et ce qui le rend singulier, jusqu'à dégager une direction claire avant même d'ouvrir un outil.",
+        text: "Je clarifie l’intention, le contexte et ce qui doit réellement changer avant de dessiner.",
+        points: [
+          "Questionnaire et cadrage",
+          "Recherche, contexte et public",
+          "Direction de travail partagée",
+        ],
       },
       {
         number: "02.",
         title: "Exploration",
-        text: "L'idée prend forme. Moodboards, croquis, premières pistes : je teste, je trie, je cadre. C'est l'étape où la direction se traduit en visuel, où l'on retient ce qui sonne juste et où l'on écarte le reste.",
+        text: "Je transforme la direction choisie en pistes visuelles, puis je garde ce qui sert le mieux l’idée.",
+        points: [
+          "Moodboards et axes créatifs",
+          "Pistes et tests sur les supports clés",
+          "Sélection et affinage",
+        ],
       },
       {
         number: "03.",
         title: "Distribution",
-        text: "Place à la finalisation. Déclinaisons sur tous les supports, mise au propre, préparation des fichiers : je m'assure que l'univers reste cohérent partout où il vit, et qu'il arrive à sa cible dans les meilleures conditions.",
+        text: "Je finalise le système et prépare chaque élément pour qu’il reste cohérent là où il sera utilisé.",
+        points: [
+          "Déclinaisons prioritaires",
+          "Contrôle et préparation des fichiers",
+          "Livraison et passation",
+        ],
       },
     ],
     categories: {
@@ -239,37 +275,27 @@ export const translations = {
       eyebrow: "NEXT STEP",
       titlePlain: "A project you care about?",
       titleBold: "Let's talk.",
-      cta: "LEARN MORE",
+      body: "Identity, campaign or collaboration: tell me what you have in mind.",
+      cta: "GET IN TOUCH",
     },
     homepage: {
       role: "Art Director",
       location: "Nice, France.",
       contact: "CONTACT",
       manifesto:
-        "I work where aesthetics meet intention. Every project has its own material: I read it, frame it, give it a form that carries as much meaning as style. So that at first glance, image and idea become one.",
+        "I create identities, images and interfaces. For every project, I look for the right form to bring the idea, tone and details together.",
       projectsTitle: "Selected Projects",
       viewAll: "View all projects",
       servicesTitle: "Services",
+      clientsTitle: "Clients",
       scroll: "Scroll",
       awardsTitle: "Awards",
       awardsEmpty: "Awards coming soon.",
     },
     about: {
-      heroSegments: [
-        { text: "Art director", bold: true },
-        { text: " shaped between two cultures, I work across ", bold: false },
-        { text: "branding, art direction, motion and UX/UI", bold: true },
-        { text: ". My eye was sharpened ", bold: false },
-        {
-          text: "in agency, then freelance, and within the studio I co-founded",
-          bold: true,
-        },
-        {
-          text: ". Curious to the point of obsession, I linger on the detail that makes an idea feel right. ",
-          bold: false,
-        },
-        { text: "Rigorous in method, free in form.", bold: true },
-      ],
+      heroTitle: "Art director shaped between two cultures.",
+      heroBody:
+        "I create identities and images for brands, artists and digital experiences. Working in agencies, studios and independently taught me to carry an idea through to the smallest detail.",
       location: "Nice, France.",
       contact: "CONTACT",
       experienceTitle: "Experience",
@@ -277,18 +303,19 @@ export const translations = {
       servicesTitle: "Services",
       methodologyTitle: "Methodology",
       methodologyIntro:
-        "Four steps, never skipped. Hover each step to see the detail. The goal is that with every delivery, you know exactly where things stand and why.",
+        "Three stages take a clear idea through to a coherent result, from the first conversation to delivery.",
     },
     horsCadre: {
       nav: "Hors Cadre",
       title: "Hors Cadre",
-      lede: "Covers, posters and proposals that never found a client.",
+      lede: "Covers, posters and personal explorations.",
+      viewAll: "View the gallery",
       empty: "Pieces coming soon.",
     },
     projectsPage: {
       title: "Selected Projects",
       description:
-        "A selection of projects where image and idea become one: identities, campaigns, packaging and art direction, thought through from concept to execution.",
+        "Identity, campaigns, packaging and art direction: selected projects from concept to application.",
       empty: "No projects in this category yet.",
     },
     projectDetail: {
@@ -301,6 +328,8 @@ export const translations = {
         demarche: "Approach",
         reponse: "Outcome",
       },
+      chaptersLabel: "Chapters",
+      overview: "Overview",
       details: {
         annee: "Year",
         secteur: "Sector",
@@ -311,20 +340,23 @@ export const translations = {
     },
     contact: {
       eyebrow: "CONTACT",
-      titlePlain: "A project you care about?",
-      titleBold: "Let's build it together.",
-      briefLabel: "01 — Brief",
-      directLabel: "02 — Direct",
+      titlePlain: "Have an idea?",
+      titleBold: "Write to me.",
+      intro: "Identity, campaign, imagery or collaboration: tell me what you have in mind.",
+      emailCta: "Email me directly",
+      briefLabel: "About your project",
+      directLabel: "Direct contact",
+      directIntro: "Prefer a call or a conversation on social media?",
       yourName: "Your name",
       namePlaceholder: "Type here",
       email: "Email",
       emailPlaceholderForm: "contact@yourbrand.com",
       projectType: "Project type",
-      timeline: "Desired timeline",
+      timeline: "When would you like to start?",
       projectTypes: ["Branding", "Motion", "Art Direction", "UX/UI", "Other"],
       timelines: ["No rush", "1 to 3 months", "Within the month", "Urgent"],
       projectDescription: "The project in a few lines",
-      descPlaceholder: "Context, audience, what's blocking you, what you're dreaming of...",
+      descPlaceholder: "Context, audience, goals and what you imagine...",
       submit: "SEND THE BRIEF",
       sending: "SENDING...",
       successTitle: "Message sent.",
@@ -343,47 +375,75 @@ export const translations = {
         timeline: "Desired timeline",
       },
     },
+    servicesIntro:
+      "I can lead the work from its first direction through to final files. Each engagement is shaped around the project, with a clear scope from the start.",
     practices: [
       {
         number: "01",
         title: "Branding",
         description:
-          "Coherent, recognizable identities: a system, a grammar, a voice that hold together well beyond the logo.",
+          "I build identities that remain coherent long after the logo has been designed.",
+        deliverables: [
+          "Visual positioning and moodboard",
+          "Logo and identity system",
+          "Typography, colour and imagery",
+          "Guidelines and key applications",
+        ],
       },
       {
         number: "02",
         title: "Art Direction",
         description:
-          "A clear direction for a project or a brand, from concept to final image, where every choice answers an intention.",
+          "I define a clear visual territory and carry it from the first concept to the final image.",
+        deliverables: [
+          "Concept and visual territory",
+          "Photography and image direction",
+          "Campaigns, key visuals and supervision",
+        ],
       },
       {
         number: "03",
         title: "Motion Design",
         description:
-          "Movement as an extension of identity: rhythm, breathing space, a presence on screen.",
+          "I give identities a simple, recognisable and useful language of motion.",
+        deliverables: [
+          "Motion principles",
+          "Logo animation",
+          "Social content and short formats",
+        ],
       },
       {
         number: "04",
         title: "UX / UI",
         description:
-          "Clean, legible interfaces, where form works for usability, never against it.",
+          "I translate identities into clear, coherent interfaces designed around real use.",
+        deliverables: [
+          "Architecture and wireframes",
+          "Interface direction and design system",
+          "Prototype and handoff",
+        ],
       },
     ],
+    collaborationsIntro:
+      "I can lead a complete direction or join an existing team, depending on the scale and pace of the project.",
     collaborations: [
       {
         number: "01",
         who: "Brands",
-        text: "Existing or new, packaging, identity, full rebrands.",
+        text: "To create an identity, evolve an existing brand or build a more coherent visual system.",
+        tags: ["Identity", "Packaging", "Rebranding"],
       },
       {
         number: "02",
         who: "Agencies",
-        text: "Support on one-off projects or long-term collaboration.",
+        text: "To strengthen a team during an art-direction phase, a pitch or demanding production.",
+        tags: ["Art direction", "Pitches", "Production"],
       },
       {
         number: "03",
         who: "Artists",
-        text: "Musicians, producers, covers, lyric videos, tour visuals.",
+        text: "To give a release, an artistic world or a music campaign a strong visual form.",
+        tags: ["Covers", "Visual campaigns", "Motion"],
       },
     ],
     experience: [
@@ -409,17 +469,32 @@ export const translations = {
       {
         number: "01.",
         title: "Understanding",
-        text: "It all starts with the right questions. Questionnaire, research, conversations: I dig into the project's intention, its context and what makes it singular, until a clear direction emerges — before I even open a tool.",
+        text: "I clarify the intention, context and what genuinely needs to change before designing.",
+        points: [
+          "Questionnaire and scope",
+          "Research, context and audience",
+          "Shared working direction",
+        ],
       },
       {
         number: "02.",
         title: "Exploration",
-        text: "The idea takes shape. Moodboards, sketches, first directions: I test, sort, and frame. This is where direction turns into visuals — keeping what feels right and letting go of the rest.",
+        text: "I turn the chosen direction into visual routes, then keep what serves the idea best.",
+        points: [
+          "Moodboards and creative routes",
+          "Directions tested on key applications",
+          "Selection and refinement",
+        ],
       },
       {
         number: "03.",
         title: "Distribution",
-        text: "Time to finalize. Variations across every format, clean-up, file prep: I make sure the world stays coherent wherever it lives, and reaches its audience in the best conditions.",
+        text: "I finalise the system and prepare each element to stay coherent wherever it is used.",
+        points: [
+          "Priority applications",
+          "Consistency review and file preparation",
+          "Delivery and handoff",
+        ],
       },
     ],
     categories: {

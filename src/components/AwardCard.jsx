@@ -1,19 +1,11 @@
 import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
-import MediaReveal from "./MediaReveal";
 
-/*
-  Une récompense occupe toute la largeur : la couverture du projet à
-  gauche comme seule tache d'image, le prix en grand au centre, la
-  mention rejetée à droite. Rien à voir avec les lignes d'index des
-  disciplines — c'est un fait, pas une liste.
-*/
 export default function AwardCard({
   year,
   title,
   body,
   project,
-  cover,
   to,
   delay = 0,
 }) {
@@ -21,43 +13,19 @@ export default function AwardCard({
     <Reveal delay={delay} className="w-full">
       <Link
         to={to}
-        className="colonnes group w-full items-center gap-y-5 border-t border-encre py-8 md:py-10"
+        className="group grid w-full grid-cols-[minmax(0,1fr)_44px] items-start gap-x-4 gap-y-4 border-t border-encre/20 py-7 transition-[padding,background-color] duration-500 hover:bg-encre/[0.035] md:grid-cols-[10%_minmax(0,1fr)_minmax(12rem,27%)_44px] md:gap-x-5 md:py-9 md:hover:px-3"
       >
-        {cover && (
-          <MediaReveal className="col-span-6 rounded-[var(--rayon-image)] bg-ivoire-soft md:col-span-3">
-            <img
-              src={cover}
-              alt={project}
-              loading="lazy"
-              decoding="async"
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </MediaReveal>
-        )}
-
-        <div className="col-span-16 flex flex-col gap-3 md:col-span-8 md:col-start-5">
-          <h3 className="type-title max-w-[18ch] text-encre">{title}</h3>
-          <span className="type-index flex items-center gap-3 text-encre/50 transition-colors duration-500 group-hover:text-encre">
-            {project}
-            <svg
-              className="h-[9px] w-[11px] shrink-0 transition-transform duration-500 ease-out group-hover:translate-x-1"
-              viewBox="0 0 11 9"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M0 4.5H10M10 4.5L6.5 1M10 4.5L6.5 8"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-            </svg>
-          </span>
-        </div>
-
-        <div className="type-micro col-span-16 flex items-baseline gap-3 text-taupe md:col-span-3 md:col-start-14 md:flex-col md:items-end md:gap-1 md:text-right">
+        <span className="type-index col-span-1 text-encre/45 md:pt-1">{year}</span>
+        <h3 className="type-subtitle col-span-1 col-start-1 max-w-[27ch] text-encre transition-transform duration-500 ease-out group-hover:translate-x-1 md:col-start-2">
+          {title}
+        </h3>
+        <div className="type-index col-span-1 col-start-1 flex flex-col gap-1 text-encre/70 md:col-start-3 md:pt-1">
           <span>{body}</span>
-          <span>{year}</span>
+          <span className="text-encre/45">{project}</span>
         </div>
+        <span className="col-start-2 row-start-1 flex h-10 w-10 items-center justify-center rounded-[8px] border border-encre/20 text-encre transition-[background-color,color,transform] duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-encre group-hover:text-ivoire md:col-start-4" aria-hidden="true">
+          ↗
+        </span>
       </Link>
     </Reveal>
   );

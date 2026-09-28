@@ -19,13 +19,10 @@ export default function HorsCadre() {
 
   return (
     <div className="relative z-10 bg-ivoire">
-      <div className="shell flex flex-col gap-12 pt-[104px] pb-32">
-        <Reveal as="section" className="colonnes items-end gap-y-6 py-10">
-          <h1 className="type-micro col-span-16 text-taupe md:col-span-4">
-            {t("horsCadre.title")}{" "}
-            <span className="text-encre/35">
-              ({String(pieces.length).padStart(2, "0")})
-            </span>
+      <div className="shell flex flex-col gap-[clamp(4rem,7vw,7rem)] page-top page-bottom">
+        <Reveal as="section" className="colonnes items-end gap-y-8">
+          <h1 className="type-title col-span-16 text-encre md:col-span-4">
+            {t("horsCadre.title")}
           </h1>
           <p className="type-lede col-span-16 max-w-[38ch] text-encre/60 md:col-span-11 md:col-start-6">
             {t("horsCadre.lede")}
@@ -41,7 +38,7 @@ export default function HorsCadre() {
                 onClick={() => setOpen(piece)}
                 className="group mb-[var(--gouttiere)] block w-full break-inside-avoid text-left"
               >
-                <MediaReveal className="rounded-[var(--rayon-image)] bg-ivoire-soft">
+                <MediaReveal className="bg-ivoire-soft">
                   {isVideoSrc(piece.cover) ? (
                     <video
                       src={piece.cover}

@@ -54,26 +54,51 @@ export default function Contact() {
 
   return (
     <div className="relative z-10 bg-ivoire">
-      {/* HERO */}
-      <section className="bg-encre">
-        <div className="shell colonnes items-end gap-y-6 pt-[104px] pb-24">
-          <p className="type-micro col-span-16 text-ivoire/45 md:col-span-4">
-            {t("contact.eyebrow")}
+      <section className="bg-ivoire">
+        <div className="shell colonnes items-end gap-y-12 page-top pb-[clamp(6rem,9vw,9rem)]">
+          <h1 className="type-display col-span-16 max-w-[14ch] text-encre md:col-span-10">
+            <span className="text-encre/40">{t("contact.titlePlain")}</span>{" "}
+            <span className="block">{t("contact.titleBold")}</span>
+          </h1>
+          <p className="type-lede col-span-16 max-w-[24ch] text-encre/65 md:col-span-5 md:col-start-12">
+            {t("contact.intro")}
           </p>
-          <p className="type-lede col-span-16 max-w-[38ch] text-ivoire md:col-span-11 md:col-start-6">
-            <span className="text-ivoire/45">{t("contact.titlePlain")}</span>{" "}
-            <span>{t("contact.titleBold")}</span>
-          </p>
+          <div className="col-span-16 mt-4 flex flex-wrap items-end gap-x-6 gap-y-5 md:mt-16">
+            <a
+              href="mailto:dernouniamine02@gmail.com"
+              className="type-title max-w-full break-all border-b border-encre/30 pb-2 text-encre transition-colors duration-300 hover:border-encre md:break-normal"
+            >
+              dernouniamine02@gmail.com
+            </a>
+          </div>
         </div>
       </section>
 
-      <div className="shell flex flex-col gap-32 py-32">
-        {/* 01 — BRIEF */}
-        <Reveal as="section" className="colonnes gap-y-8">
-          <p className="type-micro col-span-16 text-taupe md:col-span-4">
-            {t("contact.briefLabel")}
-          </p>
-          <form onSubmit={handleSubmit} className="col-span-16 flex w-full flex-col gap-8 md:col-span-11 md:col-start-6">
+      <div className="shell border-t border-encre/20 section-space">
+        <Reveal as="section" className="colonnes items-start gap-y-14">
+          <div className="col-span-16 flex flex-col gap-10 md:col-span-5">
+            <div className="flex flex-col gap-5">
+              <h2 className="type-subtitle text-encre">{t("contact.directLabel")}</h2>
+              <p className="type-body max-w-[30ch] text-encre/55">{t("contact.directIntro")}</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <a href="tel:+33625020042" className="type-body w-fit text-encre/70 transition-colors hover:text-encre">
+                +33 6 25 02 00 42
+              </a>
+              <a
+                href="https://www.instagram.com/amine_dernouni/"
+                target="_blank"
+                rel="noreferrer"
+                className="type-body w-fit text-encre/70 transition-colors hover:text-encre"
+              >
+                Instagram ↗
+              </a>
+            </div>
+          </div>
+
+          <div className="col-span-16 md:col-span-9 md:col-start-8">
+            <h2 className="type-subtitle mb-8 text-encre">{t("contact.briefLabel")}</h2>
+            <form onSubmit={handleSubmit} className="flex w-full flex-col gap-8">
             {status === "success" ? (
               <div className="flex flex-col gap-3 py-4">
                 <p className="type-lede text-encre">{t("contact.successTitle")}</p>
@@ -81,7 +106,7 @@ export default function Contact() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="type-micro mt-2 w-fit rounded-[var(--rayon-pastille)] border border-encre/25 px-4 py-2.5 text-taupe transition-colors duration-500 hover:border-encre hover:text-encre"
+                  className="type-micro morph-button morph-button--grey relative mt-2 w-fit px-5 py-3"
                 >
                   {t("contact.sendAnother")}
                 </button>
@@ -90,7 +115,7 @@ export default function Contact() {
               <>
                 <div className="grid gap-8 md:grid-cols-2">
                 <label className="flex flex-col gap-2">
-                  <span className="type-micro text-taupe">
+                  <span className="type-body font-medium text-encre">
                     {t("contact.yourName")}
                   </span>
                   <input
@@ -98,13 +123,13 @@ export default function Contact() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={t("contact.namePlaceholder")}
-                    className="type-lede rounded-[var(--rayon-image)] border border-encre/20 bg-transparent px-4 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/50 focus:border-encre focus:outline-none"
+                    className="type-body border-0 border-b border-encre/25 bg-transparent px-0 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/60 focus:border-encre focus:outline-none"
                     required
                   />
                 </label>
 
                 <label className="flex flex-col gap-2">
-                  <span className="type-micro text-taupe">
+                  <span className="type-body font-medium text-encre">
                     {t("contact.email")}
                   </span>
                   <input
@@ -112,14 +137,14 @@ export default function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={t("contact.emailPlaceholderForm")}
-                    className="type-lede rounded-[var(--rayon-image)] border border-encre/20 bg-transparent px-4 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/50 focus:border-encre focus:outline-none"
+                    className="type-body border-0 border-b border-encre/25 bg-transparent px-0 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/60 focus:border-encre focus:outline-none"
                     required
                   />
                 </label>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <span className="type-micro text-taupe">
+                  <span className="type-body font-medium text-encre">
                     {t("contact.projectType")}
                   </span>
                   <div className="flex flex-wrap gap-1">
@@ -132,13 +157,13 @@ export default function Contact() {
                 </div>
 
                 <label className="flex flex-col gap-2">
-                  <span className="type-micro text-taupe">
+                  <span className="type-body font-medium text-encre">
                     {t("contact.timeline")}
                   </span>
                   <select
                     value={timeline}
                     onChange={(e) => setTimeline(e.target.value)}
-                    className="type-lede rounded-[var(--rayon-image)] border border-encre/20 bg-transparent px-4 py-3 text-encre transition-colors duration-500 focus:border-encre focus:outline-none"
+                    className="type-body border-0 border-b border-encre/25 bg-transparent px-0 py-3 text-encre transition-colors duration-500 focus:border-encre focus:outline-none"
                   >
                     {timelines.map((tl) => (
                       <option key={tl} value={tl}>
@@ -149,7 +174,7 @@ export default function Contact() {
                 </label>
 
                 <label className="flex flex-col gap-2">
-                  <span className="type-micro text-taupe">
+                  <span className="type-body font-medium text-encre">
                     {t("contact.projectDescription")}
                   </span>
                   <textarea
@@ -157,14 +182,14 @@ export default function Contact() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder={t("contact.descPlaceholder")}
                     rows={4}
-                    className="type-lede resize-none rounded-[var(--rayon-image)] border border-encre/20 bg-transparent px-4 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/50 focus:border-encre focus:outline-none"
+                    className="type-body resize-none border-0 border-b border-encre/25 bg-transparent px-0 py-3 text-encre transition-colors duration-500 placeholder:text-taupe/60 focus:border-encre focus:outline-none"
                   />
                 </label>
 
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="type-micro group mt-2 flex w-fit items-center gap-2 rounded-[var(--rayon-pastille)] border border-encre/25 px-4 py-2.5 text-encre transition-colors duration-500 hover:border-encre disabled:opacity-50"
+                  className="type-micro morph-button morph-button--grey direct-button group relative mt-2 flex w-fit items-center gap-2 px-5 py-3 disabled:opacity-50"
                 >
                   {status === "sending" ? t("contact.sending") : t("contact.submit")}
                   <svg
@@ -183,52 +208,7 @@ export default function Contact() {
                 )}
               </>
             )}
-          </form>
-        </Reveal>
-
-        <div className="h-px w-full bg-encre/15" />
-
-        {/* 02 — DIRECT */}
-        <Reveal as="section" className="colonnes gap-y-8">
-          <p className="type-micro col-span-16 text-taupe md:col-span-4">
-            {t("contact.directLabel")}
-          </p>
-          <div className="col-span-16 flex flex-col gap-8 md:col-span-11 md:col-start-6">
-            <div className="flex flex-col gap-1">
-              <span className="type-micro text-taupe">
-                {t("contact.email")}
-              </span>
-              <a
-                href="mailto:dernouniamine02@gmail.com"
-                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
-              >
-                dernouniamine02@gmail.com
-              </a>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="type-micro text-taupe">
-                {t("contact.numberLabel")}
-              </span>
-              <a
-                href="tel:+33625020042"
-                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
-              >
-                +33 6 25 02 00 42
-              </a>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="type-micro text-taupe">
-                {t("contact.instagramLabel")}
-              </span>
-              <a
-                href="https://www.instagram.com/amine_dernoui"
-                target="_blank"
-                rel="noreferrer"
-                className="type-lede w-fit text-encre underline decoration-encre/25 underline-offset-[6px] transition-colors duration-500 hover:decoration-rouge"
-              >
-                @amine_dernoui
-              </a>
-            </div>
+            </form>
           </div>
         </Reveal>
       </div>

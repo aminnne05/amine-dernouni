@@ -1,8 +1,4 @@
-/*
-  Étiquette cliquable : pastille pleine à l'état actif, contour qui se
-  pose au survol. Même rondeur que la barre du header — c'est la forme
-  de référence pour tout ce qui se clique sur le site.
-*/
+/* One quiet filter control, sized and shaped like the main buttons. */
 export default function HoverTab({
   as: Tag = "button",
   active = false,
@@ -12,19 +8,14 @@ export default function HoverTab({
 }) {
   return (
     <Tag
-      className={`type-micro group relative inline-flex items-center justify-center whitespace-nowrap rounded-[var(--rayon-pastille)] px-4 py-2 transition-colors duration-500 ${
-        active ? "text-ivoire" : "text-encre"
+      className={`type-micro morph-button inline-flex min-h-10 items-center justify-center whitespace-nowrap border px-4 py-2 ${
+        active
+          ? "morph-button--grey border-transparent"
+          : "border-encre/20 bg-transparent text-encre/70 hover:border-encre hover:bg-encre hover:text-ivoire"
       } ${className}`}
       {...props}
     >
-      <span
-        className={`absolute inset-0 rounded-[var(--rayon-pastille)] border transition-all duration-500 ease-out ${
-          active
-            ? "scale-100 border-encre bg-encre opacity-100"
-            : "scale-95 border-encre/25 bg-transparent opacity-0 group-hover:scale-100 group-hover:opacity-100"
-        }`}
-      />
-      <span className="relative">{children}</span>
+      {children}
     </Tag>
   );
 }

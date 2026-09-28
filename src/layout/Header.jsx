@@ -4,22 +4,15 @@ import LogoMark from "../assets/logo/logo-mark.svg?react";
 import { useLanguage } from "../i18n/LanguageContext";
 import useReady from "../hooks/useReady";
 
-const HAUTEUR = 48;
+const HAUTEUR = 52;
 
-/*
-  Barre reprise de wolffolins.com :
-  — à l'entrée, elle se déroule depuis une hauteur nulle, contenu découpé ;
-  — elle occupe toute la largeur, sans fond, en haut de page ;
-  — dès qu'on défile, un fond dépoli vient se poser derrière elle.
-  Toutes les bascules suivent la même courbe (ease-quint, 650 ms).
-*/
+/* Barre noire compacte : forme pleine, contraste franc, sans contour dépoli. */
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { lang, t, path } = useLanguage();
   const { pathname } = useLocation();
   const ready = useReady();
   const [entered, setEntered] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     if (!ready) return;
@@ -30,23 +23,6 @@ export default function Header() {
     const timer = setTimeout(() => setEntered(true), 260);
     return () => clearTimeout(timer);
   }, [ready]);
-
-  useEffect(() => {
-    let raf = null;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 80);
-        raf = null;
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
 
   const navLinks = [
     { to: path("/"), label: t("nav.accueil") },
@@ -62,14 +38,6 @@ export default function Header() {
   const frPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
   const enPath = isEn ? pathname : pathname === "/" ? "/en" : `/en${pathname}`;
 
-  // Les pages qui s'ouvrent sur un bloc noir : la barre y flotte en clair
-  // tant que le fond dépoli n'est pas posé.
-  const debutSombre = ["/", "/en", "/contact", "/en/contact"].includes(pathname);
-  const surFondNoir = debutSombre && !scrolled && !open;
-
-  const encreTexte = surFondNoir ? "text-ivoire" : "text-encre";
-  const encreDoux = surFondNoir ? "text-ivoire/50" : "text-taupe";
-
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -81,19 +49,14 @@ export default function Header() {
     <>
       <div className="shell pointer-events-none fixed top-0 left-0 z-50 w-full pt-3">
         <div
-          className="pointer-events-auto relative mx-auto overflow-clip rounded-[var(--rayon-pastille)]"
+          className="pointer-events-auto relative mx-auto overflow-hidden rounded-[8px] bg-encre/90 shadow-[0_8px_28px_rgba(29,29,27,0.12)] backdrop-blur-lg"
           style={{
             height: entered ? `${HAUTEUR}px` : "0px",
-            transition: "height 650ms var(--ease-quint)",
+            opacity: entered ? 1 : 0,
+            transform: entered ? "translateY(0) scale(1)" : "translateY(-10px) scale(.97)",
+            transition: "height 760ms var(--ease-doux), opacity 420ms ease-out, transform 760ms var(--ease-quint)",
           }}
         >
-          {/* fond dépoli, posé un peu après le mouvement */}
-          <div
-            className="absolute inset-0 rounded-[var(--rayon-pastille)] border border-encre/10 bg-ivoire/85 backdrop-blur-xl transition-opacity duration-500 ease-out"
-            style={{ opacity: scrolled ? 1 : 0 }}
-            aria-hidden
-          />
-
           <div
             className="relative flex w-full items-center justify-between px-4"
             style={{ height: `${HAUTEUR}px` }}
@@ -102,7 +65,7 @@ export default function Header() {
               <Link
                 to={path("/")}
                 onClick={() => setOpen(false)}
-                className={`block w-[26px] shrink-0 transition-colors duration-500 ${encreTexte}`}
+                className="block w-[26px] shrink-0 text-ivoire transition-opacity duration-500 hover:opacity-65"
                 aria-label="Amine Dernouni"
               >
                 <LogoMark className="h-auto w-full" />
@@ -114,32 +77,15 @@ export default function Header() {
                     key={link.to}
                     to={link.to}
                     end
-                    className="type-index group relative inline-flex items-center justify-center px-3 py-1"
+                    className={({ isActive }) =>
+                      `type-nav inline-flex items-center justify-center rounded-[6px] px-3 py-1.5 transition-colors duration-300 ${
+                        isActive
+                          ? "bg-[#d8d8d6] text-encre"
+                          : "text-ivoire hover:bg-ivoire/15"
+                      }`
+                    }
                   >
-                    {({ isActive }) => (
-                      <>
-                        <span
-                          className={`absolute inset-0 rounded-full transition-all duration-500 ${
-                            surFondNoir ? "bg-ivoire" : "bg-encre"
-                          } ${
-                            isActive
-                              ? "scale-100 opacity-100"
-                              : "scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-10"
-                          }`}
-                        />
-                        <span
-                          className={`relative transition-colors duration-500 ${
-                            isActive
-                              ? surFondNoir
-                                ? "text-encre"
-                                : "text-ivoire"
-                              : encreTexte
-                          }`}
-                        >
-                          {link.label}
-                        </span>
-                      </>
-                    )}
+                    {link.label}
                   </NavLink>
                 ))}
               </nav>
@@ -149,48 +95,29 @@ export default function Header() {
               <NavLink
                 to={horsCadre.to}
                 end
-                className="type-index group relative ml-20 hidden items-center justify-center px-3 py-1 md:inline-flex"
+                className={({ isActive }) =>
+                  `type-nav ml-10 hidden items-center justify-center rounded-[6px] px-3 py-1.5 transition-colors duration-300 md:inline-flex ${
+                    isActive
+                      ? "bg-[#d8d8d6] text-encre"
+                      : "text-ivoire hover:bg-ivoire/15"
+                  }`
+                }
               >
-                {({ isActive }) => (
-                  <>
-                    <span
-                      className={`absolute inset-0 rounded-full transition-all duration-500 ${
-                        surFondNoir ? "bg-ivoire" : "bg-encre"
-                      } ${
-                        isActive
-                          ? "scale-100 opacity-100"
-                          : "scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-10"
-                      }`}
-                    />
-                    <span
-                      className={`relative transition-colors duration-500 ${
-                        isActive
-                          ? surFondNoir
-                            ? "text-encre"
-                            : "text-ivoire"
-                          : encreTexte
-                      }`}
-                    >
-                      {horsCadre.label}
-                    </span>
-                  </>
-                )}
+                {horsCadre.label}
               </NavLink>
             </div>
 
-            <div
-              className={`type-micro hidden items-center gap-1 transition-colors duration-500 md:flex ${encreDoux}`}
-            >
+            <div className="type-nav hidden items-center gap-1 text-ivoire/55 md:flex">
               <Link
                 to={frPath}
-                className={`transition-colors ${lang === "fr" ? encreTexte : ""}`}
+                className={`transition-colors hover:text-ivoire ${lang === "fr" ? "text-ivoire" : ""}`}
               >
                 FR
               </Link>
               <span>/</span>
               <Link
                 to={enPath}
-                className={`transition-colors ${lang === "en" ? encreTexte : ""}`}
+                className={`transition-colors hover:text-ivoire ${lang === "en" ? "text-ivoire" : ""}`}
               >
                 EN
               </Link>
@@ -203,16 +130,8 @@ export default function Header() {
               aria-expanded={open}
               className="relative z-50 -mr-1 flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden"
             >
-              <span
-                className={`h-px w-5 transition-all duration-300 ${
-                  surFondNoir ? "bg-ivoire" : "bg-encre"
-                } ${open ? "translate-y-[3px] rotate-45" : ""}`}
-              />
-              <span
-                className={`h-px w-5 transition-all duration-300 ${
-                  surFondNoir ? "bg-ivoire" : "bg-encre"
-                } ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
-              />
+              <span className={`h-px w-5 bg-ivoire transition-all duration-300 ${open ? "translate-y-[3px] rotate-45" : ""}`} />
+              <span className={`h-px w-5 bg-ivoire transition-all duration-300 ${open ? "-translate-y-[3px] -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
@@ -221,7 +140,6 @@ export default function Header() {
       {open && (
         <div className="shell fixed inset-0 z-40 flex flex-col justify-between bg-ivoire pt-24 pb-8 md:hidden">
           <div className="flex flex-col gap-3">
-            <p className="type-micro text-taupe">{t("nav.menuLabel")}</p>
             <nav className="flex flex-col">
               {navLinks.map((link, i) => (
                 <NavLink
@@ -230,7 +148,7 @@ export default function Header() {
                   end
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `type-title flex items-center justify-between gap-4 border-t border-encre/15 py-5 transition-colors ${
+                    `type-subtitle flex items-center justify-between gap-4 border-t border-encre/15 py-5 transition-colors ${
                       isActive ? "text-encre" : "text-encre/60"
                     }`
                   }
@@ -259,7 +177,7 @@ export default function Header() {
               end
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
-                `type-title mt-10 flex items-center justify-between gap-4 border-t border-encre/15 py-5 transition-colors ${
+                `type-subtitle mt-10 flex items-center justify-between gap-4 border-t border-encre/15 py-5 transition-colors ${
                   isActive ? "text-encre" : "text-encre/60"
                 }`
               }
@@ -280,7 +198,6 @@ export default function Header() {
 
           <div className="flex items-end justify-between gap-4 border-t border-encre/15 pt-4">
             <div className="flex flex-col gap-4">
-              <p className="type-micro text-taupe">{t("nav.socialLabel")}</p>
               <div className="type-index flex flex-col gap-1 text-encre">
                 <a
                   href="https://www.instagram.com/amine_dernouni/"
