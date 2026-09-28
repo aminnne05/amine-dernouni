@@ -352,10 +352,8 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 8px;
-  transition:
-    color 360ms var(--ease-quint),
-    border-color 360ms var(--ease-quint),
-    background-color 360ms var(--ease-quint);
+  background-image: none;
+  box-shadow: none;
 }
 
 .morph-button--grey {
