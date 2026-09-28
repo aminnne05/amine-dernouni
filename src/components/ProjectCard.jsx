@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import MediaReveal from "./MediaReveal";
 import useReveal from "../hooks/useReveal";
 import { isVideoSrc } from "../utils/media";
+import { createPreviewOrder } from "../utils/previewOrder";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ProjectCard({ project, className = "", index = 0 }) {
@@ -11,11 +12,16 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
   const { t, path } = useLanguage();
   const [hovered, setHovered] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-  const slides = [...new Set([image, ...gallery.flat()].filter((src) => src && !isVideoSrc(src)))];
+  const previewImages = useMemo(
+    () => [...new Set(gallery.flat().filter((src) => src && !isVideoSrc(src)))],
+    [gallery]
+  );
+  const [slides, setSlides] = useState(() => createPreviewOrder(previewImages));
 
   const startSlideshow = (event) => {
-    if (event?.pointerType === "touch") return;
-    setSlideIndex(slides.length > 1 ? 1 : 0);
+    if (event?.pointerType === "touch" || previewImages.length < 2) return;
+    setSlides(createPreviewOrder(previewImages));
+    setSlideIndex(0);
     setHovered(true);
   };
 
@@ -76,7 +82,7 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
             {t("projectDetail.comingSoon")}
           </div>
         )}
-        {slides.length > 0 && slides.map((src, slide) => (
+        {slides.length > 1 && slides.map((src, slide) => (
           <img
             key={src}
             src={src}
