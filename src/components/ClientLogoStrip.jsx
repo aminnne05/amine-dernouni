@@ -5,9 +5,9 @@ const logos = getClientLogos();
 const slotCount = Math.min(5, logos.length);
 const opticalSizes = {
   "01.svg": { maxHeight: "2.1rem", maxWidth: "90%" },
-  "03.svg": { maxHeight: "3rem", maxWidth: "78%" },
+  "03.svg": { maxHeight: "3.2rem", maxWidth: "84%" },
   "05.svg": { maxHeight: "3.2rem", maxWidth: "76%" },
-  "066.svg": { maxHeight: "3.4rem", maxWidth: "64%" },
+  "066.svg": { maxHeight: "3.6rem", maxWidth: "68%" },
   "07.svg": { maxHeight: "3rem", maxWidth: "82%" },
   "08.svg": { maxHeight: "2.6rem", maxWidth: "90%" },
   "09.svg": { maxHeight: "2.6rem", maxWidth: "90%" },
