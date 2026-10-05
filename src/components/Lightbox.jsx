@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useLenis } from "lenis/react";
 import { isVideoSrc } from "../utils/media";
 
 export default function Lightbox({ piece, onClose }) {
+  const lenis = useLenis();
   const [index, setIndex] = useState(0);
   const closeRef = useRef(null);
   const total = piece?.media.length ?? 0;
@@ -29,15 +31,17 @@ export default function Lightbox({ piece, onClose }) {
     };
 
     document.body.style.overflow = "hidden";
+    lenis?.stop();
     window.addEventListener("keydown", onKey);
     closeRef.current?.focus();
 
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = previousOverflow;
+      lenis?.start();
       if (previousFocus instanceof HTMLElement) previousFocus.focus();
     };
-  }, [go, onClose]);
+  }, [go, lenis, onClose]);
 
   if (!piece || total === 0) return null;
   const current = piece.media[index];

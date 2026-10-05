@@ -7,7 +7,7 @@ import { createPreviewOrder } from "../utils/previewOrder";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ProjectCard({ project, className = "", index = 0 }) {
-  const { title, year, image, gallery = [], slug } = project;
+  const { title, categories = [], image, gallery = [], slug } = project;
   const [ref, visible] = useReveal();
   const { t, path } = useLanguage();
   const [hovered, setHovered] = useState(false);
@@ -17,6 +17,7 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
     [gallery]
   );
   const [slides, setSlides] = useState(() => createPreviewOrder(previewImages));
+  const projectTags = categories.map((category) => t(`categories.${category}`));
 
   const startSlideshow = (event) => {
     if (event?.pointerType === "touch" || previewImages.length < 2) return;
@@ -48,7 +49,7 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
     <Link
       ref={ref}
       to={path(`/projets/${slug}`)}
-      className={`group flex w-full flex-col gap-2 ${className}`}
+      className={`project-card group flex w-full flex-col gap-3 ${className}`}
       onPointerEnter={startSlideshow}
       onPointerLeave={stopSlideshow}
       onFocus={startSlideshow}
@@ -95,16 +96,15 @@ export default function ProjectCard({ project, className = "", index = 0 }) {
         ))}
       </MediaReveal>
       <div
-        className={`flex shrink-0 items-baseline gap-3 transition-[opacity,transform] duration-[900ms] [transition-timing-function:var(--ease-quint)] ${
+        className={`grid shrink-0 grid-cols-[minmax(0,1fr)_minmax(8rem,1fr)] items-start gap-x-5 transition-[opacity,transform] duration-[900ms] [transition-timing-function:var(--ease-quint)] sm:grid-cols-[minmax(0,1fr)_auto] ${
           visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         }`}
         style={{ transitionDelay: `${(index % 2) * 110 + 380}ms` }}
       >
-        <span className="type-micro text-taupe">
-          {`N.${String(index + 1).padStart(2, "0")}`}
+        <span className="type-index min-w-0 text-encre">{title}</span>
+        <span className="type-caption max-w-[26ch] justify-self-end text-right text-encre/55 sm:max-w-none sm:whitespace-nowrap">
+          {projectTags.join(" · ")}
         </span>
-        <span className="type-index text-encre">{title}</span>
-        <span className="type-micro ml-auto text-taupe">{year}</span>
       </div>
     </Link>
   );

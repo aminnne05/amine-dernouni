@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 import { useLanguage } from "../i18n/LanguageContext";
 
 /*
@@ -9,6 +10,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 */
 export default function ChapterNav({ chapters }) {
   const { t } = useLanguage();
+  const lenis = useLenis();
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [courant, setCourant] = useState("apercu");
@@ -41,7 +43,12 @@ export default function ChapterNav({ chapters }) {
 
   const aller = (id) => {
     const el = id === "apercu" ? null : document.getElementById(id);
-    if (el) {
+    if (lenis) {
+      lenis.scrollTo(el ?? 0, {
+        offset: el ? -96 : 0,
+        duration: 1.2,
+      });
+    } else if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });

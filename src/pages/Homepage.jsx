@@ -32,6 +32,7 @@ export default function Homepage() {
           dans le premier écran, comme sur la référence Antinomy. */}
       <section className="bg-encre">
         <div className="shell flex flex-col pt-[88px] pb-8 md:pb-8">
+          <h1 className="sr-only">Amine Dernouni — {t("homepage.role")}</h1>
           <div className="colonnes items-end gap-y-7 py-6 md:gap-y-12 md:py-7">
             {/* Portrait + logo, calé sur le bas de la colonne de texte */}
             <div className="col-span-9 col-start-1 md:col-span-3">

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import LoadingScreen from "./components/LoadingScreen";
@@ -15,21 +16,32 @@ import HorsCadre from "./pages/HorsCadre";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+  const lenis = useLenis();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [lenis, pathname]);
   return null;
 }
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const lenis = useLenis();
 
   useEffect(() => {
     document.body.style.overflow = loading ? "hidden" : "";
+    if (lenis) {
+      if (loading) lenis.stop();
+      else lenis.start();
+    }
     return () => {
       document.body.style.overflow = "";
     };
-  }, [loading]);
+  }, [lenis, loading]);
 
   return (
     <BrowserRouter>

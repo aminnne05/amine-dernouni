@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useLenis } from "lenis/react";
 import LogoMark from "../assets/logo/logo-mark.svg?react";
 import { useLanguage } from "../i18n/LanguageContext";
 import useReady from "../hooks/useReady";
@@ -11,6 +12,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const { lang, t, path } = useLanguage();
   const { pathname } = useLocation();
+  const lenis = useLenis();
   const ready = useReady();
   const [entered, setEntered] = useState(false);
 
@@ -40,10 +42,14 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    if (lenis) {
+      if (open) lenis.stop();
+      else lenis.start();
+    }
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [lenis, open]);
 
   return (
     <>
